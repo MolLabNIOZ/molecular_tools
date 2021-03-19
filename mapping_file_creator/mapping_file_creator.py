@@ -23,6 +23,14 @@ sample_file = 'NIOZ197.csv'
 fw_primer = '515F'
 rv_primer = '926RBC'    # '806RB' is also available
   # For any other primer we need to make a new .csv list
+  # primer list must look like this: 3 columns:
+  # $1 Forward_primer or Reverse_primer --> primername _Golay### 
+  # $2 = ForwardPrimer or ReversePrimer --> primer sequence
+  # $3 = LinkerPrimerSequence or Barcode_Reverse_Primer --> barcode sequence
+  # i.e.: 
+  # Reverse_primer;ReversePrimer;Barcode_Reverse_Primer
+  # 926RBC_Golay002;CCGYCAATTYMTTTRAGTTT;CTTCCAACTCAT
+
   
 # Import needed files
 sample_list = pd.read_csv(sample_file, delimiter=';')
