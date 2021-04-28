@@ -1,0 +1,63 @@
+﻿Well;Fluor;Target;Content;Sample;End RFU;Call;Sample Type;CallType;Is Control
+A01;SYBR;;Unkn;BR 200 ng;38580.15;;Unknown;Unassigned;FALSE
+A02;SYBR;;Unkn;BR_LAZ19-19;11039.4;;Unknown;Unassigned;FALSE
+A03;SYBR;;Unkn;BR_LAZ19-29;4915.22;;Unknown;Unassigned;FALSE
+A08;SYBR;;Unkn;HS_LAZ19-33;6619.8;;Unknown;Unassigned;FALSE
+A09;SYBR;;Unkn;HS_LAZ19-17;4807.63;;Unknown;Unassigned;FALSE
+A10;SYBR;;Unkn;HS_LAZ19-9;5094.86;;Unknown;Unassigned;FALSE
+A11;SYBR;;Unkn;HS_LAZ19-1;5147.48;;Unknown;Unassigned;FALSE
+A12;SYBR;;Unkn;HS 20 ng;36733.02;;Unknown;Unassigned;FALSE
+B01;SYBR;;Unkn;BR 200 ng;38187.5;;Unknown;Unassigned;FALSE
+B02;SYBR;;Unkn;BR_LAZ19-20;4651.19;;Unknown;Unassigned;FALSE
+B03;SYBR;;Unkn;BR_LAZ19-31;7165.85;;Unknown;Unassigned;FALSE
+B08;SYBR;;Unkn;HS_LAZ19-34;7303.62;;Unknown;Unassigned;FALSE
+B09;SYBR;;Unkn;HS_LAZ19-18;4660.81;;Unknown;Unassigned;FALSE
+B10;SYBR;;Unkn;HS_LAZ19-10;4797.43;;Unknown;Unassigned;FALSE
+B11;SYBR;;Unkn;HS_LAZ19-2;4985.49;;Unknown;Unassigned;FALSE
+B12;SYBR;;Unkn;HS 20 ng;37442.48;;Unknown;Unassigned;FALSE
+C01;SYBR;;Unkn;BR 200 ng;38289.67;;Unknown;Unassigned;FALSE
+C02;SYBR;;Unkn;BR_LAZ19-22;5439.86;;Unknown;Unassigned;FALSE
+C03;SYBR;;Unkn;BR_LAZ19-32;6230.1;;Unknown;Unassigned;FALSE
+C08;SYBR;;Unkn;HS_LAZ19-35;11125.76;;Unknown;Unassigned;FALSE
+C09;SYBR;;Unkn;HS_LAZ19-20;8662.45;;Unknown;Unassigned;FALSE
+C10;SYBR;;Unkn;HS_LAZ19-11;4872.49;;Unknown;Unassigned;FALSE
+C11;SYBR;;Unkn;HS_LAZ19-3;4569.14;;Unknown;Unassigned;FALSE
+C12;SYBR;;Unkn;HS 20 ng;42398.86;;Unknown;Unassigned;FALSE
+D01;SYBR;;Unkn;BR 200 ng;37435.5;;Unknown;Unassigned;FALSE
+D02;SYBR;;Unkn;BR_LAZ19-23;7723.2;;Unknown;Unassigned;FALSE
+D03;SYBR;;Unkn;BR_LAZ19-35;4783.03;;Unknown;Unassigned;FALSE
+D08;SYBR;;Unkn;HS_LAZ19-36;13296.64;;Unknown;Unassigned;FALSE
+D09;SYBR;;Unkn;HS_LAZ19-21;5469.21;;Unknown;Unassigned;FALSE
+D10;SYBR;;Unkn;HS_LAZ19-12;4408.66;;Unknown;Unassigned;FALSE
+D11;SYBR;;Unkn;HS_LAZ19-4;5199.74;;Unknown;Unassigned;FALSE
+D12;SYBR;;Unkn;HS 20 ng;40871.37;;Unknown;Unassigned;FALSE
+E01;SYBR;;Unkn;BR 0 ng;4216.6;;Unknown;Unassigned;FALSE
+E02;SYBR;;Unkn;BR_LAZ19-24;4831.58;;Unknown;Unassigned;FALSE
+E03;SYBR;;Unkn;BR_LAZ19-36;4710.28;;Unknown;Unassigned;FALSE
+E08;SYBR;;Unkn;HS_LAZ19-37;28186.24;;Unknown;Unassigned;FALSE
+E09;SYBR;;Unkn;HS_LAZ19-24;11649.27;;Unknown;Unassigned;FALSE
+E10;SYBR;;Unkn;HS_LAZ19-13;5264.74;;Unknown;Unassigned;FALSE
+E11;SYBR;;Unkn;HS_LAZ19-5;4652.61;;Unknown;Unassigned;FALSE
+E12;SYBR;;Unkn;HS 0 ng;4313.34;;Unknown;Unassigned;FALSE
+F01;SYBR;;Unkn;BR 0 ng;4318.6;;Unknown;Unassigned;FALSE
+F02;SYBR;;Unkn;BR_LAZ19-25;5239.88;;Unknown;Unassigned;FALSE
+F03;SYBR;;Unkn;BR_LAZ19-37;7475.36;;Unknown;Unassigned;FALSE
+F08;SYBR;;Unkn;HS_LAZ19-38;11233.2;;Unknown;Unassigned;FALSE
+F09;SYBR;;Unkn;HS_LAZ19-29;11880.02;;Unknown;Unassigned;FALSE
+F10;SYBR;;Unkn;HS_LAZ19-14;4702.11;;Unknown;Unassigned;FALSE
+F11;SYBR;;Unkn;HS_LAZ19-6;4715.85;;Unknown;Unassigned;FALSE
+F12;SYBR;;Unkn;HS 0 ng;4347.31;;Unknown;Unassigned;FALSE
+G01;SYBR;;Unkn;BR 0 ng;4264.99;;Unknown;Unassigned;FALSE
+G02;SYBR;;Unkn;BR_LAZ19-26;5529.55;;Unknown;Unassigned;FALSE
+G03;SYBR;;Unkn;BR_LAZ19-39;9979.41;;Unknown;Unassigned;FALSE
+G09;SYBR;;Unkn;HS_LAZ19-28;7866.53;;Unknown;Unassigned;FALSE
+G10;SYBR;;Unkn;HS_LAZ19-15;5404.62;;Unknown;Unassigned;FALSE
+G11;SYBR;;Unkn;HS_LAZ19-7;5004.95;;Unknown;Unassigned;FALSE
+G12;SYBR;;Unkn;HS 0 ng;4338.16;;Unknown;Unassigned;FALSE
+H01;SYBR;;Unkn;BR 0 ng;4438.87;;Unknown;Unassigned;FALSE
+H02;SYBR;;Unkn;BR_LAZ19-27;9524.18;;Unknown;Unassigned;FALSE
+H03;SYBR;;Unkn;BR_LAZ19-40;21571.5;;Unknown;Unassigned;FALSE
+H09;SYBR;;Unkn;HS_LAZ19-30;7611.78;;Unknown;Unassigned;FALSE
+H10;SYBR;;Unkn;HS_LAZ19-16;4542.74;;Unknown;Unassigned;FALSE
+H11;SYBR;;Unkn;HS_LAZ19-8;4758.44;;Unknown;Unassigned;FALSE
+H12;SYBR;;Unkn;HS 0 ng;4390.23;;Unknown;Unassigned;FALSE
