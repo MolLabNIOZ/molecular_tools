@@ -17,8 +17,8 @@ import pandas as pd       # to be able to work with tables
 from Bio.Seq import Seq   # to be able to do compl_rev
 
 # !!! Set variables for your mappingfile
-sample_file = 'NIOZ184_primerIDs.csv'
-NIOZnumber = 'NIOZ184'
+sample_file = 'NIOZ198_primerIDs.csv'
+NIOZnumber = 'NIOZ198'
   # Sample_file must be .csv
   # $1 and $2 must be Forward_ and Reverse_ primerIDs: 
   # You can add as many columns of metadata as you like
@@ -27,7 +27,7 @@ NIOZnumber = 'NIOZ184'
   # Forward_primer;Reverse_primer;PurifMethod;TargetAmpliconSize;Description
   # 515F_Golay001;926RBC_Golay252;GelQuant;600bp400bp;1A1P
 fw_primer = '515F'
-rv_primer = '806RB'    # '806RB' and '926RBC' are available
+rv_primer = '926RBC'    # '806RB' and '926RBC' are available
   # For any other primer we need to make a new .csv list
   # primer list must look like this: 3 columns:
   # $1 Forward_primer or Reverse_primer --> primername _Golay### 

@@ -15,6 +15,8 @@
 
 # ==================Import needed packages=====================================
 import pandas as pd, numpy as np
+from natsort import index_natsorted 
+ ## to be able to sort naturally, so 1,2,14,21 instead of 1,14,2,21
 from scipy import stats
 from matplotlib import pyplot as plt
 # =============================================================================
@@ -76,17 +78,48 @@ ax.plot(
 
 
 # ==================Calculating concentrations=================================
-# Make a new dataframe with the HS Samples
-DNA_concentrations_HS = data.loc[(data["Sample"].str.startswith("HS_")), "Sample"]
-# Add the measured RFU
-for sample in DNA_concentrations_HS.Sample:
-    RFU = (data['End RFU'][sample])
-    # add BarcodeSequence to the dataframe
-    DNA_concentrations_HS.at[sample,'End RFU'] = RFU
-    
+# Make a new dataframe with the HS Samples + RFU only
+DNA_concentrations_HS_raw = data.loc[(data["Sample"].str.startswith("HS_"))]
+DNA_concentrations_HS = pd.DataFrame()
+DNA_concentrations_HS["Sample"] = DNA_concentrations_HS_raw["Sample"]
+DNA_concentrations_HS["RFU"] = DNA_concentrations_HS_raw["End RFU"]
+# calculate concentration ((RFU - y-intercept) / slope)
+DNA_concentrations_HS["[DNA] ng/µL"] = ''
+for sample in DNA_concentrations_HS.index:
+    concentration = (
+        ((DNA_concentrations_HS['RFU'][sample]) - HSintercept) 
+        / HSslope
+        ) 
+    # add concentration to the dataframe
+    DNA_concentrations_HS.at[sample,'[DNA] ng/µL'] = concentration
+# Sort samples
+DNA_concentrations_HS.sort_values(
+    by=['Sample'], 
+    inplace=True,
+    key=lambda x: np.argsort(index_natsorted(DNA_concentrations_HS["Sample"]))
+    )     
 
-#  DNA_concentrations_BR = data.loc[(data["Sample"].str.startswith("BR_")), "Sample"]
 
+# Make a new dataframe with the BR Samples + RFU only
+DNA_concentrations_BR_raw = data.loc[(data["Sample"].str.startswith("BR_"))]
+DNA_concentrations_BR = pd.DataFrame()
+DNA_concentrations_BR["Sample"] = DNA_concentrations_BR_raw["Sample"]
+DNA_concentrations_BR["RFU"] = DNA_concentrations_BR_raw["End RFU"]
+# calculate concentration ((RFU - y-intercept) / slope)
+DNA_concentrations_BR["[DNA] ng/µL"] = ''
+for sample in DNA_concentrations_BR.index:
+    concentration = (
+        ((DNA_concentrations_BR['RFU'][sample]) - BRintercept) 
+        / BRslope
+        )
+    # add concentration to the dataframe
+    DNA_concentrations_BR.at[sample,'[DNA] ng/µL'] = concentration
+# Sort samples
+DNA_concentrations_BR.sort_values(
+    by=['Sample'], 
+    inplace=True,
+    key=lambda x: np.argsort(index_natsorted(DNA_concentrations_BR["Sample"]))
+    )    
  
 # =============================================================================
 
