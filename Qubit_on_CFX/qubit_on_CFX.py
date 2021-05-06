@@ -23,8 +23,9 @@ from matplotlib import pyplot as plt
 
 
 # ==================Import file================================================
-data = 'molecular_tools/190905-Qubit_LAZ19-1_to_LAZ19-40-End_Point_Results_SYBR.csv'
-data = pd.read_csv(data, delimiter=';')
+project = "190905_QubitLAZ19-1_to_LAZ19-40"
+csv = '190905-Qubit_LAZ19-1_to_LAZ19-40-End_Point_Results_SYBR.csv'
+data = pd.read_csv(csv, delimiter=';')
 # =============================================================================
 
 
@@ -51,29 +52,40 @@ BR_interp = np.linspace(np.min(stdcurveBR["ng/ul"]), np.max(stdcurveBR["ng/ul"])
 
 # Plot standard curves
 # empty plot
-fig, ax = plt.subplots(dpi=300)
-ax.grid(alpha=0.3)
-ax.set_title('standardcurve')
+fig, ax = plt.subplots(ncols=2, dpi=300)
+HSax = ax[0]
+HSax.grid(alpha=0.5)
+HSax.set_title('standardcurve HS', fontsize=16)
 #plot HS curve
-HS = ax.scatter(stdcurveHS["ng/ul"], stdcurveHS["End RFU"])
-ax.set_xlabel('DNA (ng/µl)')
-ax.set_ylabel('end RFU')
-ax.plot(
+HS = HSax.scatter(stdcurveHS["ng/ul"], stdcurveHS["End RFU"], c='lightsteelblue')
+HSax.set_xlabel('DNA (ng/µl)')
+HSax.set_ylabel('end RFU')
+HSax.plot(
         HS_interp, 
         HSintercept + HSslope * HS_interp,
         label='Linear regression',
-        linestyle="--"
+        linestyle='--',
+        c='cornflowerblue'
         )
 # plot BR curve
-BR = ax.scatter(stdcurveBR["ng/ul"], stdcurveBR["End RFU"])
-ax.set_xlabel('DNA (ng/µl)')
-ax.set_ylabel('end RFU')
-ax.plot(
+BRax = ax[1]
+BRax.grid(alpha=0.5)
+BRax.set_title('standardcurve BR', fontsize=16)
+BR = BRax.scatter(stdcurveBR["ng/ul"], stdcurveBR["End RFU"], c='cornflowerblue')
+BRax.set_xlabel('DNA (ng/µl)')
+BRax.set_ylabel('end RFU')
+BRax.plot(
         BR_interp, 
         BRintercept + BRslope * BR_interp,
         label='Linear regression',
-        linestyle="--"
+        linestyle="--",
+        c='blue'
         )
+# make layout fit better
+plt.tight_layout()
+# save standard curve
+plt.savefig("output/standardcurve"+ project + ".png")
+
 # =============================================================================
 
 
@@ -82,48 +94,80 @@ ax.plot(
 DNA_concentrations_HS_raw = data.loc[(data["Sample"].str.startswith("HS_"))]
 DNA_concentrations_HS = pd.DataFrame()
 DNA_concentrations_HS["Sample"] = DNA_concentrations_HS_raw["Sample"]
-DNA_concentrations_HS["RFU"] = DNA_concentrations_HS_raw["End RFU"]
+DNA_concentrations_HS["HS_RFU"] = DNA_concentrations_HS_raw["End RFU"]
 # calculate concentration ((RFU - y-intercept) / slope)
-DNA_concentrations_HS["[DNA] ng/µL"] = ''
+DNA_concentrations_HS["HS_[DNA] ng/µL"] = ''
 for sample in DNA_concentrations_HS.index:
     concentration = (
-        ((DNA_concentrations_HS['RFU'][sample]) - HSintercept) 
+        ((DNA_concentrations_HS['HS_RFU'][sample]) - HSintercept) 
         / HSslope
         ) 
     # add concentration to the dataframe
-    DNA_concentrations_HS.at[sample,'[DNA] ng/µL'] = concentration
-# Sort samples
+    DNA_concentrations_HS.at[sample,'HS_[DNA] ng/µL'] = concentration
+# Sort samples natrually
 DNA_concentrations_HS.sort_values(
     by=['Sample'], 
     inplace=True,
     key=lambda x: np.argsort(index_natsorted(DNA_concentrations_HS["Sample"]))
     )     
 
-
 # Make a new dataframe with the BR Samples + RFU only
 DNA_concentrations_BR_raw = data.loc[(data["Sample"].str.startswith("BR_"))]
 DNA_concentrations_BR = pd.DataFrame()
 DNA_concentrations_BR["Sample"] = DNA_concentrations_BR_raw["Sample"]
-DNA_concentrations_BR["RFU"] = DNA_concentrations_BR_raw["End RFU"]
+DNA_concentrations_BR["BR_RFU"] = DNA_concentrations_BR_raw["End RFU"]
 # calculate concentration ((RFU - y-intercept) / slope)
-DNA_concentrations_BR["[DNA] ng/µL"] = ''
+DNA_concentrations_BR["BR_[DNA] ng/µL"] = ''
 for sample in DNA_concentrations_BR.index:
     concentration = (
-        ((DNA_concentrations_BR['RFU'][sample]) - BRintercept) 
+        ((DNA_concentrations_BR['BR_RFU'][sample]) - BRintercept) 
         / BRslope
         )
     # add concentration to the dataframe
-    DNA_concentrations_BR.at[sample,'[DNA] ng/µL'] = concentration
-# Sort samples
+    DNA_concentrations_BR.at[sample,'BR_[DNA] ng/µL'] = concentration
+# Sort samples naturally
 DNA_concentrations_BR.sort_values(
     by=['Sample'], 
     inplace=True,
     key=lambda x: np.argsort(index_natsorted(DNA_concentrations_BR["Sample"]))
     )    
- 
+
+# Get rid of HS / BR in sample name, to be able to merge
+DNA_concentrations_HS['Sample'] = (
+    (DNA_concentrations_HS['Sample'].str.split('_', expand=True))[1].astype(str))
+DNA_concentrations_BR['Sample'] = (
+    (DNA_concentrations_BR['Sample'].str.split('_', expand=True))[1].astype(str))
+
+# Merge HS and BR
+DNA_concentrations = pd.merge(
+    DNA_concentrations_HS, 
+    DNA_concentrations_BR,
+    how = 'outer',      # Use union of keys from both frames
+    indicator = 'merge' # new column, that tells if both HS and BR are measured
+    )
+# Sort samples, naturally
+DNA_concentrations.sort_values(
+    by=['Sample'], 
+    inplace=True,
+    key=lambda x: np.argsort(index_natsorted(DNA_concentrations["Sample"]))
+    )
+
+# Final column for concentration chosen if both are measured for BR or HS
+DNA_concentrations['[DNA] ng/µL'] = ''
+for index in DNA_concentrations.index:
+    if DNA_concentrations.loc[index,'merge'] == 'left_only':
+        DNA_concentrations.loc[index,'[DNA] ng/µL'] = DNA_concentrations.loc[index,'HS_[DNA] ng/µL']
+    elif DNA_concentrations.loc[index,'merge'] == 'right_only':
+        DNA_concentrations.loc[index,'[DNA] ng/µL'] = DNA_concentrations.loc[index,'BR_[DNA] ng/µL']
+    elif (DNA_concentrations.loc[index,'merge'] == 'both' 
+          and DNA_concentrations.loc[index,'HS_[DNA] ng/µL'] > 5
+          and DNA_concentrations.loc[index,'BR_[DNA] ng/µL'] > 5
+          ):
+        DNA_concentrations.loc[index,'[DNA] ng/µL'] = DNA_concentrations.loc[index,'BR_[DNA] ng/µL']
+    
+
+# Save results
+DNA_concentrations.to_excel('output/results' + project + '.xlsx', index=False)
+    
 # =============================================================================
-
-
-
-                                  
-
+                             

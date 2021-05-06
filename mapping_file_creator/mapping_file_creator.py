@@ -20,7 +20,8 @@ from Bio.Seq import Seq   # to be able to do compl_rev
 sample_file = 'NIOZ198_primerIDs.csv'
 NIOZnumber = 'NIOZ198'
   # Sample_file must be .csv
-  # $1 and $2 must be Forward_ and Reverse_ primerIDs: 
+  # $1 and $2 must be Forward_primer and Reverse_ primer
+  # Primers should be written like: 515F_Golay001 / 926RBC_Golay252
   # You can add as many columns of metadata as you like
   # This metadata will be added to the end of the mappingfile
   # !!! The last column must be Description (sample name or control etc.)
