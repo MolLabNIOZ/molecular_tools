@@ -160,11 +160,16 @@ for index in DNA_concentrations.index:
     elif DNA_concentrations.loc[index,'merge'] == 'right_only':
         DNA_concentrations.loc[index,'[DNA] ng/µL'] = DNA_concentrations.loc[index,'BR_[DNA] ng/µL']
     elif (DNA_concentrations.loc[index,'merge'] == 'both' 
-          and DNA_concentrations.loc[index,'HS_[DNA] ng/µL'] > 5
+          and DNA_concentrations.loc[index,'BR_[DNA] ng/µL'] <= 5
+          ):
+        DNA_concentrations.loc[index,'[DNA] ng/µL'] = DNA_concentrations.loc[index,'HS_[DNA] ng/µL']
+    elif (DNA_concentrations.loc[index,'merge'] == 'both'
           and DNA_concentrations.loc[index,'BR_[DNA] ng/µL'] > 5
+          or DNA_concentrations.loc[index,'HS_[DNA] ng/µL'] > 10
           ):
         DNA_concentrations.loc[index,'[DNA] ng/µL'] = DNA_concentrations.loc[index,'BR_[DNA] ng/µL']
-    
+          
+          
 
 # Save results
 DNA_concentrations.to_excel('output/results' + project + '.xlsx', index=False)
