@@ -27,8 +27,8 @@ NIOZnumber = 'NIOZ198'
   # !!! The last column must be Description (sample name or control etc.)
   # Forward_primer;Reverse_primer;PurifMethod;TargetAmpliconSize;Description
   # 515F_Golay001;926RBC_Golay252;GelQuant;600bp400bp;1A1P
-fw_primer = '515F'
-rv_primer = '926RBC'    # '806RB' and '926RBC' are available
+fw_primer = '515F'      # '515F' and '12S_F1a'are available
+rv_primer = '926RBC'    # '806RB', '926RBC' and '12S_R1' are available
   # For any other primer we need to make a new .csv list
   # primer list must look like this: 3 columns:
   # $1 Forward_primer or Reverse_primer --> primername _Golay### 
