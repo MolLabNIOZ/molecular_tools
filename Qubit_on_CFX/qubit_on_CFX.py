@@ -43,7 +43,7 @@ stdcurveBR["ng/ul"] = stdcurveBRraw["Sample"].str.split(' ', expand=True)[1].ast
 stdcurveHS["End RFU"] = stdcurveHSraw["End RFU"]
 stdcurveBR["End RFU"] = stdcurveBRraw["End RFU"]
 
-# Linear regression
+# Linear regression + interpolation for standard curve
 HSslope, HSintercept, rv, pv, se = stats.linregress(stdcurveHS["ng/ul"], stdcurveHS["End RFU"])
 HS_interp = np.linspace(np.min(stdcurveHS["ng/ul"]), np.max(stdcurveHS["ng/ul"]), num=500)
 
@@ -83,20 +83,23 @@ BRax.plot(
         )
 # make layout fit better
 plt.tight_layout()
-# save standard curve
+# save standard curve as .png
 plt.savefig("output/standardcurve"+ project + ".png")
 
 # =============================================================================
 
 
 # ==================Calculating concentrations=================================
-# Make a new dataframe with the HS Samples + RFU only
+# Make a new dataframe with the HS Samples only
 DNA_concentrations_HS_raw = data.loc[(data["Sample"].str.startswith("HS_"))]
+# Make a new empty dataframe
 DNA_concentrations_HS = pd.DataFrame()
+# Add HS sample names and RFU columns only
 DNA_concentrations_HS["Sample"] = DNA_concentrations_HS_raw["Sample"]
 DNA_concentrations_HS["HS_RFU"] = DNA_concentrations_HS_raw["End RFU"]
-# calculate concentration ((RFU - y-intercept) / slope)
+# Add a new column for the concentration
 DNA_concentrations_HS["HS_[DNA] ng/µL"] = ''
+# for every sample calculate concentration ((RFU - y-intercept) / slope)
 for sample in DNA_concentrations_HS.index:
     concentration = (
         ((DNA_concentrations_HS['HS_RFU'][sample]) - HSintercept) 
@@ -104,12 +107,6 @@ for sample in DNA_concentrations_HS.index:
         ) 
     # add concentration to the dataframe
     DNA_concentrations_HS.at[sample,'HS_[DNA] ng/µL'] = concentration
-# Sort samples natrually
-DNA_concentrations_HS.sort_values(
-    by=['Sample'], 
-    inplace=True,
-    key=lambda x: np.argsort(index_natsorted(DNA_concentrations_HS["Sample"]))
-    )     
 
 # Make a new dataframe with the BR Samples + RFU only
 DNA_concentrations_BR_raw = data.loc[(data["Sample"].str.startswith("BR_"))]
@@ -125,53 +122,55 @@ for sample in DNA_concentrations_BR.index:
         )
     # add concentration to the dataframe
     DNA_concentrations_BR.at[sample,'BR_[DNA] ng/µL'] = concentration
-# Sort samples naturally
-DNA_concentrations_BR.sort_values(
-    by=['Sample'], 
-    inplace=True,
-    key=lambda x: np.argsort(index_natsorted(DNA_concentrations_BR["Sample"]))
-    )    
 
-# Get rid of HS / BR in sample name, to be able to merge
+# Get rid of HS / BR in sample names, to be able to merge samples
 DNA_concentrations_HS['Sample'] = (
     (DNA_concentrations_HS['Sample'].str.split('_', expand=True))[1].astype(str))
 DNA_concentrations_BR['Sample'] = (
     (DNA_concentrations_BR['Sample'].str.split('_', expand=True))[1].astype(str))
 
-# Merge HS and BR
+# Merge HS and BR measurements
 DNA_concentrations = pd.merge(
     DNA_concentrations_HS, 
     DNA_concentrations_BR,
     how = 'outer',      # Use union of keys from both frames
     indicator = 'merge' # new column, that tells if both HS and BR are measured
     )
-# Sort samples, naturally
+# Sort samples, naturally (so 1,2,14,21 instead of 1,14,2,21)
 DNA_concentrations.sort_values(
     by=['Sample'], 
     inplace=True,
     key=lambda x: np.argsort(index_natsorted(DNA_concentrations["Sample"]))
     )
 
-# Final column for concentration chosen if both are measured for BR or HS
+# Final column for concentration, chose if both are measured for BR or HS
 DNA_concentrations['[DNA] ng/µL'] = ''
 for index in DNA_concentrations.index:
+    # If only HS is measured, concentration is HS measurement
     if DNA_concentrations.loc[index,'merge'] == 'left_only':
         DNA_concentrations.loc[index,'[DNA] ng/µL'] = DNA_concentrations.loc[index,'HS_[DNA] ng/µL']
+    # If only BR is measured, concentration is BR measurement
     elif DNA_concentrations.loc[index,'merge'] == 'right_only':
         DNA_concentrations.loc[index,'[DNA] ng/µL'] = DNA_concentrations.loc[index,'BR_[DNA] ng/µL']
-    elif (DNA_concentrations.loc[index,'merge'] == 'both' 
-          and DNA_concentrations.loc[index,'BR_[DNA] ng/µL'] <= 5
-          ):
-        DNA_concentrations.loc[index,'[DNA] ng/µL'] = DNA_concentrations.loc[index,'HS_[DNA] ng/µL']
+    # If both HS and BR is measured and BR[DNA] > 5 or HS[DNA] > 10,
+    # concentration is BR measurement
     elif (DNA_concentrations.loc[index,'merge'] == 'both'
           and DNA_concentrations.loc[index,'BR_[DNA] ng/µL'] > 5
           or DNA_concentrations.loc[index,'HS_[DNA] ng/µL'] > 10
           ):
         DNA_concentrations.loc[index,'[DNA] ng/µL'] = DNA_concentrations.loc[index,'BR_[DNA] ng/µL']
-          
-          
+    # If both HS and BR is measured and BR[DNA] <= 5,
+    # concentration is HS measurement
+    elif (DNA_concentrations.loc[index,'merge'] == 'both' 
+          and DNA_concentrations.loc[index,'BR_[DNA] ng/µL'] <= 5
+          ):
+        DNA_concentrations.loc[index,'[DNA] ng/µL'] = DNA_concentrations.loc[index,'HS_[DNA] ng/µL']
 
-# Save results
+# Remove the merge column
+DNA_concentrations.drop(columns=['merge'], inplace=True)
+         
+
+# Save results in excel file
 DNA_concentrations.to_excel('output/results' + project + '.xlsx', index=False)
     
 # =============================================================================
