@@ -26,7 +26,7 @@ from matplotlib import pyplot as plt
 # ==================Import file================================================
 # =============================================================================
 project = "210527-QubitLena"
-csv = '//zeus/mmb/molecular_ecology/mollab_team/Projects/2021/2021_Lena/210422-LenaQubit.csv'
+csv = '210422-LenaQubit.csv'
 data = pd.read_csv(csv, delimiter=';')
 # =============================================================================
 
@@ -96,8 +96,14 @@ if stdcurveHSraw.empty is False:
             c='cornflowerblue'                  # color of the line
             )
     # add equation to plot
-    HSequation = "y = " + str(round(HSslope)) + "X + " + str(round(HSintercept))
-    HSax.text(6,500, HSequation)
+    HSequation = (
+        "y = " + str(round(HSslope)) + "X + " + str(round(HSintercept))
+        )
+    HSax.text(
+        0.1, 0.9, HSequation, 
+        size=8, color='purple', 
+        transform=HSax.transAxes
+        )
 
 # plot BR curve
 if stdcurveBRraw.empty is False:
@@ -121,8 +127,12 @@ if stdcurveBRraw.empty is False:
     BRequation = (
         "y = " + str(round(BRslope)) + "X + " + str(round(BRintercept))
         )
-    BRax.text(70,500, BRequation)
-
+    BRax.text(
+        0.1, 0.9, BRequation, 
+        size=8, color='purple', 
+        transform=BRax.transAxes
+        )
+    
 # make layout fit better
 plt.tight_layout()
 # save standard curve as .png
