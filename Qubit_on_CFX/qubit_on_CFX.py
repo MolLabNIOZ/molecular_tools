@@ -79,7 +79,7 @@ fig, ax = plt.subplots(ncols=2, dpi=300)
 
 if stdcurveHSraw.empty is False:
     HSax = ax[0] # HS plot on the left
-    HSax.set_xticks(np.arange(0,25,5)) # x-grid from 0 to 25, with intervals = 5
+    HSax.set_xticks(np.arange(0,25,5)) # x-grid from 0to25, with intervals=5
     HSax.grid(alpha=0.3) # transparancy of grid 
     HSax.set_title('standardcurve HS', fontsize=16)
     # plot HS curve
@@ -108,7 +108,7 @@ if stdcurveHSraw.empty is False:
 # plot BR curve
 if stdcurveBRraw.empty is False:
     BRax = ax[1] # BR plot on the right
-    BRax.set_xticks(np.arange(0,250,50)) # x-grid from 0 to 25, with intervals = 5
+    BRax.set_xticks(np.arange(0,250,50)) # x-grid from 0to25, with intervals=5
     BRax.grid(alpha=0.3)
     BRax.set_title('standardcurve BR', fontsize=16)
     BR = BRax.scatter(stdcurveBR["ng/µl"], 
@@ -148,7 +148,9 @@ DNA_concentrations_BR = pd.DataFrame(columns = ["Sample"])
 # ==================High Sensitivity===========================================
 if stdcurveHSraw.empty is False:
     # Get data from HS samples only
-    DNA_concentrations_HS_raw = data.loc[(data["Sample"].str.startswith("HS_"))]
+    DNA_concentrations_HS_raw = data.loc[
+        (data["Sample"].str.startswith("HS_"))
+        ]
     # Add HS sample names and RFU columns to results dataframe
     DNA_concentrations_HS["Sample"] = DNA_concentrations_HS_raw["Sample"]
     DNA_concentrations_HS["HS_RFU"] = DNA_concentrations_HS_raw["End RFU"]
@@ -169,7 +171,9 @@ if stdcurveHSraw.empty is False:
 
 if stdcurveBRraw.empty is False:
     # Get data from BR samples only
-    DNA_concentrations_BR_raw = data.loc[(data["Sample"].str.startswith("BR_"))]
+    DNA_concentrations_BR_raw = data.loc[
+        (data["Sample"].str.startswith("BR_"))
+        ]
     # Add BR sample names and RFU columns to results dataframe    
     DNA_concentrations_BR["Sample"] = DNA_concentrations_BR_raw["Sample"]
     DNA_concentrations_BR["BR_RFU"] = DNA_concentrations_BR_raw["End RFU"]
@@ -193,7 +197,7 @@ DNA_concentrations = pd.merge(
     DNA_concentrations_HS, 
     DNA_concentrations_BR,
     how = 'outer',      # Use union of keys from both frames
-    indicator = 'merge' # new column, that tells if both HS and BR are measured
+    indicator = 'merge' # new column that tells if both HS and BR are measured
     )
 # Sort samples, naturally (so 1,2,14,21 instead of 1,14,2,21)
 DNA_concentrations.sort_values(
@@ -207,23 +211,31 @@ DNA_concentrations['[DNA] ng/µL'] = ''
 for index in DNA_concentrations.index:
     # If only HS is measured, concentration is HS measurement
     if DNA_concentrations.loc[index,'merge'] == 'left_only':
-        DNA_concentrations.loc[index,'[DNA] ng/µL'] = DNA_concentrations.loc[index,'HS_[DNA] ng/µL']
+        DNA_concentrations.loc[index,'[DNA] ng/µL'] = (
+            DNA_concentrations.loc[index,'HS_[DNA] ng/µL']
+            )
     # If only BR is measured, concentration is BR measurement
     elif DNA_concentrations.loc[index,'merge'] == 'right_only':
-        DNA_concentrations.loc[index,'[DNA] ng/µL'] = DNA_concentrations.loc[index,'BR_[DNA] ng/µL']
+        DNA_concentrations.loc[index,'[DNA] ng/µL'] = (
+            DNA_concentrations.loc[index,'BR_[DNA] ng/µL']
+            )
     # If both HS and BR is measured and BR[DNA] > 5 or HS[DNA] > 10,
     # concentration is BR measurement
     elif (DNA_concentrations.loc[index,'merge'] == 'both'
           and DNA_concentrations.loc[index,'BR_[DNA] ng/µL'] > 5
           or DNA_concentrations.loc[index,'HS_[DNA] ng/µL'] > 10
           ):
-        DNA_concentrations.loc[index,'[DNA] ng/µL'] = DNA_concentrations.loc[index,'BR_[DNA] ng/µL']
+        DNA_concentrations.loc[index,'[DNA] ng/µL'] = (
+            DNA_concentrations.loc[index,'BR_[DNA] ng/µL']
+            )
     # If both HS and BR is measured and BR[DNA] <= 5,
     # concentration is HS measurement
     elif (DNA_concentrations.loc[index,'merge'] == 'both' 
           and DNA_concentrations.loc[index,'BR_[DNA] ng/µL'] <= 5
           ):
-        DNA_concentrations.loc[index,'[DNA] ng/µL'] = DNA_concentrations.loc[index,'HS_[DNA] ng/µL']
+        DNA_concentrations.loc[index,'[DNA] ng/µL'] = (
+            DNA_concentrations.loc[index,'HS_[DNA] ng/µL']
+            )
 
 # Remove the merge column
 DNA_concentrations.drop(columns=['merge'], inplace=True)
