@@ -136,7 +136,7 @@ if stdcurveBRraw.empty is False:
 # make layout fit better
 plt.tight_layout()
 # save standard curve as .png
-plt.savefig("output/standardcurve"+ project + ".png")
+plt.savefig("output/standardcurve_"+ project + ".png")
 # =============================================================================
 
 # ==================Calculating concentrations=================================
