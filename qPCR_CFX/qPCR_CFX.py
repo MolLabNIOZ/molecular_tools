@@ -92,7 +92,15 @@ plt.savefig("qPCR_CFX/output/standardcurve_"+ project + ".png")
 
 # ==================Sample calculations========================================
 # =============================================================================
+# Extract sample data
 samples_raw = data[(data["Content"].str.startswith("Unkn"))]
-sample_calculations = samples_raw.groupby("Sample").agg()
+# make str from float Cq values (for next step)
+samples_raw ['Cq'] = samples_raw['Cq'].astype(str)
+# combine duplicate measurements
+sample_calculations = samples_raw.groupby("Sample")['Cq'].apply(' '.join)
+# sample_calculations = samples_raw.groupby("Sample")['Cq'].apply(' '.join)
+# sample_calculations['Cq_1'] = (
+    # (sample_calculations['Cq'].str.split(' ',expand=True))[1].astype(float))
+
 # sample_calculations = sample_calculations["Cq"].agg([np.mean, np.std])
 
