@@ -22,18 +22,15 @@
 
 # ==================Import needed packages=====================================
 import pandas as pd, numpy as np
-import math
-
-from natsort import index_natsorted 
- ## to be able to sort naturally, so 1,2,14,21 instead of 1,14,2,21
 from scipy import stats
 from matplotlib import pyplot as plt
+import math
 # =============================================================================
 
 
 # ==================Import file================================================
 # =============================================================================
-project = "210601-qPCR2_qqqp_BlackSea_Laura"
+project = "Tim_qPCR"
 csv = 'qPCR_CFX/compare.csv'
 data = pd.read_csv(csv, delimiter=';')
 # =============================================================================
@@ -57,8 +54,8 @@ for standard in stdcurve.index:
     stdcurve.at[standard, 'copies/µL'] = copies
     stdcurve.at[standard, 'log_copies'] = log_copies
 # Linear regression + interpolation for standard curve
-slope, yintercept, rv, pv, se =  stats.linregress(stdcurve["log_copies"], 
-                                                        stdcurve["Cq"])
+slope, yintercept, rv, pv, se = stats.linregress(stdcurve["log_copies"], 
+                                                 stdcurve["Cq"])
 interp = np.linspace(np.min(stdcurve['log_copies']), 
                             np.max(stdcurve['log_copies']), 
                             num=500)
@@ -71,8 +68,8 @@ ax.set_title('standardcurve', fontsize=16)
 ax.scatter(stdcurve["log_copies"],  # x-axis
            stdcurve["Cq"],          # y-axis
            c='blue')                # color of the dots
-ax.set_xlabel('log10_copies')
-ax.set_ylabel('Cq')
+ax.set_xlabel('log10 copies')       # x-axis label
+ax.set_ylabel('Cq')                 # y-axis label
 # plot linear regression
 ax.plot(interp,                     # x-axis
         yintercept + slope * interp,# y-axis
@@ -80,7 +77,7 @@ ax.plot(interp,                     # x-axis
         c='cornflowerblue'          # color of the line
         )
 # add equation to plot
-equation = "y = " + str(round(slope, 3)) + "X + " + str(round(yintercept,1))
+equation = "y = " + str(round(slope, 3)) + "X + " + str(round(yintercept,2))
 ax.text(.7, 0.9, equation, 
         size=8, color='purple', 
         transform=ax.transAxes
@@ -95,12 +92,23 @@ plt.savefig("qPCR_CFX/output/standardcurve_"+ project + ".png")
 # Extract sample data
 samples_raw = data[(data["Content"].str.startswith("Unkn"))]
 # make str from float Cq values (for next step)
-samples_raw ['Cq'] = samples_raw['Cq'].astype(str)
+samples_raw["Cq"] = samples_raw["Cq"].astype(str)
 # combine duplicate measurements
-sample_calculations = samples_raw.groupby("Sample")['Cq'].apply(' '.join)
-# sample_calculations = samples_raw.groupby("Sample")['Cq'].apply(' '.join)
-# sample_calculations['Cq_1'] = (
-    # (sample_calculations['Cq'].str.split(' ',expand=True))[1].astype(float))
+sample_calculations = samples_raw.groupby("Sample")["Cq"].apply('-'.join)
+# Convert series to dataframe
+sample_calculations = sample_calculations.to_frame()
 
-# sample_calculations = sample_calculations["Cq"].agg([np.mean, np.std])
+# Get seperate CQ values
+sample_calculations = (
+    sample_calculations["Cq"].str.split('-', expand=True).astype(float))
+
+# Calculate mean Cq values, stdev and variance
+    # variance = how far from the mean the individual observations are
+    # stdev = square root of the variance, the amount of variation or dispersion
+
+
+   
+
+
+
 
