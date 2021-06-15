@@ -17,8 +17,8 @@ import pandas as pd       # to be able to work with tables
 from Bio.Seq import Seq   # to be able to do compl_rev
 
 # !!! Set variables for your mappingfile
-sample_file = 'NIOZ198_primerIDs.csv'
-NIOZnumber = 'NIOZ198'
+sample_file = 'NIOZ308_FDV.csv'
+NIOZnumber = 'NIOZ308'
   # Sample_file must be .csv
   # $1 and $2 must be Forward_primer and Reverse_ primer
   # Primers should be written like: 515F_Golay001 / 926RBC_Golay252
@@ -108,6 +108,9 @@ mf['BarcodeSequence'] = df['BarcodeSequence']
 mf['LinkerPrimerSequence'] = df['LinkerPrimerSequence']
 # Next column: InputFileName
 mf['InputFileName'] = df['InputFileName']
+# Next column: Forward and reverse barcode sequence
+mf['Forward_barcode'] = df['Barcode_Forward_Primer']
+mf['Reverse_barcode'] = df['Barcode_Reverse_Primer']
 # After that... extra data from sample_file
 for column in sample_file.columns[2:]:
     mf[column] = sample_file[column]
