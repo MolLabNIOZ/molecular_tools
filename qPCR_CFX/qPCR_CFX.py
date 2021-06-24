@@ -1,15 +1,15 @@
-
 # =============================================================================
-# Title:    Qubit_on_CFX analysis tool
+# Title:    qPCR_on_CFX analysis tool
 # Version:  1.0
 # Author:   Maartje Brouwer
-# Goal:     Automating qubit on CFX analysis
-# Date:     210423
+# Goal:     Automating qPCR on CFX analysis
+# Date:     210624
 # =============================================================================
 
 # !!! Make sure in the CFX manager you have selected:
 # Standard for the standard curve samples
-#   And name standards 10^0, 10^1, 10^2... etc.
+# And name standards 10^0, 10^1, 10^2... etc.
+# Positive control for the sample_mix
 # unknown for samples
 # NTC for Non Template Controls
 
@@ -20,7 +20,7 @@
 # Click [Export]
 # in excel, save as .csv otherwise, Cq values are not correct
 
-# ==================Import needed packages=====================================
+# Import needed packages=======================================================
 import pandas as pd, numpy as np
 from scipy import stats
 from matplotlib import pyplot as plt
@@ -28,31 +28,35 @@ import math
 # =============================================================================
 
 
-# ==================Import file================================================
+# Import file==================================================================
 # =============================================================================
-project = "Tim_qPCR"
-csv = 'qPCR_CFX/compare.csv'
+project = "Dina_qPCR1"
+csv = 'qPCR_CFX/Dina1.csv'
 data = pd.read_csv(csv, delimiter=';')
 # =============================================================================
 
-# !!! ==================Variables to set=======================================
+
+# !!!Variables to set==========================================================
 # =============================================================================
 std_copies = 4.06 # copies/µL of the standard *10^x
+diluted_PCR = 100
 
-# ==================Making a standard curve====================================
+# Making a standard curve======================================================
 # =============================================================================
 # Extract standard curve data
 stdcurve = data[(data["Content"].str.startswith("Std"))]
 # From the Sample column, extract the power (copies) of the standards
 stdcurve['power'] = (
     stdcurve["Sample"].str.split('^', expand=True)[1].astype(float))
+
 # For each standard, calculate + add copies/µL and log_copies to the dataframe
 for standard in stdcurve.index:
     power = stdcurve['power'][standard]
     copies = std_copies * 10 ** power
     log_copies = math.log10(copies)
-    stdcurve.at[standard, 'copies/µL'] = copies
-    stdcurve.at[standard, 'log_copies'] = log_copies
+    stdcurve.loc[standard, 'copies/µL'] = copies
+    stdcurve.loc[standard, 'log_copies'] = log_copies
+
 # Linear regression + interpolation for standard curve
 slope, yintercept, rv, pv, se = stats.linregress(stdcurve["log_copies"], 
                                                  stdcurve["Cq"])
@@ -70,12 +74,14 @@ ax.scatter(stdcurve["log_copies"],  # x-axis
            c='blue')                # color of the dots
 ax.set_xlabel('log10 copies')       # x-axis label
 ax.set_ylabel('Cq')                 # y-axis label
+
 # plot linear regression
 ax.plot(interp,                     # x-axis
         yintercept + slope * interp,# y-axis
         linestyle='--',             # style of the line
         c='cornflowerblue'          # color of the line
         )
+
 # add equation to plot
 equation = "y = " + str(round(slope, 3)) + "X + " + str(round(yintercept,2))
 ax.text(.7, 0.9, equation, 
@@ -84,10 +90,14 @@ ax.text(.7, 0.9, equation,
         )
 # make layout fit better
 plt.tight_layout()
-# save standard curve as .png
-plt.savefig("qPCR_CFX/output/standardcurve_"+ project + ".png")
 
-# ==================Sample calculations========================================
+
+
+# =============================================================================
+# =============================================================================
+
+
+# Sample calculations==========================================================
 # =============================================================================
 # Extract sample data
 samples_raw = data[(data["Content"].str.startswith("Unkn"))]
@@ -98,13 +108,41 @@ sample_calculations = samples_raw.groupby("Sample")["Cq"].apply('-'.join)
 # Convert series to dataframe
 sample_calculations = sample_calculations.to_frame()
 
-# Get seperate CQ values
-sample_calculations = (
-    sample_calculations["Cq"].str.split('-', expand=True).astype(float))
+# Check how many reps each sample has (count the join marks '-' +1)
+for sample in sample_calculations.index:
+    reps = sample_calculations["Cq"][sample].count('-') + 1
+    sample_calculations.loc[sample, "reps"] = reps
+# What is the highest amount of reps
+rep_max = int(sample_calculations["reps"].max())
+# a list for possible seperate Cq values, max 5 repetitions
+Cqs = ["Cq1","Cq2","Cq3","Cq4","Cq5"]
+# Get seperate CQ values, amount depending on number of replicates
+sample_calculations[Cqs[:rep_max]]  = (
+        sample_calculations["Cq"].str.split('-', expand=True).astype(float))
 
-# Calculate mean Cq values, stdev and variance
-    # variance = how far from the mean the individual observations are
-    # stdev = square root of the variance, the amount of variation or dispersion
+# remove joined Cq and reps column
+sample_calculations = sample_calculations.drop(['Cq', 'reps'], axis=1)
+
+# Calculate mean Cq values and stdev
+sample_calculations['mean']= sample_calculations.mean(axis=1)
+sample_calculations['stdev']= sample_calculations.iloc[:, sample_calculations.columns!="mean"].std(axis=1)
+
+# calculate copies/µL in the DNA extract
+for sample in sample_calculations.index:
+    # calculate from std curve formula (10** because usinjg log-copies)
+    copies = 10**((sample_calculations["mean"][sample] - yintercept) / slope)
+    # add to dataframe, use scientific format, 2 decimal points
+    sample_calculations.loc[sample, "extract copies/µL"] = (
+        "{:.2e}".format(copies))
+
+# save results
+# save standard curve as .png
+plt.savefig("qPCR_CFX/output/standardcurve_"+ project + ".png")
+# save results in excel
+sample_calculations.to_excel("qPCR_CFX/output/results" + project + ".xlsx")
+
+
+    
 
 
    
