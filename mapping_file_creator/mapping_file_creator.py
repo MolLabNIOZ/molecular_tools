@@ -17,8 +17,8 @@ import pandas as pd       # to be able to work with tables
 from Bio.Seq import Seq   # to be able to do compl_rev
 
 # !!! Set variables for your mappingfile
-sample_file = 'NIOZ308_FDV.csv'
-NIOZnumber = 'NIOZ308'
+sample_file = 'NIOZ309-user_template_for_mappingfile_creatorpy.csv'
+NIOZnumber = 'NIOZ309'
   # Sample_file must be .csv
   # $1 and $2 must be Forward_primer and Reverse_ primer
   # Primers should be written like: 515F_Golay001 / 926RBC_Golay252
@@ -85,18 +85,6 @@ for sample in df.index:
     # add BarcodeSequence to the dataframe
     df.at[sample,'BarcodeSequence'] = BarcodeSequence
 
-## Construct InputFileName (NIOZnumber.full_name_fwd.full_name_rev.fasta)
-# Make empty new column
-df ['InputFileName'] = ''
-# For every sample make the InputFileName
-for sample in df.index:
-    Forward_Name = (df['Forward_primer'][sample])
-    Reverse_Name = (df['Reverse_primer'][sample])
-    InputFileName = (
-        NIOZnumber + '.' + Forward_Name + '.' + Reverse_Name + '.fasta')
-    # add BarcodeSequence to the dataframe
-    df.at[sample,'InputFileName'] = InputFileName
-
 ## Assemble final mappingfile
 # Make an empty dataframe
 mf = pd.DataFrame()
@@ -104,13 +92,17 @@ mf = pd.DataFrame()
 mf['#SampleID'] = df['#SampleID']
 # Next column: BarcodeSequence
 mf['BarcodeSequence'] = df['BarcodeSequence']
-# Next column: LinkerPrimerSequence
+# Next column: LinkerPrimerSequence 
 mf['LinkerPrimerSequence'] = df['LinkerPrimerSequence']
-# Next column: InputFileName
-mf['InputFileName'] = df['InputFileName']
+mf['ReversePrimerSequence'] = df['ReversePrimer']
 # Next column: Forward and reverse barcode sequence
 mf['Forward_barcode'] = df['Barcode_Forward_Primer']
 mf['Reverse_barcode'] = df['Barcode_Reverse_Primer']
+# Next columna: primer names
+mf['ForwardPrimerName'] = df['Forward_primer']
+mf['ReversePrimerName'] = df['Reverse_primer']
+
+
 # After that... extra data from sample_file
 for column in sample_file.columns[2:]:
     mf[column] = sample_file[column]
