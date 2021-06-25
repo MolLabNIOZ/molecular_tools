@@ -30,7 +30,7 @@ import math
 
 # Import file==================================================================
 # =============================================================================
-project = "Dina_qPCR1"
+project = "Dina"
 csv = 'qPCR_CFX/Dina1.csv'
 data = pd.read_csv(csv, delimiter=';')
 # =============================================================================
@@ -63,6 +63,8 @@ slope, yintercept, rv, pv, se = stats.linregress(stdcurve["log_copies"],
 interp = np.linspace(np.min(stdcurve['log_copies']), 
                             np.max(stdcurve['log_copies']), 
                             num=500)
+# calculate efficiency
+efficiency = (-1+10**(-1/slope))*100
 
 # plot standard curve
 fig, ax = plt.subplots(dpi=300)     # empty plot
@@ -88,6 +90,13 @@ ax.text(.7, 0.9, equation,
         size=8, color='purple', 
         transform=ax.transAxes
         )
+# add efficiency to plot
+efficiency = "efficiency = " + str(round(efficiency)) + "%"
+ax.text(.7, 0.85, efficiency, 
+        size=8, color='purple', 
+        transform=ax.transAxes
+        )
+
 # make layout fit better
 plt.tight_layout()
 
