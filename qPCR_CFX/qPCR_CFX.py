@@ -6,11 +6,14 @@
 # Date:     210624
 # =============================================================================
 
-# !!! Make sure in the CFX manager you have selected:
-# Standard for the standard curve samples
-# And name standards 10^0, 10^1, 10^2... etc.
-# Positive control for the sample_mix
-# unknown for samples
+# Include standard dilution series in PCR1 of a batch
+# Include a sample_mix (random mix of some samples from the batch) in all PCRs
+# of the batch. Preferable at least in fivefold. used for normalization
+
+# !!! Make sure in the CFX manager you have selected content:
+# Std for the standard curve samples and Sample: 10^0, 10^1, 10^2... etc.
+# Pos Ctrl for the sample_mix 
+# Unkn for samples
 # NTC for Non Template Controls
 
 # !!! in CFX manager, click [Export], [Custom Export]
@@ -18,7 +21,7 @@
 # Check only the boxes for Content, Sample Name and Cq
 # Change Export Format to .xlsx
 # Click [Export]
-# in excel, save as .csv otherwise, Cq values are not correct
+# Open in excel, save as .csv otherwise, Cq values are not correct
 
 # Import needed packages=======================================================
 import pandas as pd, numpy as np
@@ -31,8 +34,12 @@ import math
 # Import file==================================================================
 # =============================================================================
 project = "Dina"
-csv = 'qPCR_CFX/Dina1.csv'
-data = pd.read_csv(csv, delimiter=';')
+PCR1 = '//zeus/mmb/molecular_ecology/mollab_team/Projects/2021/2021_Dina/210721-qpcrDina1.csv'
+PCR2 = '//zeus/mmb/molecular_ecology/mollab_team/Projects/2021/2021_Dina/210721-qpcrDina2_trial.csv'
+PCR1 = pd.read_csv(PCR1, delimiter=';')
+PCR2 = pd.read_csv(PCR2, delimiter=';')
+
+PCRs = [PCR1, PCR2]
 # =============================================================================
 
 
@@ -44,7 +51,7 @@ diluted_PCR = 100
 # Making a standard curve======================================================
 # =============================================================================
 # Extract standard curve data
-stdcurve = data[(data["Content"].str.startswith("Std"))]
+stdcurve = PCR1[(PCR1["Content"].str.startswith("Std"))]
 # From the Sample column, extract the power (copies) of the standards
 stdcurve['power'] = (
     stdcurve["Sample"].str.split('^', expand=True)[1].astype(float))
@@ -108,54 +115,50 @@ plt.tight_layout()
 
 # Sample calculations==========================================================
 # =============================================================================
-# Extract sample data
-samples_raw = data[(data["Content"].str.startswith("Unkn"))]
-# make str from float Cq values (for next step)
-samples_raw["Cq"] = samples_raw["Cq"].astype(str)
-# combine duplicate measurements
-sample_calculations = samples_raw.groupby("Sample")["Cq"].apply('-'.join)
-# Convert series to dataframe
-sample_calculations = sample_calculations.to_frame()
-
-# Check how many reps each sample has (count the join marks '-' +1)
-for sample in sample_calculations.index:
-    reps = sample_calculations["Cq"][sample].count('-') + 1
-    sample_calculations.loc[sample, "reps"] = reps
-# What is the highest amount of reps
-rep_max = int(sample_calculations["reps"].max())
-# a list for possible seperate Cq values, max 5 repetitions
-Cqs = ["Cq1","Cq2","Cq3","Cq4","Cq5"]
-# Get seperate CQ values, amount depending on number of replicates
-sample_calculations[Cqs[:rep_max]]  = (
-        sample_calculations["Cq"].str.split('-', expand=True).astype(float))
-
-# remove joined Cq and reps column
-sample_calculations = sample_calculations.drop(['Cq', 'reps'], axis=1)
-
-# Calculate mean Cq values and stdev
-sample_calculations['mean']= sample_calculations.mean(axis=1)
-sample_calculations['stdev']= sample_calculations.iloc[:, sample_calculations.columns!="mean"].std(axis=1)
-
-# calculate copies/µL in the DNA extract
-for sample in sample_calculations.index:
-    # calculate from std curve formula (10** because usinjg log-copies)
-    copies = 10**((sample_calculations["mean"][sample] - yintercept) / slope)
-    # add to dataframe, use scientific format, 2 decimal points
-    sample_calculations.loc[sample, "extract copies/µL"] = (
-        "{:.2e}".format(copies))
-
-# save results
-# save standard curve as .png
-plt.savefig("qPCR_CFX/output/standardcurve_"+ project + ".png")
-# save results in excel
-sample_calculations.to_excel("qPCR_CFX/output/results" + project + ".xlsx")
-
-
+for PCR in PCRs:
+    data = PCR
     
+    
+    
+    # # Extract sample data
+    # samples_raw = data[(data["Content"].str.startswith("Unkn"))]
+    # # make str from float Cq values (for next step)
+    # samples_raw["Cq"] = samples_raw["Cq"].astype(str)
+    # # combine duplicate measurements
+    # sample_calculations = samples_raw.groupby("Sample")["Cq"].apply('-'.join)
+    # # Convert series to dataframe
+    # sample_calculations = sample_calculations.to_frame()
 
+# # Check how many reps each sample has (count the join marks '-' +1)
+# for sample in sample_calculations.index:
+#     reps = sample_calculations["Cq"][sample].count('-') + 1
+#     sample_calculations.loc[sample, "reps"] = reps
+# # What is the highest amount of reps
+# rep_max = int(sample_calculations["reps"].max())
+# # a list for possible seperate Cq values, max 5 repetitions
+# Cqs = ["Cq1","Cq2","Cq3","Cq4","Cq5"]
+# # Get seperate CQ values, amount depending on number of replicates
+# sample_calculations[Cqs[:rep_max]]  = (
+#         sample_calculations["Cq"].str.split('-', expand=True).astype(float))
 
-   
+# # remove joined Cq and reps column
+# sample_calculations = sample_calculations.drop(['Cq', 'reps'], axis=1)
 
+# # Calculate mean Cq values and stdev
+# sample_calculations['mean']= sample_calculations.mean(axis=1)
+# sample_calculations['stdev']= sample_calculations.iloc[:, sample_calculations.columns!="mean"].std(axis=1)
 
+# # calculate copies/µL in the DNA extract
+# for sample in sample_calculations.index:
+#     # calculate from std curve formula (10** because usinjg log-copies)
+#     copies = 10**((sample_calculations["mean"][sample] - yintercept) / slope)
+#     # add to dataframe, use scientific format, 2 decimal points
+#     sample_calculations.loc[sample, "extract copies/µL"] = (
+#         "{:.2e}".format(copies))
 
+# # save results
+# # save standard curve as .png
+# plt.savefig("qPCR_CFX/output/standardcurve_"+ project + ".png")
+# # save results in excel
+# sample_calculations.to_excel("qPCR_CFX/output/results" + project + ".xlsx")
 
