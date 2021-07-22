@@ -108,15 +108,45 @@ ax.text(.7, 0.85, efficiency,
 plt.tight_layout()
 
 
-
 # =============================================================================
 # =============================================================================
 
 
 # Sample calculations==========================================================
 # =============================================================================
+
+##### Normalize data from subsequent PCRs to PCR with standard dilution series
+data = pd.DataFrame()
+
 for PCR in PCRs:
-    data = PCR
+    sample_mix = PCR[(PCR['Content'].str.startswith('Pos Ctrl'))]
+      ## Extract sample_mix data
+    mean_sample_mix = float(sample_mix.mean())
+      ## calculate mean Cq of sample_mix 
+    if 'Std' in PCR.values:
+           normalization = mean_sample_mix
+      ## If the specified PCR contains the std dilution series, 
+      ## use that sample_mix to normalize
+    
+    normalization_factor = mean_sample_mix - normalization
+      ## Calculate normalization_factor for specified PCR
+    
+    for sample in PCR.index:
+        Cq = PCR['Cq'][sample] + normalization_factor
+        PCR.loc[sample, 'corrected Cq'] = Cq
+          ## Normalize Cq values based on normalization_factor
+    
+    data = data.append(PCR)
+
+
+    
+    
+    
+    
+
+                
+    
+    
     
     
     
@@ -161,4 +191,3 @@ for PCR in PCRs:
 # plt.savefig("qPCR_CFX/output/standardcurve_"+ project + ".png")
 # # save results in excel
 # sample_calculations.to_excel("qPCR_CFX/output/results" + project + ".xlsx")
-
