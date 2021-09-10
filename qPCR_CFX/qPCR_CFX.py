@@ -44,13 +44,17 @@ PCR1 = '//zeus/mmb/molecular_ecology/mollab_team/Projects/2021/2021_Dina/210721-
 PCR2 = '//zeus/mmb/molecular_ecology/mollab_team/Projects/2021/2021_Dina/210723-qpcrDina2.csv'
 PCR3 = '//zeus/mmb/molecular_ecology/mollab_team/Projects/2021/2021_Dina/210723-qpcrDina3.csv'
 PCR4 = '//zeus/mmb/molecular_ecology/mollab_team/Projects/2021/2021_Dina/210723-qpcrDina4.csv'
+PCRredo = '//zeus/mmb/molecular_ecology/mollab_team/Projects/2021/2021_Dina/210823-qpcrDinare-do.csv'
+
 
 PCR1 = pd.read_csv(PCR1, delimiter=';')
 PCR2 = pd.read_csv(PCR2, delimiter=';')
 PCR3 = pd.read_csv(PCR3, delimiter=';')
 PCR4 = pd.read_csv(PCR4, delimiter=';')
+PCRredo = pd.read_csv(PCRredo, delimiter=';')
 
-PCRs = [PCR1, PCR2, PCR3, PCR4]
+
+PCRs = [PCR1, PCR2, PCR3, PCR4, PCRredo]
 
 save_location = '//zeus/mmb/molecular_ecology/mollab_team/Projects/2021/2021_Dina/'
 # =============================================================================

@@ -17,8 +17,9 @@ import pandas as pd       # to be able to work with tables
 from Bio.Seq import Seq   # to be able to do compl_rev
 
 # !!! Set variables for your mappingfile
-sample_file = 'NIOZ309-user_template_for_mappingfile_creatorpy.csv'
-NIOZnumber = 'NIOZ309'
+file_path = '//ZEUS/mmb/molecular_ecology/mollab_team/Sequencing/ngs_sequencing/Mapping_files/'
+sample_file = file_path + 'NIOZ311_template.csv'
+NIOZnumber = 'NIOZ311'
   # Sample_file must be .csv
   # $1 and $2 must be Forward_primer and Reverse_ primer
   # Primers should be written like: 515F_Golay001 / 926RBC_Golay252
@@ -27,8 +28,8 @@ NIOZnumber = 'NIOZ309'
   # !!! The last column must be Description (sample name or control etc.)
   # Forward_primer;Reverse_primer;PurifMethod;TargetAmpliconSize;Description
   # 515F_Golay001;926RBC_Golay252;GelQuant;600bp400bp;1A1P
-fw_primer = '515F'      # '515F' and '12S_F1a'are available
-rv_primer = '926RBC'    # '806RB', '926RBC' and '12S_R1' are available
+fw_primer = '12S_F1a'      # '515F' and '12S_F1a'are available
+rv_primer = '12S_R1'    # '806RB', '926RBC' and '12S_R1' are available
   # For any other primer we need to make a new .csv list
   # primer list must look like this: 3 columns:
   # $1 Forward_primer or Reverse_primer --> primername _Golay### 
@@ -109,4 +110,4 @@ for column in sample_file.columns[2:]:
 
 ## Save mapping_file
 # Save file as RUNID_mapping_file.txt, tab delimited and without the index
-mf.to_csv(NIOZnumber + "_mapping_file.txt", sep="\t", index=False)
+mf.to_csv(file_path + NIOZnumber + "_mapping_file.txt", sep="\t", index=False)
