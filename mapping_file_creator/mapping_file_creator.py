@@ -1,6 +1,6 @@
 # =============================================================================
 # Title:    Mapping File creator
-# Version:  2.0
+# Version:  3.0
 # Author:   Maartje Brouwer
 # Goal:     Automating mapping file generation
 # Date:     210322
@@ -13,14 +13,16 @@
 ## to automate this process.
 
 #### Import needed packages
-import pandas as pd       # to be able to work with tables
+import pandas as pd       # to be able to work with dataframes
 from Bio.Seq import Seq   # to be able to do compl_rev
 
+
 # !!! Set variables for your mappingfile
-file_path = '//ZEUS/mmb/molecular_ecology/mollab_team/Sequencing/ngs_sequencing/Mapping_files/'
-sample_file = file_path + 'NIOZ321_template.csv'
-NIOZnumber = 'NIOZ321'
-  # Sample_file must be .csv
+path = '//ZEUS/mmb/molecular_ecology/mollab_team/Sequencing/ngs_sequencing/210616_python_mapping_file_creator/'
+file = path + 'test_template_for_mappingfile_creatorpy.csv'
+NIOZnumber = 'testcsv_NIOZ313'
+  # Sample_file must be .xlsx
+  # Mapping file info must be 
   # $1 and $2 must be Forward_primer and Reverse_ primer
   # Primers should be written like: 515F_Golay001 / 926RBC_Golay252
   # You can add as many columns of metadata as you like
@@ -41,7 +43,11 @@ rv_primer = '926RBC'    # '806RB', '926RBC' and '12S_R1' are available
 
   
 # Import needed files
-sample_file = pd.read_csv(sample_file, delimiter=';')
+if file.endswith('.xlsx'):
+    sample_file = pd.read_excel(file, sheet_name='FILL_IN')
+if file.endswith('.csv'):
+    sample_file = pd.read_csv(file, delimiter=';')
+
 fw_primers = pd.read_csv(fw_primer + '.csv', delimiter=';')
 rv_primers = pd.read_csv(rv_primer + '.csv', delimiter=';')
 
@@ -110,4 +116,4 @@ for column in sample_file.columns[2:]:
 
 ## Save mapping_file
 # Save file as RUNID_mapping_file.txt, tab delimited and without the index
-mf.to_csv(file_path + NIOZnumber + "_mapping_file.txt", sep="\t", index=False)
+mf.to_csv(path + NIOZnumber + "_mapping_file.txt", sep="\t", index=False)
