@@ -113,6 +113,8 @@ mf['ReversePrimerName'] = df['Reverse_primer']
 # After that... extra data from sample_file
 for column in sample_file.columns[2:]:
     mf[column] = sample_file[column]
+# Remove everything after the description column
+mf = mf.loc[:,:'description']
 
 ## Save mapping_file
 # Save file as RUNID_mapping_file.txt, tab delimited and without the index
