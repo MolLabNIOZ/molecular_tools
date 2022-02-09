@@ -5,23 +5,19 @@ VERSION: Feb2022
 If you have different primer sets within 1 sequencing lane
 make seperate mapping_files for the different primer sets
 
-Template can be .xlsx or .csv:
+Fill in a template. this can be .xlsx or .csv:
+Template can be found here: 
+//zeus.nioz.nl/mmb/molecular_ecology/mollab_team/Sequencing/ngs_sequencing
 If .xlsx, sheet with mapping_file data must be called FILL_IN.
 $1 and $2 must be Forward_primer and Reverse_primer
 
-'515F', '926RBC', '806RB', '12S_F1a', '12S_R1',
-'EUKssu_F04' and 'EUKssu_R22mod_A002' are available
-For any other primer we need to make a new .csv list
-Primers should be written like: 
-#515F_Golay001 , 926RBC_Golay002 , 806RB_Golay002 , 12S_F1a_Golay001 , 
-#12S_R1_Golay002 , EUKssu_F04_A001 ,  EUKssu_R22mod_A002
-
 You can add as many columns of metadata as you like
-Add meta data that is equal for all samples to the ReadMe.
+In the .xlsx template, add meta data that is equal for all samples to the ReadMe.
 In the FILL_IN only enter metadata that differs between samples
 This metadata will be added to the end of the mappingfile
-The description column will be the last column of the mapping_file
-Make the description as descriptive as possible.
+The description column will be the last column of the mapping_file.
+Anything after that in the template will be disregarded.
+Make the description as descriptive as possible (controls etc).
 """
 
 #### Import needed packages
@@ -29,11 +25,11 @@ import pandas as pd       # to be able to work with dataframes
 from Bio.Seq import Seq   # to be able to do compl_rev
 
 #### !!! Set variables for your mappingfile
-# file_path to mapping_file template (.xlsx or .csv)
-file_path = "\\zeus.nioz.nl\mmb\molecular_ecology\mollab_team\Sequencing\ngs_sequencing\test_template_for_mappingfile_creatorpy.xlsx"
+file_name = 'test_NIOZ319_template - Copy.csv'
+# file_path to folder of apping_file template (.xlsx or .csv)
+folder_path = "//zeus.nioz.nl/mmb/molecular_ecology/mollab_team/Sequencing/ngs_sequencing/Mapping_files/"
 # Change from windows path to unix path
-file_path = (
-    '/' + file_path.replace('\\', '/').replace('\n', '/n').replace('\t', '/t'))
+file_path = folder_path + file_name
 
 # NIOZ number to name the mapping_file
 NIOZnumber = 'test_mapping'	
@@ -67,10 +63,10 @@ fw_primer = sample_file.iloc[1]['Forward_primer'][:-3]
 rv_primer = sample_file.iloc[1]['Reverse_primer'][:-3]
 # Import files with primer
 fw_primers = pd.read_excel(
-    "//zeus.nioz.nl/mmb/molecular_ecology/mollab_team/Sequencing/ngs_sequencing/220208_python_mapping_file_creator/primer_lists.xlsx",
+    "//zeus.nioz.nl/mmb/molecular_ecology/mollab_team/Sequencing/ngs_sequencing/python_mapping_file_creator/primer_lists.xlsx",
     sheet_name=fw_primer)
 rv_primers = pd.read_excel(
-    "//zeus.nioz.nl/mmb/molecular_ecology/mollab_team/Sequencing/ngs_sequencing/220208_python_mapping_file_creator/primer_lists.xlsx",
+    "//zeus.nioz.nl/mmb/molecular_ecology/mollab_team/Sequencing/ngs_sequencing/python_mapping_file_creator/primer_lists.xlsx",
     sheet_name=rv_primer)
 
 #### Add primer sequence and barcode sequences from database to samples
@@ -123,5 +119,4 @@ mf = mf.loc[:,:'description']
 
 ## Save mapping_file
 # Save file as RUNID_mapping_file.txt, tab delimited and without the index
-path = '//zeus.nioz.nl/mmb/molecular_ecology/mollab_team/Sequencing/ngs_sequencing/Mapping_files/'
-mf.to_csv(path + NIOZnumber + "_mapping_file.txt", sep="\t", index=False)
+mf.to_csv(folder_path + NIOZnumber + "_mapping_file.txt", sep="\t", index=False)
