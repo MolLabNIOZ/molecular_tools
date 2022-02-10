@@ -25,9 +25,9 @@ import pandas as pd       # to be able to work with dataframes
 from Bio.Seq import Seq   # to be able to do compl_rev
 
 #### !!! Set variables for your mappingfile
-file_name = 'test_NIOZ319_template - Copy.csv'
+file_name = 'test_user_template_for_mappingfile_creatorpy.xlsm'
 # file_path to folder of apping_file template (.xlsx or .csv)
-folder_path = "//zeus.nioz.nl/mmb/molecular_ecology/mollab_team/Sequencing/ngs_sequencing/Mapping_files/"
+folder_path = "//zeus.nioz.nl/mmb/molecular_ecology/mollab_team/Sequencing/ngs_sequencing/"
 # Change from windows path to unix path
 file_path = folder_path + file_name
 
@@ -35,7 +35,7 @@ file_path = folder_path + file_name
 NIOZnumber = 'test_mapping'	
  
 #### Import needed files
-if file_path.endswith('.xlsx'):
+if file_path.endswith('.xlsx') or file_path.endswith('.xlsm'):
     sample_file = pd.read_excel(file_path, sheet_name='FILL_IN')
 if file_path.endswith('.csv'):
     sample_file = pd.read_csv(file_path, delimiter=';')
@@ -115,7 +115,7 @@ mf['ReversePrimerName'] = df['Reverse_primer']
 for column in sample_file.columns[2:]:
     mf[column] = sample_file[column]
 # Remove everything after the description column
-mf = mf.loc[:,:'description']
+mf = mf.loc[:,:'Description']
 
 ## Save mapping_file
 # Save file as RUNID_mapping_file.txt, tab delimited and without the index
