@@ -11,9 +11,10 @@
 # of the batch. Preferable at least in fivefold. used for normalization
 
 # !!! Make sure in the CFX manager you have selected content:
-# Std for the standard curve samples and Sample: 10^0, 10^1, 10^2... etc.
-# Pos Ctrl for the sample_mix 
-# Unkn for samples
+# Std for the standard curve samples. Call them: ....^0, ....^1, ....^2 etc.
+# .... can be whatever you want (don't use ^ in the rest of the name)
+# Select Pos Ctrl for the sample_mix 
+# Select Unkn for samples
 # NTC for Non Template Controls
 # Make sure for follow-up PCRs the threshold is set to the same value as the 
 # PCR including standard dilution series
@@ -36,38 +37,53 @@ from natsort import index_natsorted
  ## to be able to sort naturally, so 1,2,14,21 instead of 1,14,2,21
 # =============================================================================
 
+# !!!Variables to set==========================================================
+# =============================================================================
+std_copies = 1.98 # copies/µL of the standard *10^x
+
+# Name of the project
+project = "Tim_Oceanibacter"
+
+# Location of the raw data
+PCR1 = '//zeus/mmb/molecular_ecology/mollab_team/Projects/2022/Helge/Tim/220217-Methyob_qPCR.csv'
+PCR2 = False
+PCR3 = False
+PCR4 = False
+PCRredo = False
+
+# Decimal sign used for Cq values in the .csv
+decimal_sign =','
+
+# Where do you want to save the results
+save_location = '//zeus/mmb/molecular_ecology/mollab_team/Projects/2022/Helge/Tim/'
+# =============================================================================
+
 
 # Import file==================================================================
 # =============================================================================
-project = "DinaJuly21"
-PCR1 = '//zeus/mmb/molecular_ecology/mollab_team/Projects/2021/2021_Dina/210721-qpcrDina1.csv'
-PCR2 = '//zeus/mmb/molecular_ecology/mollab_team/Projects/2021/2021_Dina/210723-qpcrDina2.csv'
-PCR3 = '//zeus/mmb/molecular_ecology/mollab_team/Projects/2021/2021_Dina/210723-qpcrDina3.csv'
-PCR4 = '//zeus/mmb/molecular_ecology/mollab_team/Projects/2021/2021_Dina/210723-qpcrDina4.csv'
-PCRredo = '//zeus/mmb/molecular_ecology/mollab_team/Projects/2021/2021_Dina/210823-qpcrDinare-do.csv'
-
-
-PCR1 = pd.read_csv(PCR1, delimiter=';')
-PCR2 = pd.read_csv(PCR2, delimiter=';')
-PCR3 = pd.read_csv(PCR3, delimiter=';')
-PCR4 = pd.read_csv(PCR4, delimiter=';')
-PCRredo = pd.read_csv(PCRredo, delimiter=';')
-
-
-PCRs = [PCR1, PCR2, PCR3, PCR4, PCRredo]
-
-save_location = '//zeus/mmb/molecular_ecology/mollab_team/Projects/2021/2021_Dina/'
+PCR1 = pd.read_csv(PCR1, delimiter=';', decimal=decimal_sign)
+PCRs = [PCR1]
+if PCR2:
+    PCR2 = pd.read_csv(PCR2, delimiter=';', decimal=decimal_sign)
+    PCRs = PCRs.append(PCR2)
+    if PCR3:
+        PCR3 = pd.read_csv(PCR3, delimiter=';', decimal=decimal_sign)
+        PCRs = PCRs.append(PCR3)
+        if PCR4:
+            PCR4 = pd.read_csv(PCR4, delimiter=';', decimal=decimal_sign)
+            PCRs = PCRs.append(PCR4)
+if PCRredo:
+    PCRredo = pd.read_csv(PCRredo, delimiter=';', decimal=decimal_sign)
+    PCRs = PCRs.append(PCRredo)
 # =============================================================================
 
-
-# !!!Variables to set==========================================================
-# =============================================================================
-std_copies = 4.06 # copies/µL of the standard *10^x
 
 # Making a standard curve======================================================
 # =============================================================================
 # Extract standard curve data
 stdcurve = PCR1[(PCR1["Content"].str.startswith("Std"))]
+# Remove NaN values
+stdcurve = stdcurve[stdcurve['Cq'].notna()]
 # From the Sample column, extract the power (copies) of the standards
 stdcurve['power'] = (
     stdcurve["Sample"].str.split('^', expand=True)[1].astype(float))
@@ -82,21 +98,24 @@ for standard in stdcurve.index:
 
 # Linear regression + interpolation for standard curve
 slope, yintercept, rv, pv, se = stats.linregress(stdcurve["log_copies"], 
-                                                 stdcurve["Cq"])
+                                                  stdcurve["Cq"])
 interp = np.linspace(np.min(stdcurve['log_copies']), 
                             np.max(stdcurve['log_copies']), 
                             num=500)
 # calculate efficiency
 efficiency = (-1+10**(-1/slope))*100
 
+# determine highest standard
+max_power = max(stdcurve['power'])
+
 # plot standard curve
 fig, ax = plt.subplots(dpi=300)     # empty plot
-ax.set_xticks(np.arange(0,8,1))     # x-grid from 0to8, with intervals=1
+ax.set_xticks(np.arange(0,max_power + 1,1))     # x-grid intervals=1
 ax.grid(alpha=0.3)                  # transparancy of grid
 ax.set_title('standardcurve', fontsize=16)
 ax.scatter(stdcurve["log_copies"],  # x-axis
-           stdcurve["Cq"],          # y-axis
-           c='blue')                # color of the dots
+            stdcurve["Cq"],          # y-axis
+            c='blue')                # color of the dots
 ax.set_xlabel('log10 copies')       # x-axis label
 ax.set_ylabel('Cq')                 # y-axis label
 
@@ -122,8 +141,6 @@ ax.text(.7, 0.85, efficiency,
 
 # make layout fit better
 plt.tight_layout()
-
-
 # =============================================================================
 
 
@@ -139,13 +156,15 @@ for PCR in PCRs:
     mean_sample_mix = float(sample_mix['Cq'].mean())
       ## calculate mean Cq of sample_mix 
     if 'Std' in PCR.values:
-           normalization = mean_sample_mix
+            normalization = mean_sample_mix
       ## If the specified PCR contains the std dilution series, 
       ## use that sample_mix to normalize
     
     normalization_factor = mean_sample_mix - normalization
+    if math.isnan(normalization_factor):
+        normalization_factor = 0
       ## Calculate normalization_factor for specified PCR
-    
+      
     for sample in PCR.index:
         Cq = PCR['Cq'][sample] + normalization_factor
         PCR.loc[sample, 'corrected Cq'] = Cq
