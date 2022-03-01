@@ -1,8 +1,2 @@
-https://data.macrogen.com/~macro3/HiSeq02//20210819/HN00154315/NIOZ308_2.fastq.gz
-https://data.macrogen.com/~macro3/HiSeq02//20210819/HN00154315/NIOZ310_1.fastq.gz
-https://data.macrogen.com/~macro3/HiSeq02//20210819/HN00154315/NIOZ309_1.fastq.gz
-https://data.macrogen.com/~macro3/HiSeq02//20210819/HN00154315/NIOZ309_2.fastq.gz
-https://data.macrogen.com/~macro3/HiSeq02//20210819/HN00154315/NIOZ302_1.fastq.gz
-https://data.macrogen.com/~macro3/HiSeq02//20210819/HN00154315/NIOZ302_2.fastq.gz
-https://data.macrogen.com/~macro3/HiSeq02//20210819/HN00154315/NIOZ308_1.fastq.gz
-https://data.macrogen.com/~macro3/HiSeq02//20210819/HN00154315/NIOZ310_2.fastq.gz
+https://data.macrogen.com/~macro3/HiSeq02//20220228/HN00167129/NIOZ323_1.fastq.gz
+https://data.macrogen.com/~macro3/HiSeq02//20220228/HN00167129/NIOZ323_2.fastq.gz

@@ -5,7 +5,7 @@ import pdfx
 # Read pdf file
 pdf = pdfx.PDFx(
     "//ZEUS/mmb/molecular_ecology/mollab_team/Sequencing/ngs_sequencing/"
-    "project_administration/NIOZ302_308_309_310/HN00154315.pdf"
+    "project_administration/NIOZ323/NIOZ323_HN00167129.pdf"
     )
 
 # Get urls from pdf file as a dictionary
@@ -23,7 +23,6 @@ for element in links_list[0]:
 #%% Transfer list to txt file
 #Create new txt file
 txt_file = open(
-    "C:/Users/svreugdenhil/Documents/GitHub/molecular_tools/data_download/"
     "download_links.txt", 
     "w"
     )
