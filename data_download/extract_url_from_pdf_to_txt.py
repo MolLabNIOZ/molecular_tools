@@ -5,7 +5,7 @@ import pdfx
 # Read pdf file
 pdf = pdfx.PDFx(
     "//ZEUS/mmb/molecular_ecology/mollab_team/Sequencing/ngs_sequencing/"
-    "project_administration/NIOZ323/NIOZ323_HN00167129.pdf"
+    "project_administration/NIOZ321/NIOZ321_raw_data_report_HN00166645.pdf"
     )
 
 # Get urls from pdf file as a dictionary

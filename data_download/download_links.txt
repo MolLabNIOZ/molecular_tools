@@ -1,2 +1,2 @@
-https://data.macrogen.com/~macro3/HiSeq02//20220228/HN00167129/NIOZ323_1.fastq.gz
-https://data.macrogen.com/~macro3/HiSeq02//20220228/HN00167129/NIOZ323_2.fastq.gz
+https://data.macrogen.com/~macro3/HiSeq02//20220302/HN00166645/NIOZ321_1.fastq.gz
+https://data.macrogen.com/~macro3/HiSeq02//20220302/HN00166645/NIOZ321_2.fastq.gz
