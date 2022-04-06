@@ -39,13 +39,13 @@ from natsort import index_natsorted
 
 # !!!Variables to set==========================================================
 # =============================================================================
-std_copies = 1.98 # copies/µL of the standard *10^x
+std_copies = 5.28 # copies/µL of the standard *10^x
 
 # Name of the project
-project = "Tim_Oceanibacter"
+project = "Tim_OM43"
 
 # Location of the raw data
-PCR1 = '//zeus/mmb/molecular_ecology/mollab_team/Projects/2022/Helge/Tim/220217-Methyob_qPCR.csv'
+PCR1 = '//zeus/mmb/molecular_ecology/mollab_team/Projects/2022/Helge/Tim/220222-OM43_qPCR.csv'
 PCR2 = False
 PCR3 = False
 PCR4 = False
