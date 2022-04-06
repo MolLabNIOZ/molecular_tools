@@ -25,9 +25,10 @@ from matplotlib import pyplot as plt
 
 # ==================Import file================================================
 # =============================================================================
-project = "210527-QubitLena"
-csv = '210422-LenaQubit.csv'
-data = pd.read_csv(csv, delimiter=';')
+project = "220406-QubitAnnalisa"
+csv = 'annalisa_qubit.csv'
+decimal_sign =','
+data = pd.read_csv(csv, delimiter=';', decimal=decimal_sign)
 # =============================================================================
 
 
@@ -209,25 +210,38 @@ DNA_concentrations.sort_values(
 # Final column for concentration, chose if both are measured for BR or HS
 DNA_concentrations['[DNA] ng/µL'] = ''
 for index in DNA_concentrations.index:
-    # If only HS is measured, concentration is HS measurement
+    # If only HS is measured and concentration is below 5
+    # concentration is HS measurement
     if DNA_concentrations.loc[index,'merge'] == 'left_only':
-        DNA_concentrations.loc[index,'[DNA] ng/µL'] = (
-            DNA_concentrations.loc[index,'HS_[DNA] ng/µL']
-            )
-    # If only BR is measured, concentration is BR measurement
+        if DNA_concentrations.loc[index,'HS_[DNA] ng/µL'] < 5:
+            DNA_concentrations.loc[index,'[DNA] ng/µL'] = (
+                DNA_concentrations.loc[index,'HS_[DNA] ng/µL']
+                )
+    # If concentration is above 5, advise to measure with BR kit
+        else:
+            DNA_concentrations.loc[index,'[DNA] ng/µL'] = "measure with BR kit"
+
+    # If only BR is measured and concentration is above 5
+    # concentration is BR measurement
     elif DNA_concentrations.loc[index,'merge'] == 'right_only':
-        DNA_concentrations.loc[index,'[DNA] ng/µL'] = (
-            DNA_concentrations.loc[index,'BR_[DNA] ng/µL']
-            )
-    # If both HS and BR is measured and BR[DNA] > 5 or HS[DNA] > 10,
+        if DNA_concentrations.loc[index,'BR_[DNA] ng/µL'] > 5:
+            DNA_concentrations.loc[index,'[DNA] ng/µL'] = (
+                DNA_concentrations.loc[index,'BR_[DNA] ng/µL']
+                )
+    # If concentration is below 5, advise to measure with HS kit
+        else:
+            DNA_concentrations.loc[index,'[DNA] ng/µL'] = "measure with HS kit"
+    
+    # If both HS and BR is measured and BR[DNA] > 5 and HS[DNA] > 5,
     # concentration is BR measurement
     elif (DNA_concentrations.loc[index,'merge'] == 'both'
           and DNA_concentrations.loc[index,'BR_[DNA] ng/µL'] > 5
-          or DNA_concentrations.loc[index,'HS_[DNA] ng/µL'] > 10
+          and DNA_concentrations.loc[index,'HS_[DNA] ng/µL'] > 5
           ):
         DNA_concentrations.loc[index,'[DNA] ng/µL'] = (
             DNA_concentrations.loc[index,'BR_[DNA] ng/µL']
             )
+
     # If both HS and BR is measured and BR[DNA] <= 5,
     # concentration is HS measurement
     elif (DNA_concentrations.loc[index,'merge'] == 'both' 
@@ -236,6 +250,10 @@ for index in DNA_concentrations.index:
         DNA_concentrations.loc[index,'[DNA] ng/µL'] = (
             DNA_concentrations.loc[index,'HS_[DNA] ng/µL']
             )
+
+    else:
+        DNA_concentrations.loc[index,'[DNA] ng/µL'] = "indecisive"
+
 
 # Remove the merge column
 DNA_concentrations.drop(columns=['merge'], inplace=True)
