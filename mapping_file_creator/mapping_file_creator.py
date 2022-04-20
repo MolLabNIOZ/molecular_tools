@@ -25,7 +25,7 @@ import pandas as pd       # to be able to work with dataframes
 from Bio.Seq import Seq   # to be able to do compl_rev
 
 #### !!! Set variables for your mappingfile
-file_name = 'NIOZ325_mappingfile_creatorpy.xlsx'
+file_name = 'NIOZ322_user_template_for_mappingfile_EMNA.xlsx'
 
 # file_path to folder of mapping_file template (.xlsx or .csv)
 folder_path = "//zeus/mmb/molecular_ecology/mollab_team/Sequencing/ngs_sequencing/Mapping_files/"
@@ -33,7 +33,7 @@ folder_path = "//zeus/mmb/molecular_ecology/mollab_team/Sequencing/ngs_sequencin
 file_path = folder_path + file_name
 
 # !!! NIOZ number to name the mapping_file
-NIOZnumber = 'NIOZ325'	
+NIOZnumber = 'NIOZ322'	
  
 #### Import needed files
 if file_path.endswith('.xlsx') or file_path.endswith('.xlsm'):
