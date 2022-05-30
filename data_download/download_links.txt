@@ -1,2 +1,4 @@
-https://data.macrogen.com/~macro3/HiSeq02//20220426/HN00169497/NIOZ325_2.fastq.gz
-https://data.macrogen.com/~macro3/HiSeq02//20220426/HN00169497/NIOZ325_1.fastq.gz
+https://data.macrogen.com/~macro3/HiSeq02/20220524/HN00171340/NIOZ331_1.fastq.gz
+https://data.macrogen.com/~macro3/HiSeq02/20220524/HN00171340/NIOZ331_2.fastq.gz
+https://data.macrogen.com/~macro3/HiSeq02/20220524/HN00171340/NIOZ330_1.fastq.gz
+https://data.macrogen.com/~macro3/HiSeq02/20220524/HN00171340/NIOZ330_2.fastq.gz
