@@ -25,12 +25,12 @@ from matplotlib import pyplot as plt
 
 # ==================Import file================================================
 # =============================================================================
-project = "220406-QubitAnnalisa"
-csv = 'annalisa_qubit.csv'
+project = "Eva"
+csv = 'Eva.csv'
 decimal_sign =','
 data = pd.read_csv(csv, delimiter=';', decimal=decimal_sign)
+data = data.dropna(0, thresh=2)
 # =============================================================================
-
 
 # ==================Making a standard curve====================================
 # =============================================================================
@@ -69,7 +69,7 @@ if stdcurveBRraw.empty is False:
 
     # Linear regression + interpolation for standard curve
     BRslope, BRintercept, rv, pv, se = stats.linregress(stdcurveBR["ng/µl"], 
-                         stdcurveBR["End RFU"])
+                          stdcurveBR["End RFU"])
     BR_interp = np.linspace(np.min(stdcurveBR["ng/µl"]), 
                     np.max(stdcurveBR["ng/µl"]), 
                     num=500)
@@ -167,7 +167,7 @@ if stdcurveHSraw.empty is False:
         DNA_concentrations_HS.at[sample,'HS_[DNA] ng/µL'] = concentration
     # Get rid of HS in sample names, to be able to merge samples
     DNA_concentrations_HS['Sample'] = (
-        (DNA_concentrations_HS['Sample'].str.split('_', 
+        (DNA_concentrations_HS['Sample'].str.split('HS_', 
         expand=True))[1].astype(str))
 
 if stdcurveBRraw.empty is False:
@@ -190,7 +190,7 @@ if stdcurveBRraw.empty is False:
 
     # Get rid of BR in sample names, to be able to merge samples
     DNA_concentrations_BR['Sample'] = (
-        (DNA_concentrations_BR['Sample'].str.split('_', 
+        (DNA_concentrations_BR['Sample'].str.split('BR_', 
         expand=True))[1].astype(str))
 
 # Merge HS and BR measurements
@@ -201,11 +201,11 @@ DNA_concentrations = pd.merge(
     indicator = 'merge' # new column that tells if both HS and BR are measured
     )
 # Sort samples, naturally (so 1,2,14,21 instead of 1,14,2,21)
-DNA_concentrations.sort_values(
-    by=['Sample'], 
-    inplace=True,
-    key=lambda x: np.argsort(index_natsorted(DNA_concentrations["Sample"]))
-    )
+# DNA_concentrations.sort_values(
+#     by=['Sample'], 
+#     inplace=True,
+#     key=lambda x: np.argsort(index_natsorted(DNA_concentrations["Sample"]))
+#     )
 
 # Final column for concentration, chose if both are measured for BR or HS
 DNA_concentrations['[DNA] ng/µL'] = ''
