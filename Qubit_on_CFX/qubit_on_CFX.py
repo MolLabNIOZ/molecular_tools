@@ -29,7 +29,7 @@ project = "Eva"
 csv = 'Eva.csv'
 decimal_sign =','
 data = pd.read_csv(csv, delimiter=';', decimal=decimal_sign)
-data = data.dropna(0, thresh=2)
+data.dropna(0, subset=['Sample'], inplace=True)
 # =============================================================================
 
 # ==================Making a standard curve====================================
