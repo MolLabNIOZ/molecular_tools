@@ -1,10 +1,10 @@
-#%% import module for pdf files
+# import module for pdf files
 import pdfx
 
-#%% Read pdf and create dictionary and list
+# Read pdf and create dictionary and list
 # Read pdf file
 pdf = pdfx.PDFx(
-    "//ZEUS/mmb/molecular_ecology/mollab_team/Sequencing/ngs_sequencing/project_administration/NIOZ330_NIOZ331/NIOZ330_331_raw_data_report_HN00171340.pdf"
+    "//ZEUS/mmb/molecular_ecology/mollab_team/Sequencing/ngs_sequencing/project_administration/NIOZ332/NIOZ332_data_report_HN00171341.pdf"
     )
 
 # Get urls from pdf file as a dictionary
@@ -19,7 +19,7 @@ links_list = list(links_dict.values())
 for element in links_list[0:]:
     print(element)
     
-#%% Transfer list to txt file
+# Transfer list to txt file
 #Create new txt file
 txt_file = open(
     "download_links.txt", 
