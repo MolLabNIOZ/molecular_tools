@@ -18,6 +18,12 @@ This metadata will be added to the end of the mappingfile
 The description column will be the last column of the mapping_file.
 Anything after that in the template will be disregarded.
 Make the description as descriptive as possible (controls etc).
+
+edit:
+    220929. Changed barcodes to 4 digits instead of 3, so that we can combine
+    Linda's primer set with our primer set. Linda's primers will be numbered 
+    9001 and on.
+
 """
 
 #### Import needed packages
@@ -25,15 +31,15 @@ import pandas as pd       # to be able to work with dataframes
 from Bio.Seq import Seq   # to be able to do compl_rev
 
 #### !!! Set variables for your mappingfile
-file_name = 'nioz331_AdP_template_for_mappingfile_creator_OS-focus.xlsx'
+file_name = 'test_user_template_for_mappingfile_creatorpy.xlsx'
 
 # file_path to folder of mapping_file template (.xlsx or .csv)
-folder_path = "//zeus/mmb/molecular_ecology/mollab_team/Sequencing/ngs_sequencing/Mapping_files/"
+folder_path = "molecular_tools/mapping_file_creator/"
 # Change from windows path to unix path
 file_path = folder_path + file_name
 
 # !!! NIOZ number to name the mapping_file
-NIOZnumber = 'NIOZ331'	
+NIOZnumber = 'test_run'	
  
 #### Import needed files
 if file_path.endswith('.xlsx') or file_path.endswith('.xlsm'):
@@ -64,10 +70,10 @@ fw_primer = sample_file.iloc[1]['Forward_primer'][:-3]
 rv_primer = sample_file.iloc[1]['Reverse_primer'][:-3]
 # Import files with primer
 fw_primers = pd.read_excel(
-    "//zeus.nioz.nl/mmb/molecular_ecology/mollab_team/Sequencing/ngs_sequencing/python_mapping_file_creator/primer_lists.xlsx",
+    "molecular_tools/mapping_file_creator/primer_lists.xlsx",
     sheet_name=fw_primer)
 rv_primers = pd.read_excel(
-    "//zeus.nioz.nl/mmb/molecular_ecology/mollab_team/Sequencing/ngs_sequencing/python_mapping_file_creator/primer_lists.xlsx",
+    "molecular_tools/mapping_file_creator/primer_lists.xlsx",
     sheet_name=rv_primer)
 
 #### Add primer sequence and barcode sequences from database to samples
