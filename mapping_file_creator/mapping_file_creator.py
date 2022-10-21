@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 """
 Automated mapping_file creator
 VERSION: Feb2022
@@ -18,26 +19,31 @@ This metadata will be added to the end of the mappingfile
 The description column will be the last column of the mapping_file.
 Anything after that in the template will be disregarded.
 Make the description as descriptive as possible (controls etc).
+
+edit:
+    220929. Changed barcodes to 4 digits instead of 3, so that we can combine
+    Linda's primer set with our primer set. Linda's primers will be numbered 
+    9001 and on.
+
 """
 
 #### Import needed packages
 import pandas as pd       # to be able to work with dataframes
 from Bio.Seq import Seq   # to be able to do compl_rev
-
-#### !!! Set variables for your mappingfile
-file_name = 'nioz331_AdP_template_for_mappingfile_creator_OS-focus.xlsx'
+# !!! Set variables for your mappingfile
+file_name = 'test_user_template_for_mappingfile_creatorpy.xlsx'
 
 # file_path to folder of mapping_file template (.xlsx or .csv)
-folder_path = "//zeus/mmb/molecular_ecology/mollab_team/Sequencing/ngs_sequencing/Mapping_files/"
+folder_path = "molecular_tools/mapping_file_creator/"
 # Change from windows path to unix path
 file_path = folder_path + file_name
 
 # !!! NIOZ number to name the mapping_file
-NIOZnumber = 'NIOZ331'	
+NIOZnumber = 'test_run'	
  
 #### Import needed files
 if file_path.endswith('.xlsx') or file_path.endswith('.xlsm'):
-    sample_file = pd.read_excel(file_path, sheet_name='FILL_IN')
+    sample_file = pd.read_excel(file_path, sheet_name='FILL_IN', engine='openpyxl')
 if file_path.endswith('.csv'):
     sample_file = pd.read_csv(file_path, delimiter=';')
 
@@ -45,30 +51,43 @@ if file_path.endswith('.csv'):
 # Create a new empty dataframe
 df = pd.DataFrame()
 # Insert primers
-df['Forward_primer']=(sample_file['Forward_primer'])
-df['Reverse_primer']=(sample_file['Reverse_primer'])
-# Extract primernumbers (last 3 characters)
-df['Forward_primer_number'] = (
-    (sample_file['Forward_primer'].str.slice(-3)))
-df['Reverse_primer_number'] = (
-    (sample_file['Reverse_primer'].str.slice(-3)))
+df['Forward_primer']=(sample_file['Forward_primer'].dropna())
+df['Reverse_primer']=(sample_file['Reverse_primer'].dropna())
+# Extract primernumbers (last 3-4 characters depending on the primer)
+
+try:
+    #checks if last 4 characters are intergers, else the 4th digit is an char
+    int(sample_file.iloc[1]['Reverse_primer'][-4:])
+    df['Forward_primer_number'] = (
+            (sample_file['Forward_primer'].str.slice(-4)))
+    df['Reverse_primer_number'] = (
+            (sample_file['Reverse_primer'].str.slice(-4)))
+    #### Get primer and barcode sequence info
+    # Get primer names without barcode number
+    fw_primer = sample_file.iloc[1]['Forward_primer'][:-4]
+    rv_primer = sample_file.iloc[1]['Reverse_primer'][:-4]
+except ValueError:
+    #
+    df['Forward_primer_number'] = (
+            (sample_file['Forward_primer'].str.slice(-3)))
+    df['Reverse_primer_number'] = (
+            (sample_file['Reverse_primer'].str.slice(-3)))
+    #### Get primer and barcode sequence info
+    # Get primer names without barcode number
+    fw_primer = sample_file.iloc[1]['Forward_primer'][:-3]
+    rv_primer = sample_file.iloc[1]['Reverse_primer'][:-3]
 # Generate SampleIDs
 df['#SampleID'] = (
     NIOZnumber + '.' + 
     df ['Forward_primer_number'] + '.' + 
     df ['Reverse_primer_number'])
-
-#### Get primer and barcode sequence info
-# Get primer names without barcode number
-fw_primer = sample_file.iloc[1]['Forward_primer'][:-3]
-rv_primer = sample_file.iloc[1]['Reverse_primer'][:-3]
 # Import files with primer
 fw_primers = pd.read_excel(
-    "//zeus.nioz.nl/mmb/molecular_ecology/mollab_team/Sequencing/ngs_sequencing/python_mapping_file_creator/primer_lists.xlsx",
-    sheet_name=fw_primer)
+    "molecular_tools/mapping_file_creator/primer_lists.xlsx",
+    sheet_name=fw_primer, engine='openpyxl')
 rv_primers = pd.read_excel(
-    "//zeus.nioz.nl/mmb/molecular_ecology/mollab_team/Sequencing/ngs_sequencing/python_mapping_file_creator/primer_lists.xlsx",
-    sheet_name=rv_primer)
+    "molecular_tools/mapping_file_creator/primer_lists.xlsx",
+    sheet_name=rv_primer, engine='openpyxl')
 
 #### Add primer sequence and barcode sequences from database to samples
 df = pd.merge(df, fw_primers)
