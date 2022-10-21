@@ -16,7 +16,7 @@
 
 # ==================Import needed packages=====================================
 import pandas as pd, numpy as np
-from natsort import index_natsorted 
+# from natsort import index_natsorted 
  ## to be able to sort naturally, so 1,2,14,21 instead of 1,14,2,21
 from scipy import stats
 from matplotlib import pyplot as plt
