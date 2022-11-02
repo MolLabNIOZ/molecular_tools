@@ -1,0 +1,58 @@
+,Well,Fluor,Target,Content,Sample,End RFU,Call,Sample Type,CallType,Is Control
+,A01,SYBR,,Unkn,BR 0 ng,3334.353846809,,Unknown,Unassigned,False
+,B01,SYBR,,Unkn,BR 0 ng,3380.09721614484,,Unknown,Unassigned,False
+,C01,SYBR,,Unkn,BR 0 ng,3454.67094762179,,Unknown,Unassigned,False
+,D01,SYBR,,Unkn,BR 0 ng,3529.03467928712,,Unknown,Unassigned,False
+,E01,SYBR,,Unkn,BR 200 ng,11262.2685313429,,Unknown,Unassigned,False
+,F01,SYBR,,Unkn,BR 200 ng,11312.3760233776,,Unknown,Unassigned,False
+,G01,SYBR,,Unkn,BR 200 ng,11771.8878998448,,Unknown,Unassigned,False
+,H01,SYBR,,Unkn,BR 200 ng,11441.2235719462,,Unknown,Unassigned,False
+,A02,SYBR,,Unkn,BR_WZM-1,4431.99246368402,,Unknown,Unassigned,False
+,B02,SYBR,,Unkn,BR_WZM-2,4747.87890924495,,Unknown,Unassigned,False
+,C02,SYBR,,Unkn,BR_WZM-3,3929.69129007248,,Unknown,Unassigned,False
+,D02,SYBR,,Unkn,BR_WZM-4,4493.07048655035,,Unknown,Unassigned,False
+,E02,SYBR,,Unkn,BR_WZM-5,4539.25446560282,,Unknown,Unassigned,False
+,F02,SYBR,,Unkn,BR_WZM-6,4271.90745038518,,Unknown,Unassigned,False
+,G02,SYBR,,Unkn,BR_WZM-7,4765.85787171004,,Unknown,Unassigned,False
+,H02,SYBR,,Unkn,BR_WZM-8,4424.22632522628,,Unknown,Unassigned,False
+,A03,SYBR,,Unkn,BR_WZM-9,4425.46703551039,,Unknown,Unassigned,False
+,B03,SYBR,,Unkn,BR_WZM-10,4046.73641260046,,Unknown,Unassigned,False
+,C03,SYBR,,Unkn,BR_WZM-11,4364.76272469402,,Unknown,Unassigned,False
+,D03,SYBR,,Unkn,BR_WZM-12,4201.36389246655,,Unknown,Unassigned,False
+,E03,SYBR,,Unkn,BR_WZM-13,4447.8234365105,,Unknown,Unassigned,False
+,F03,SYBR,,Unkn,BR_WZM-14,4354.25790139831,,Unknown,Unassigned,False
+,G03,SYBR,,Unkn,BR_WZM-15,4357.48139632034,,Unknown,Unassigned,False
+,H03,SYBR,,Unkn,BR_WZM-16,4209.33469907031,,Unknown,Unassigned,False
+,A04,SYBR,,Unkn,BR_WZM-17,4468.58461288909,,Unknown,Unassigned,False
+,B04,SYBR,,Unkn,BR_WZM-18,4440.6795965066,,Unknown,Unassigned,False
+,C04,SYBR,,Unkn,BR_WZM-19,4026.41125883483,,Unknown,Unassigned,False
+,D04,SYBR,,Unkn,BR_WZM-20,4470.50043461534,,Unknown,Unassigned,False
+,E04,SYBR,,Unkn,BR_WZM-21,4551.20310865199,,Unknown,Unassigned,False
+,F04,SYBR,,Unkn,BR_WZM-22,4635.62838253749,,Unknown,Unassigned,False
+,G04,SYBR,,Unkn,BR_WZM-23,4624.41063859827,,Unknown,Unassigned,False
+,H04,SYBR,,Unkn,BR_WZM-24,4413.81987039199,,Unknown,Unassigned,False
+,A05,SYBR,,Unkn,BR_WZM-25,3916.99868972921,,Unknown,Unassigned,False
+,B05,SYBR,,Unkn,BR_WZM-26,4126.45660058043,,Unknown,Unassigned,False
+,C05,SYBR,,Unkn,BR_WZM-27,4312.85194314248,,Unknown,Unassigned,False
+,D05,SYBR,,Unkn,BR_WZM-28,4189.59307081441,,Unknown,Unassigned,False
+,E05,SYBR,,Unkn,BR_WZM-30,4417.46120222993,,Unknown,Unassigned,False
+,F05,SYBR,,Unkn,BR_WZM-29,4231.54691384843,,Unknown,Unassigned,False
+,G05,SYBR,,Unkn,BR_WZM-31,4313.54460597263,,Unknown,Unassigned,False
+,H05,SYBR,,Unkn,BR_WZM-32,4256.96636321708,,Unknown,Unassigned,False
+,A06,SYBR,,Unkn,BR_WZM-33,3928.49871387757,,Unknown,Unassigned,False
+,B06,SYBR,,Unkn,BR_WZM-34,3999.93164297369,,Unknown,Unassigned,False
+,C06,SYBR,,Unkn,BR_WZM-35,4650.95069384468,,Unknown,Unassigned,False
+,D06,SYBR,,Unkn,BR_WZM-36,3994.76092006942,,Unknown,Unassigned,False
+,E06,SYBR,,Unkn,BR_WZM-37,4099.5544501679,,Unknown,Unassigned,False
+,F06,SYBR,,Unkn,BR_WZM-38,4076.5102922123,,Unknown,Unassigned,False
+,G06,SYBR,,Unkn,BR_WZM-39,4221.01046023528,,Unknown,Unassigned,False
+,H06,SYBR,,Unkn,BR_WZM-40,3982.27413005133,,Unknown,Unassigned,False
+,A07,SYBR,,Unkn,BR_WZM-41,4255.13739139622,,Unknown,Unassigned,False
+,B07,SYBR,,Unkn,BR_WZM-42,4679.91859381775,,Unknown,Unassigned,False
+,C07,SYBR,,Unkn,BR_M NTC1 c2,3548.99769709195,,Unknown,Unassigned,False
+,D07,SYBR,,Unkn,BR_M NC2 c2,3572.54358080277,,Unknown,Unassigned,False
+,E07,SYBR,,Unkn,BR_Mre NTC1 c2,3569.09877763457,,Unknown,Unassigned,False
+,F07,SYBR,,Unkn,BR_Mre NC2 c2,3571.1057357175,,Unknown,Unassigned,False
+,G07,SYBR,,Unkn,BR_allre NTC1 c2,3613.38010851817,,Unknown,Unassigned,False
+,H07,SYBR,,Unkn,BR_allre NC2 c2,3652.05179159266,,Unknown,Unassigned,False
+,A08,SYBR,,Unkn,BR_redo M NC2 c2,3462.70525750384,,Unknown,Unassigned,False

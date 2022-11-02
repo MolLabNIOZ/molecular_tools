@@ -1,0 +1,43 @@
+;Well;Fluor;Target;Content;Sample;End RFU;Call;Sample Type;CallType;Is Control
+;A01;SYBR;;Unkn;HS 0 ng;3738,11517128481;;Unknown;Unassigned;False
+;B01;SYBR;;Unkn;HS 0 ng;3907,2033212165;;Unknown;Unassigned;False
+;C01;SYBR;;Unkn;HS 0 ng;3785,81256593586;;Unknown;Unassigned;False
+;D01;SYBR;;Unkn;HS 0 ng;3860,04602317587;;Unknown;Unassigned;False
+;E01;SYBR;;Unkn;HS 20 ng;42716,1688337856;;Unknown;Unassigned;False
+;F01;SYBR;;Unkn;HS 20 ng;47043,3387131752;;Unknown;Unassigned;False
+;G01;SYBR;;Unkn;HS 20 ng;46303,9307799633;;Unknown;Unassigned;False
+;H01;SYBR;;Unkn;HS 20 ng;44796,2757070234;;Unknown;Unassigned;False
+;A02;SYBR;;Unkn;HS_WZM-34;20251,5992115359;;Unknown;Unassigned;False
+;B02;SYBR;;Unkn;HS_WZM-40;17187,9514200138;;Unknown;Unassigned;False
+;C02;SYBR;;Unkn;HS_WZJn-6;9285,02171164504;;Unknown;Unassigned;False
+;D02;SYBR;;Unkn;HS_WZJn-7;11090,9625923458;;Unknown;Unassigned;False
+;E02;SYBR;;Unkn;HS_WZJn-8;15165,9870204994;;Unknown;Unassigned;False
+;F02;SYBR;;Unkn;HS_WZJn-9;15143,3360938378;;Unknown;Unassigned;False
+;G02;SYBR;;Unkn;HS_WZJn-10;10307,5646271079;;Unknown;Unassigned;False
+;H02;SYBR;;Unkn;HS_WZJn-32;32861,4107603924;;Unknown;Unassigned;False
+;A03;SYBR;;Unkn;HS_WZJn-34;21607,6444800499;;Unknown;Unassigned;False
+;B03;SYBR;;Unkn;HS_WZJn-40;32863,577626752;;Unknown;Unassigned;False
+;C03;SYBR;;Unkn;HS_WZA-16;33648,4288248435;;Unknown;Unassigned;False
+;D03;SYBR;;Unkn;HS_WZN-4;18606,6671340996;;Unknown;Unassigned;False
+;E03;SYBR;;Unkn;HS_WZN-6;19279,7375454154;;Unknown;Unassigned;False
+;F03;SYBR;;Unkn;HS_WZN-7;14455,6175945648;;Unknown;Unassigned;False
+;G03;SYBR;;Unkn;HS_WZN-13;14378,5354376065;;Unknown;Unassigned;False
+;H03;SYBR;;Unkn;HS_WZN-17;13698,3542941943;;Unknown;Unassigned;False
+;A04;SYBR;;Unkn;HS_WZN-19;11003,0100386502;;Unknown;Unassigned;False
+;B04;SYBR;;Unkn;HS_WZN-21;18064,3168081729;;Unknown;Unassigned;False
+;C04;SYBR;;Unkn;HS_WZN-22;25224,386730669;;Unknown;Unassigned;False
+;D04;SYBR;;Unkn;HS_WZN-36;13419,2208309299;;Unknown;Unassigned;False
+;E04;SYBR;;Unkn;HS_M_NTC1_c2;3769,78298422054;;Unknown;Unassigned;False
+;F04;SYBR;;Unkn;HS_M_NC2_c2;4345,30212153928;;Unknown;Unassigned;False
+;G04;SYBR;;Unkn;HS_Mre_NTC1_c2;3759,47036366024;;Unknown;Unassigned;False
+;H04;SYBR;;Unkn;HS_Mre_NC2_c2;3781,09575428982;;Unknown;Unassigned;False
+;A05;SYBR;;Unkn;HS_allre_NTC1_c2;4145,26060071939;;Unknown;Unassigned;False
+;B05;SYBR;;Unkn;HS_allre_NC2_c2;3845,17259967785;;Unknown;Unassigned;False
+;C05;SYBR;;Unkn;HS_M_NC_c2_redo33;3936,03963397347;;Unknown;Unassigned;False
+;D05;SYBR;;Unkn;HS_Jn_NTC1_c2;5979,06743207607;;Unknown;Unassigned;False
+;E05;SYBR;;Unkn;HS_Jn_NC2_c2;3581,56563136257;;Unknown;Unassigned;False
+;F05;SYBR;;Unkn;HS_NC_ex_c2;4026,12081394564;;Unknown;Unassigned;False
+;G05;SYBR;;Unkn;HS_A_NTC1_c2;5530,76738867412;;Unknown;Unassigned;False
+;H05;SYBR;;Unkn;HS_A_NC2_c2;4103,78492816872;;Unknown;Unassigned;False
+;A06;SYBR;;Unkn;HS_N_NTC1_c2;4146,79436622636;;Unknown;Unassigned;False
+;B06;SYBR;;Unkn;HS_N_NC2_c2;3974,71159162354;;Unknown;Unassigned;False

@@ -1,0 +1,58 @@
+,Well,Fluor,Target,Content,Sample,End RFU,Call,Sample Type,CallType,Is Control
+,A01,SYBR,,Unkn,BR 0 ng,4004.40097296454,,Unknown,Unassigned,False
+,B01,SYBR,,Unkn,BR 0 ng,3964.25007987211,,Unknown,Unassigned,False
+,C01,SYBR,,Unkn,BR 0 ng,4034.38686971545,,Unknown,Unassigned,False
+,D01,SYBR,,Unkn,BR 0 ng,4097.88477029051,,Unknown,Unassigned,False
+,E01,SYBR,,Unkn,BR 200 ng,9902.07062024844,,Unknown,Unassigned,False
+,F01,SYBR,,Unkn,BR 200 ng,9907.2388374211,,Unknown,Unassigned,False
+,G01,SYBR,,Unkn,BR 200 ng,10222.841140935,,Unknown,Unassigned,False
+,H01,SYBR,,Unkn,BR 200 ng,9927.86132203406,,Unknown,Unassigned,False
+,A02,SYBR,,Unkn,BR_WZM-1,4732.20958117717,,Unknown,Unassigned,False
+,B02,SYBR,,Unkn,BR_WZM-2,4887.48447857019,,Unknown,Unassigned,False
+,C02,SYBR,,Unkn,BR_WZM-3,4298.91023642739,,Unknown,Unassigned,False
+,D02,SYBR,,Unkn,BR_WZM-4,4674.58033356153,,Unknown,Unassigned,False
+,E02,SYBR,,Unkn,BR_WZM-5,4731.37870546767,,Unknown,Unassigned,False
+,F02,SYBR,,Unkn,BR_WZM-6,4551.39121500155,,Unknown,Unassigned,False
+,G02,SYBR,,Unkn,BR_WZM-7,4903.31692824317,,Unknown,Unassigned,False
+,H02,SYBR,,Unkn,BR_WZM-8,4595.48647345572,,Unknown,Unassigned,False
+,A03,SYBR,,Unkn,BR_WZM-9,4679.1436519184,,Unknown,Unassigned,False
+,B03,SYBR,,Unkn,BR_WZM-10,4266.78282571405,,Unknown,Unassigned,False
+,C03,SYBR,,Unkn,BR_WZM-11,4509.45693274153,,Unknown,Unassigned,False
+,D03,SYBR,,Unkn,BR_WZM-12,4420.64061681972,,Unknown,Unassigned,False
+,E03,SYBR,,Unkn,BR_WZM-13,4622.68965439932,,Unknown,Unassigned,False
+,F03,SYBR,,Unkn,BR_WZM-14,4525.90908158457,,Unknown,Unassigned,False
+,G03,SYBR,,Unkn,BR_WZM-15,4510.95191625607,,Unknown,Unassigned,False
+,H03,SYBR,,Unkn,BR_WZM-16,4422.63178775537,,Unknown,Unassigned,False
+,A04,SYBR,,Unkn,BR_WZM-17,4689.83048658653,,Unknown,Unassigned,False
+,B04,SYBR,,Unkn,BR_WZM-18,4544.11502002215,,Unknown,Unassigned,False
+,C04,SYBR,,Unkn,BR_WZM-19,4194.64246865997,,Unknown,Unassigned,False
+,D04,SYBR,,Unkn,BR_WZM-20,4527.17495724065,,Unknown,Unassigned,False
+,E04,SYBR,,Unkn,BR_WZM-21,4661.48027708029,,Unknown,Unassigned,False
+,F04,SYBR,,Unkn,BR_WZM-22,4714.51659603943,,Unknown,Unassigned,False
+,G04,SYBR,,Unkn,BR_WZM-23,4671.97600380751,,Unknown,Unassigned,False
+,H04,SYBR,,Unkn,BR_WZM-24,4500.50355836744,,Unknown,Unassigned,False
+,A05,SYBR,,Unkn,BR_WZM-25,4281.90184168008,,Unknown,Unassigned,False
+,B05,SYBR,,Unkn,BR_WZM-26,4338.13346141768,,Unknown,Unassigned,False
+,C05,SYBR,,Unkn,BR_WZM-27,4407.30496472507,,Unknown,Unassigned,False
+,D05,SYBR,,Unkn,BR_WZM-28,4338.65055880245,,Unknown,Unassigned,False
+,E05,SYBR,,Unkn,BR_WZM-30,4511.05508972143,,Unknown,Unassigned,False
+,F05,SYBR,,Unkn,BR_WZM-29,4379.52332661059,,Unknown,Unassigned,False
+,G05,SYBR,,Unkn,BR_WZM-31,4449.84029228372,,Unknown,Unassigned,False
+,H05,SYBR,,Unkn,BR_WZM-32,4405.77840256704,,Unknown,Unassigned,False
+,A06,SYBR,,Unkn,BR_WZM-33,4282.18555039625,,Unknown,Unassigned,False
+,B06,SYBR,,Unkn,BR_WZM-34,4183.72274819268,,Unknown,Unassigned,False
+,C06,SYBR,,Unkn,BR_WZM-35,4687.21371571207,,Unknown,Unassigned,False
+,D06,SYBR,,Unkn,BR_WZM-36,4133.00331791333,,Unknown,Unassigned,False
+,E06,SYBR,,Unkn,BR_WZM-37,4219.45153823616,,Unknown,Unassigned,False
+,F06,SYBR,,Unkn,BR_WZM-38,4198.55361199762,,Unknown,Unassigned,False
+,G06,SYBR,,Unkn,BR_WZM-39,4324.30132021242,,Unknown,Unassigned,False
+,H06,SYBR,,Unkn,BR_WZM-40,4144.45090784244,,Unknown,Unassigned,False
+,A07,SYBR,,Unkn,BR_WZM-41,4509.92878040414,,Unknown,Unassigned,False
+,B07,SYBR,,Unkn,BR_WZM-42,4722.05645614502,,Unknown,Unassigned,False
+,C07,SYBR,,Unkn,BR_M NTC1 c2,3814.59873927124,,Unknown,Unassigned,False
+,D07,SYBR,,Unkn,BR_M NC2 c2,3821.0216651174,,Unknown,Unassigned,False
+,E07,SYBR,,Unkn,BR_Mre NTC1 c2,3774.34023408034,,Unknown,Unassigned,False
+,F07,SYBR,,Unkn,BR_Mre NC2 c2,3812.35459523365,,Unknown,Unassigned,False
+,G07,SYBR,,Unkn,BR_allre NTC1 c2,3795.51259944289,,Unknown,Unassigned,False
+,H07,SYBR,,Unkn,BR_allre NC2 c2,3871.12458100667,,Unknown,Unassigned,False
+,A08,SYBR,,Unkn,BR_redo M NC2 c2,3906.54204792035,,Unknown,Unassigned,False

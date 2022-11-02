@@ -1,0 +1,36 @@
+Well;Fluor;Target;Content;Sample;End RFU;Call;Sample Type;CallType;Is Control
+A01;SYBR;;Unkn;BR 0 ng;3671,742639;;Unknown;Unassigned;FALSE
+B01;SYBR;;Unkn;BR 0 ng;3716,421945;;Unknown;Unassigned;FALSE
+C01;SYBR;;Unkn;BR 0 ng;3899,937046;;Unknown;Unassigned;FALSE
+D01;SYBR;;Unkn;BR 0 ng;3838,966294;;Unknown;Unassigned;FALSE
+E01;SYBR;;Unkn;BR 200 ng;7746,436825;;Unknown;Unassigned;FALSE
+F01;SYBR;;Unkn;BR 200 ng;7502,793394;;Unknown;Unassigned;FALSE
+G01;SYBR;;Unkn;BR 200 ng;7436,130627;;Unknown;Unassigned;FALSE
+H01;SYBR;;Unkn;BR 200 ng;7134,897107;;Unknown;Unassigned;FALSE
+A02;SYBR;;Unkn;BR_WZN-33;4090,51209;;Unknown;Unassigned;FALSE
+B02;SYBR;;Unkn;BR_WZN-34;3908,930679;;Unknown;Unassigned;FALSE
+C02;SYBR;;Unkn;BR_WZN-35;4336,1402;;Unknown;Unassigned;FALSE
+D02;SYBR;;Unkn;BR_WZN-36;3772,96102;;Unknown;Unassigned;FALSE
+E02;SYBR;;Unkn;BR_WZN-37;4075,46976;;Unknown;Unassigned;FALSE
+F02;SYBR;;Unkn;BR_WZN-38;4291,935654;;Unknown;Unassigned;FALSE
+G02;SYBR;;Unkn;BR_WZN-39;4014,605866;;Unknown;Unassigned;FALSE
+H02;SYBR;;Unkn;BR_WZN-40;3919,935827;;Unknown;Unassigned;FALSE
+A03;SYBR;;Unkn;BR_WZN-41;4241,616297;;Unknown;Unassigned;FALSE
+B03;SYBR;;Unkn;BR_WZN-42;4245,415366;;Unknown;Unassigned;FALSE
+C03;SYBR;;Unkn;BR_WZN-43;3917,095797;;Unknown;Unassigned;FALSE
+D03;SYBR;;Unkn;BR_WZN-44;4339,953418;;Unknown;Unassigned;FALSE
+E03;SYBR;;Unkn;BR_WZN-45;4190,691412;;Unknown;Unassigned;FALSE
+F03;SYBR;;Unkn;BR_WZN-46;4467,206591;;Unknown;Unassigned;FALSE
+G03;SYBR;;Unkn;BR_WZN-47;4030,344724;;Unknown;Unassigned;FALSE
+H03;SYBR;;Unkn;BR_WZN-48;4004,901799;;Unknown;Unassigned;FALSE
+A04;SYBR;;Unkn;BR_Jn_mock_c2;4392,587055;;Unknown;Unassigned;FALSE
+B04;SYBR;;Unkn;BR_Jn_NTC1_c2;3554,483611;;Unknown;Unassigned;FALSE
+C04;SYBR;;Unkn;BR_Jn_NC2_c2;3577,612256;;Unknown;Unassigned;FALSE
+D04;SYBR;;Unkn;BR_NC_ex_c2;3555,666855;;Unknown;Unassigned;FALSE
+E04;SYBR;;Unkn;BR_A_mock_c2;4101,201543;;Unknown;Unassigned;FALSE
+F04;SYBR;;Unkn;BR_A_NTC1_c2;3471,516468;;Unknown;Unassigned;FALSE
+G04;SYBR;;Unkn;BR_A_NC2_c2;3451,701395;;Unknown;Unassigned;FALSE
+H04;SYBR;;Unkn;BR_redo_M_NC2_c2;3287,30484;;Unknown;Unassigned;FALSE
+A05;SYBR;;Unkn;BR_N_mock_c2;4755,330251;;Unknown;Unassigned;FALSE
+B05;SYBR;;Unkn;BR_N_NTC1_c2;3553,089578;;Unknown;Unassigned;FALSE
+C05;SYBR;;Unkn;BR_N_NC2_c2;3614,756858;;Unknown;Unassigned;FALSE

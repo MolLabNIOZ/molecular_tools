@@ -1,0 +1,65 @@
+Well;Fluor;Target;Content;Sample;End RFU;Call;Sample Type;CallType;Is Control
+A01;SYBR;;Unkn;BR 0 ng;3468,255593;;Unknown;Unassigned;FALSE
+B01;SYBR;;Unkn;BR 0 ng;3487,767903;;Unknown;Unassigned;FALSE
+C01;SYBR;;Unkn;BR 0 ng;3670,875333;;Unknown;Unassigned;FALSE
+D01;SYBR;;Unkn;BR 0 ng;3763,717564;;Unknown;Unassigned;FALSE
+E01;SYBR;;Unkn;BR 200 ng;10384,72823;;Unknown;Unassigned;FALSE
+F01;SYBR;;Unkn;BR 200 ng;10451,80086;;Unknown;Unassigned;FALSE
+G01;SYBR;;Unkn;BR 200 ng;9793,501282;;Unknown;Unassigned;FALSE
+H01;SYBR;;Unkn;BR 200 ng;9651,364602;;Unknown;Unassigned;FALSE
+A02;SYBR;;Unkn;BR_WZJn-41;3828,421757;;Unknown;Unassigned;FALSE
+B02;SYBR;;Unkn;BR_WZJn-42;3809,448129;;Unknown;Unassigned;FALSE
+C02;SYBR;;Unkn;BR_WZJn-43;4034,827634;;Unknown;Unassigned;FALSE
+D02;SYBR;;Unkn;BR_WZJn-44;3708,427605;;Unknown;Unassigned;FALSE
+E02;SYBR;;Unkn;BR_WZJn-45;3921,82853;;Unknown;Unassigned;FALSE
+F02;SYBR;;Unkn;BR_WZJn-46;3791,014158;;Unknown;Unassigned;FALSE
+G02;SYBR;;Unkn;BR_WZJn-47;3802,006376;;Unknown;Unassigned;FALSE
+H02;SYBR;;Unkn;BR_WZJn-48;3794,997422;;Unknown;Unassigned;FALSE
+A03;SYBR;;Unkn;BR_WZA-1;3875,046708;;Unknown;Unassigned;FALSE
+B03;SYBR;;Unkn;BR_WZA-2;4219,209797;;Unknown;Unassigned;FALSE
+C03;SYBR;;Unkn;BR_WZA-3;4963,695923;;Unknown;Unassigned;FALSE
+D03;SYBR;;Unkn;BR_WZA-4;4795,854785;;Unknown;Unassigned;FALSE
+E03;SYBR;;Unkn;BR_WZA-5;4643,8174;;Unknown;Unassigned;FALSE
+F03;SYBR;;Unkn;BR_WZA-6;4371,129589;;Unknown;Unassigned;FALSE
+G03;SYBR;;Unkn;BR_WZA-7;4439,120518;;Unknown;Unassigned;FALSE
+H03;SYBR;;Unkn;BR_WZA-8;4051,000999;;Unknown;Unassigned;FALSE
+A04;SYBR;;Unkn;BR_WZA-9;3841,00489;;Unknown;Unassigned;FALSE
+B04;SYBR;;Unkn;BR_WZA-10;3883,303802;;Unknown;Unassigned;FALSE
+C04;SYBR;;Unkn;BR_WZA-11;4088,408598;;Unknown;Unassigned;FALSE
+D04;SYBR;;Unkn;BR_WZA-12;4341,136662;;Unknown;Unassigned;FALSE
+E04;SYBR;;Unkn;BR_WZA-13;4246,388798;;Unknown;Unassigned;FALSE
+F04;SYBR;;Unkn;BR_WZA-14;4487,586206;;Unknown;Unassigned;FALSE
+G04;SYBR;;Unkn;BR_WZA-15;4272,370404;;Unknown;Unassigned;FALSE
+H04;SYBR;;Unkn;BR_WZA-16;3685,390935;;Unknown;Unassigned;FALSE
+A05;SYBR;;Unkn;BR_WZA-17;4316,917968;;Unknown;Unassigned;FALSE
+B05;SYBR;;Unkn;BR_WZA-18;4193,215504;;Unknown;Unassigned;FALSE
+C05;SYBR;;Unkn;BR_WZA-19;4406,893333;;Unknown;Unassigned;FALSE
+D05;SYBR;;Unkn;BR_WZA-20;4310,488438;;Unknown;Unassigned;FALSE
+E05;SYBR;;Unkn;BR_WZA-21;4472,333821;;Unknown;Unassigned;FALSE
+F05;SYBR;;Unkn;BR_WZA-22;4055,195051;;Unknown;Unassigned;FALSE
+G05;SYBR;;Unkn;BR_WZA-23;4038,194147;;Unknown;Unassigned;FALSE
+H05;SYBR;;Unkn;BR_WZA-24;4250,99052;;Unknown;Unassigned;FALSE
+A06;SYBR;;Unkn;BR_WZA-25;4356,612523;;Unknown;Unassigned;FALSE
+B06;SYBR;;Unkn;BR_WZA-26;4199,317141;;Unknown;Unassigned;FALSE
+C06;SYBR;;Unkn;BR_WZA-27;4759,801207;;Unknown;Unassigned;FALSE
+D06;SYBR;;Unkn;BR_WZA-28;4382,397491;;Unknown;Unassigned;FALSE
+E06;SYBR;;Unkn;BR_WZA-29;4388,367386;;Unknown;Unassigned;FALSE
+F06;SYBR;;Unkn;BR_WZA-30;4288,004355;;Unknown;Unassigned;FALSE
+G06;SYBR;;Unkn;BR_WZA-31;4341,150813;;Unknown;Unassigned;FALSE
+H06;SYBR;;Unkn;BR_WZA-32;3952,294023;;Unknown;Unassigned;FALSE
+A07;SYBR;;Unkn;BR_WZA-33;4322,2433;;Unknown;Unassigned;FALSE
+B07;SYBR;;Unkn;BR_WZA-34;3977,250232;;Unknown;Unassigned;FALSE
+C07;SYBR;;Unkn;BR_WZA-35;4471,558491;;Unknown;Unassigned;FALSE
+D07;SYBR;;Unkn;BR_WZA-36;4327,173403;;Unknown;Unassigned;FALSE
+E07;SYBR;;Unkn;BR_WZA-37;4122,371615;;Unknown;Unassigned;FALSE
+F07;SYBR;;Unkn;BR_WZA-38;3950,361309;;Unknown;Unassigned;FALSE
+G07;SYBR;;Unkn;BR_WZA-39;3895,794959;;Unknown;Unassigned;FALSE
+H07;SYBR;;Unkn;BR_WZA-40;4120,319845;;Unknown;Unassigned;FALSE
+A08;SYBR;;Unkn;BR_WZA-41;4089,420821;;Unknown;Unassigned;FALSE
+B08;SYBR;;Unkn;BR_WZA-42;3955,56856;;Unknown;Unassigned;FALSE
+C08;SYBR;;Unkn;BR_WZA-43;4203,99791;;Unknown;Unassigned;FALSE
+D08;SYBR;;Unkn;BR_WZA-44;4160,712635;;Unknown;Unassigned;FALSE
+E08;SYBR;;Unkn;BR_WZA-45;4357,901649;;Unknown;Unassigned;FALSE
+F08;SYBR;;Unkn;BR_WZA-46;4279,904133;;Unknown;Unassigned;FALSE
+G08;SYBR;;Unkn;BR_WZA-47;4075,693723;;Unknown;Unassigned;FALSE
+H08;SYBR;;Unkn;BR_WZA-48;4088,631341;;Unknown;Unassigned;FALSE
