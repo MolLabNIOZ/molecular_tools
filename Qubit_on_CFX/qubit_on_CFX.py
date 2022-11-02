@@ -25,11 +25,11 @@ from matplotlib import pyplot as plt
 
 # ==================Import file================================================
 # =============================================================================
-project = "Eva"
-csv = 'Eva.csv'
+project = "221102_JuliaPCR2qubit_WZM_Opus"
+csv = "2022_julia_engelmann_qubit/raw_data/221102_JuliaPCR2qubit_WZM_Opus.csv"
 decimal_sign =','
-data = pd.read_csv(csv, delimiter=';', decimal=decimal_sign)
-data.dropna(0, subset=['Sample'], inplace=True)
+data = pd.read_csv(csv, delimiter=';|,', decimal=decimal_sign)
+data.dropna(0, subset=["Sample"], inplace=True)
 # =============================================================================
 
 # ==================Making a standard curve====================================
@@ -137,7 +137,7 @@ if stdcurveBRraw.empty is False:
 # make layout fit better
 plt.tight_layout()
 # save standard curve as .png
-plt.savefig("output/standardcurve_"+ project + ".png")
+plt.savefig("2022_julia_engelmann_qubit/output/"+ project + "_standardcurve.png")
 # =============================================================================
 
 # ==================Calculating concentrations=================================
@@ -260,7 +260,7 @@ DNA_concentrations.drop(columns=['merge'], inplace=True)
          
 
 # Save results in excel file
-DNA_concentrations.to_excel('output/results' + project + '.xlsx', index=False)
+DNA_concentrations.to_excel('2022_julia_engelmann_qubit/output/' + project + '_analyses.xlsx', index=False)
     
 # =============================================================================
                              
