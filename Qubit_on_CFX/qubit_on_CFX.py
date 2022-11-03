@@ -25,8 +25,8 @@ from matplotlib import pyplot as plt
 
 # ==================Import file================================================
 # =============================================================================
-project = "221102_JuliaPCR2qubit_WZN_partWZA_CFX"
-csv = "2022_julia_engelmann_qubit/raw_data/221102_JuliaPCR2qubit_WZN_partWZA_CFX.csv"
+project = "221103_JuliaPCR2qubit_WZN_partWZA_Opus_DayAfter"
+csv = "2022_julia_engelmann_qubit/raw_data/221103_JuliaPCR2qubit_WZN_partWZA_Opus_DayAfter.csv"
 decimal_sign =','
 data = pd.read_csv(csv, delimiter=';|,', decimal=decimal_sign)
 data.dropna(0, subset=["Sample"], inplace=True)

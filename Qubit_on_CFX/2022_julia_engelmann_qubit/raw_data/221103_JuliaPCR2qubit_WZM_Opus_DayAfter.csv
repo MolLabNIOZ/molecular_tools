@@ -1,0 +1,58 @@
+,Well,Fluor,Target,Content,Sample,End RFU,Call,Sample Type,CallType,Is Control
+,A01,SYBR,,Unkn,BR 0 ng,3390.21130239078,,Unknown,Unassigned,False
+,B01,SYBR,,Unkn,BR 0 ng,3440.88430469603,,Unknown,Unassigned,False
+,C01,SYBR,,Unkn,BR 0 ng,3515.16700927831,,Unknown,Unassigned,False
+,D01,SYBR,,Unkn,BR 0 ng,3580.34453243778,,Unknown,Unassigned,False
+,E01,SYBR,,Unkn,BR 200 ng,11059.5954909909,,Unknown,Unassigned,False
+,F01,SYBR,,Unkn,BR 200 ng,11272.6965200053,,Unknown,Unassigned,False
+,G01,SYBR,,Unkn,BR 200 ng,11669.9659009777,,Unknown,Unassigned,False
+,H01,SYBR,,Unkn,BR 200 ng,11013.067270901,,Unknown,Unassigned,False
+,A02,SYBR,,Unkn,BR_WZM-1,4456.44549902883,,Unknown,Unassigned,False
+,B02,SYBR,,Unkn,BR_WZM-2,4761.66947714491,,Unknown,Unassigned,False
+,C02,SYBR,,Unkn,BR_WZM-3,3973.81142613317,,Unknown,Unassigned,False
+,D02,SYBR,,Unkn,BR_WZM-4,4504.83640906429,,Unknown,Unassigned,False
+,E02,SYBR,,Unkn,BR_WZM-5,4558.53538598097,,Unknown,Unassigned,False
+,F02,SYBR,,Unkn,BR_WZM-6,4291.49132429032,,Unknown,Unassigned,False
+,G02,SYBR,,Unkn,BR_WZM-7,4763.98879750609,,Unknown,Unassigned,False
+,H02,SYBR,,Unkn,BR_WZM-8,4452.69930847166,,Unknown,Unassigned,False
+,A03,SYBR,,Unkn,BR_WZM-9,4464.83532577791,,Unknown,Unassigned,False
+,B03,SYBR,,Unkn,BR_WZM-10,4082.27954461604,,Unknown,Unassigned,False
+,C03,SYBR,,Unkn,BR_WZM-11,4397.55165332016,,Unknown,Unassigned,False
+,D03,SYBR,,Unkn,BR_WZM-12,4226.20322525801,,Unknown,Unassigned,False
+,E03,SYBR,,Unkn,BR_WZM-13,4474.24279844801,,Unknown,Unassigned,False
+,F03,SYBR,,Unkn,BR_WZM-14,4369.96411364626,,Unknown,Unassigned,False
+,G03,SYBR,,Unkn,BR_WZM-15,4381.65472575577,,Unknown,Unassigned,False
+,H03,SYBR,,Unkn,BR_WZM-16,4234.53069904587,,Unknown,Unassigned,False
+,A04,SYBR,,Unkn,BR_WZM-17,4491.72032117654,,Unknown,Unassigned,False
+,B04,SYBR,,Unkn,BR_WZM-18,4443.0739641824,,Unknown,Unassigned,False
+,C04,SYBR,,Unkn,BR_WZM-19,4062.58104979928,,Unknown,Unassigned,False
+,D04,SYBR,,Unkn,BR_WZM-20,4482.94931201891,,Unknown,Unassigned,False
+,E04,SYBR,,Unkn,BR_WZM-21,4537.93532179225,,Unknown,Unassigned,False
+,F04,SYBR,,Unkn,BR_WZM-22,4645.64510310134,,Unknown,Unassigned,False
+,G04,SYBR,,Unkn,BR_WZM-23,4598.72488454009,,Unknown,Unassigned,False
+,H04,SYBR,,Unkn,BR_WZM-24,4431.46849626298,,Unknown,Unassigned,False
+,A05,SYBR,,Unkn,BR_WZM-25,3938.77234107627,,Unknown,Unassigned,False
+,B05,SYBR,,Unkn,BR_WZM-26,4154.77692220905,,Unknown,Unassigned,False
+,C05,SYBR,,Unkn,BR_WZM-27,4325.50994980657,,Unknown,Unassigned,False
+,D05,SYBR,,Unkn,BR_WZM-28,4193.76793877799,,Unknown,Unassigned,False
+,E05,SYBR,,Unkn,BR_WZM-30,4422.52852472062,,Unknown,Unassigned,False
+,F05,SYBR,,Unkn,BR_WZM-29,4241.16409236093,,Unknown,Unassigned,False
+,G05,SYBR,,Unkn,BR_WZM-31,4345.71265093515,,Unknown,Unassigned,False
+,H05,SYBR,,Unkn,BR_WZM-32,4279.20359206341,,Unknown,Unassigned,False
+,A06,SYBR,,Unkn,BR_WZM-33,3966.94677802052,,Unknown,Unassigned,False
+,B06,SYBR,,Unkn,BR_WZM-34,4038.84771585762,,Unknown,Unassigned,False
+,C06,SYBR,,Unkn,BR_WZM-35,4647.45878546033,,Unknown,Unassigned,False
+,D06,SYBR,,Unkn,BR_WZM-36,4000.75381223273,,Unknown,Unassigned,False
+,E06,SYBR,,Unkn,BR_WZM-37,4117.04153429404,,Unknown,Unassigned,False
+,F06,SYBR,,Unkn,BR_WZM-38,4069.3578604686,,Unknown,Unassigned,False
+,G06,SYBR,,Unkn,BR_WZM-39,4250.90835203909,,Unknown,Unassigned,False
+,H06,SYBR,,Unkn,BR_WZM-40,4010.25130945593,,Unknown,Unassigned,False
+,A07,SYBR,,Unkn,BR_WZM-41,4274.57646985986,,Unknown,Unassigned,False
+,B07,SYBR,,Unkn,BR_WZM-42,4682.76773835487,,Unknown,Unassigned,False
+,C07,SYBR,,Unkn,BR_M NTC1 c2,3584.67943670915,,Unknown,Unassigned,False
+,D07,SYBR,,Unkn,BR_M NC2 c2,3599.86721871619,,Unknown,Unassigned,False
+,E07,SYBR,,Unkn,BR_Mre NTC1 c2,3587.11505891006,,Unknown,Unassigned,False
+,F07,SYBR,,Unkn,BR_Mre NC2 c2,3603.71637512658,,Unknown,Unassigned,False
+,G07,SYBR,,Unkn,BR_allre NTC1 c2,3654.19492660591,,Unknown,Unassigned,False
+,H07,SYBR,,Unkn,BR_allre NC2 c2,3690.29830419213,,Unknown,Unassigned,False
+,A08,SYBR,,Unkn,BR_redo M NC2 c2,3528.29994880106,,Unknown,Unassigned,False

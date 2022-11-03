@@ -1,60 +1,49 @@
-,Well,Fluor,Target,Content,Sample,End RFU,Call,Sample Type,CallType,Is Control
-,A01,SYBR,,Unkn,BR 0 ng,3836.40172946541,,Unknown,Unassigned,False
-,B01,SYBR,,Unkn,BR 0 ng,3778.09988425505,,Unknown,Unassigned,False
-,C01,SYBR,,Unkn,BR 0 ng,3834.51741384938,,Unknown,Unassigned,False
-,D01,SYBR,,Unkn,BR 0 ng,3842.74887026699,,Unknown,Unassigned,False
-,E01,SYBR,,Unkn,BR 200 ng,9676.65081909707,,Unknown,Unassigned,False
-,F01,SYBR,,Unkn,BR 200 ng,9724.57028356353,,Unknown,Unassigned,False
-,G01,SYBR,,Unkn,BR 200 ng,9659.49105736547,,Unknown,Unassigned,False
-,H01,SYBR,,Unkn,BR 200 ng,9564.6563221947,,Unknown,Unassigned,False
-,A02,SYBR,,Unkn,BR_WZA-7,4451.1434496058,,Unknown,Unassigned,False
-,B02,SYBR,,Unkn,BR_WZA-6,4854.2608748235,,Unknown,Unassigned,False
-,C02,SYBR,,Unkn,BR_WZA-5,5022.88791726279,,Unknown,Unassigned,False
-,D02,SYBR,,Unkn,BR_WZA-8,5072.59341971096,,Unknown,Unassigned,False
-,E02,SYBR,,Unkn,BR_WZA-3,4810.65845577725,,Unknown,Unassigned,False
-,F02,SYBR,,Unkn,BR_WZA-4,4728.06590765501,,Unknown,Unassigned,False
-,G02,SYBR,,Unkn,BR_WZA-2,4720.62435854108,,Unknown,Unassigned,False
-,H02,SYBR,,Unkn,BR_WZA-1,4480.86896824645,,Unknown,Unassigned,False
-,A03,SYBR,,Unkn,BR_WZA-9,4247.38010323982,,Unknown,Unassigned,False
-,B03,SYBR,,Unkn,BR_WZA-10,4219.82676011252,,Unknown,Unassigned,False
-,C03,SYBR,,Unkn,BR_WZA-11,4227.24229238695,,Unknown,Unassigned,False
-,D03,SYBR,,Unkn,BR_WZA-12,4500.77883285911,,Unknown,Unassigned,False
-,E03,SYBR,,Unkn,BR_WZA-13,4371.10647629329,,Unknown,Unassigned,False
-,F03,SYBR,,Unkn,BR_WZA-14,4723.70199774036,,Unknown,Unassigned,False
-,G03,SYBR,,Unkn,BR_WZA-15,4681.31335911988,,Unknown,Unassigned,False
-,H03,SYBR,,Unkn,BR_WZA-16,4264.14237541808,,Unknown,Unassigned,False
-,A04,SYBR,,Unkn,BR_WZA-23,4586.76729332514,,Unknown,Unassigned,False
-,B04,SYBR,,Unkn,BR_WZA-22,4489.01799816367,,Unknown,Unassigned,False
-,C04,SYBR,,Unkn,BR_WZA-21,4391.69577796898,,Unknown,Unassigned,False
-,D04,SYBR,,Unkn,BR_WZA-24,4439.94225729151,,Unknown,Unassigned,False
-,E04,SYBR,,Unkn,BR_WZA-19,4659.85413790379,,Unknown,Unassigned,False
-,F04,SYBR,,Unkn,BR_WZA-20,4548.23325246774,,Unknown,Unassigned,False
-,G04,SYBR,,Unkn,BR_WZA-17,4348.0101508191,,Unknown,Unassigned,False
-,H04,SYBR,,Unkn,BR_WZA-18,4702.26540948605,,Unknown,Unassigned,False
-,A05,SYBR,,Unkn,BR_WZA-25,4665.80298666394,,Unknown,Unassigned,False
-,B05,SYBR,,Unkn,BR_WZA-26,4527.70877369521,,Unknown,Unassigned,False
-,C05,SYBR,,Unkn,BR_WZA-27,4784.14991979469,,Unknown,Unassigned,False
-,D05,SYBR,,Unkn,BR_WZA-28,4520.51035679143,,Unknown,Unassigned,False
-,E05,SYBR,,Unkn,BR_WZA-29,4499.05712767574,,Unknown,Unassigned,False
-,F05,SYBR,,Unkn,BR_WZA-30,4580.7105583141,,Unknown,Unassigned,False
-,G05,SYBR,,Unkn,BR_WZA-31,4719.481839585,,Unknown,Unassigned,False
-,H05,SYBR,,Unkn,BR_WZA-32,4360.93286117437,,Unknown,Unassigned,False
-,A06,SYBR,,Unkn,BR_WZA-39,4672.61261028689,,Unknown,Unassigned,False
-,B06,SYBR,,Unkn,BR_WZA-38,4217.62332816975,,Unknown,Unassigned,False
-,C06,SYBR,,Unkn,BR_WZA-40,4583.4827018241,,Unknown,Unassigned,False
-,D06,SYBR,,Unkn,BR_WZA-37,4476.33800950224,,Unknown,Unassigned,False
-,E06,SYBR,,Unkn,BR_WZA-36,4281.34984028455,,Unknown,Unassigned,False
-,F06,SYBR,,Unkn,BR_WZA-35,4178.95580315005,,Unknown,Unassigned,False
-,G06,SYBR,,Unkn,BR_WZA-34,4199.76662926538,,Unknown,Unassigned,False
-,H06,SYBR,,Unkn,BR_WZA-33,4682.53520101532,,Unknown,Unassigned,False
-,A07,SYBR,,Unkn,BR_WZA-41,4419.38145425715,,Unknown,Unassigned,False
-,B07,SYBR,,Unkn,BR_WZA-42,4314.18332575777,,Unknown,Unassigned,False
-,C07,SYBR,,Unkn,BR_WZA-43,4220.11705625562,,Unknown,Unassigned,False
-,D07,SYBR,,Unkn,BR_WZA-44,4252.06533528589,,Unknown,Unassigned,False
-,E07,SYBR,,Unkn,BR_WZA-45,4252.87260136259,,Unknown,Unassigned,False
-,F07,SYBR,,Unkn,BR_WZA-46,4317.67735628055,,Unknown,Unassigned,False
-,G07,SYBR,,Unkn,BR_WZA-47,4296.92523644287,,Unknown,Unassigned,False
-,H07,SYBR,,Unkn,BR_WZA-48,3859.54350176937,,Unknown,Unassigned,False
-,A08,SYBR,,Unkn,BR_A NTC1 c2,4995.68270135334,,Unknown,Unassigned,False
-,B08,SYBR,,Unkn,BR_A mock c2,3800.31953205559,,Unknown,Unassigned,False
-,C08,SYBR,,Unkn,BR_A NC2 c2,3633.46962619307,,Unknown,Unassigned,False
+Well,Fluor,Target,Content,Sample,End RFU,Call,Sample Type,CallType,Is Control
+A01,SYBR,,Unkn,BR 0 ng,3836.401729,,Unknown,Unassigned,FALSE
+B01,SYBR,,Unkn,BR 0 ng,3778.099884,,Unknown,Unassigned,FALSE
+C01,SYBR,,Unkn,BR 0 ng,3834.517414,,Unknown,Unassigned,FALSE
+D01,SYBR,,Unkn,BR 0 ng,3842.74887,,Unknown,Unassigned,FALSE
+E01,SYBR,,Unkn,BR 200 ng,9676.650819,,Unknown,Unassigned,FALSE
+F01,SYBR,,Unkn,BR 200 ng,9724.570284,,Unknown,Unassigned,FALSE
+G01,SYBR,,Unkn,BR 200 ng,9659.491057,,Unknown,Unassigned,FALSE
+H01,SYBR,,Unkn,BR 200 ng,9564.656322,,Unknown,Unassigned,FALSE
+A02,SYBR,,Unkn,BR_WZA-1,4451.14345,,Unknown,Unassigned,FALSE
+B02,SYBR,,Unkn,BR_WZA-2,4854.260875,,Unknown,Unassigned,FALSE
+C02,SYBR,,Unkn,BR_WZA-3,5022.887917,,Unknown,Unassigned,FALSE
+D02,SYBR,,Unkn,BR_WZA-4,5072.59342,,Unknown,Unassigned,FALSE
+E02,SYBR,,Unkn,BR_WZA-5,4810.658456,,Unknown,Unassigned,FALSE
+F02,SYBR,,Unkn,BR_WZA-6,4728.065908,,Unknown,Unassigned,FALSE
+G02,SYBR,,Unkn,BR_WZA-7,4720.624359,,Unknown,Unassigned,FALSE
+H02,SYBR,,Unkn,BR_WZA-8,4480.868968,,Unknown,Unassigned,FALSE
+A03,SYBR,,Unkn,BR_WZA-9,4247.380103,,Unknown,Unassigned,FALSE
+B03,SYBR,,Unkn,BR_WZA-10,4219.82676,,Unknown,Unassigned,FALSE
+C03,SYBR,,Unkn,BR_WZA-11,4227.242292,,Unknown,Unassigned,FALSE
+D03,SYBR,,Unkn,BR_WZA-12,4500.778833,,Unknown,Unassigned,FALSE
+E03,SYBR,,Unkn,BR_WZA-13,4371.106476,,Unknown,Unassigned,FALSE
+F03,SYBR,,Unkn,BR_WZA-14,4723.701998,,Unknown,Unassigned,FALSE
+G03,SYBR,,Unkn,BR_WZA-15,4681.313359,,Unknown,Unassigned,FALSE
+H03,SYBR,,Unkn,BR_WZA-16,4264.142375,,Unknown,Unassigned,FALSE
+A04,SYBR,,Unkn,BR_WZA-17,4586.767293,,Unknown,Unassigned,FALSE
+B04,SYBR,,Unkn,BR_WZA-18,4489.017998,,Unknown,Unassigned,FALSE
+C04,SYBR,,Unkn,BR_WZA-19,4391.695778,,Unknown,Unassigned,FALSE
+D04,SYBR,,Unkn,BR_WZA-20,4439.942257,,Unknown,Unassigned,FALSE
+E04,SYBR,,Unkn,BR_WZA-21,4659.854138,,Unknown,Unassigned,FALSE
+F04,SYBR,,Unkn,BR_WZA-22,4548.233252,,Unknown,Unassigned,FALSE
+G04,SYBR,,Unkn,BR_WZA-23,4348.010151,,Unknown,Unassigned,FALSE
+H04,SYBR,,Unkn,BR_WZA-24,4702.265409,,Unknown,Unassigned,FALSE
+A05,SYBR,,Unkn,BR_WZA-25,4665.802987,,Unknown,Unassigned,FALSE
+B05,SYBR,,Unkn,BR_WZA-26,4527.708774,,Unknown,Unassigned,FALSE
+C05,SYBR,,Unkn,BR_WZA-27,4784.14992,,Unknown,Unassigned,FALSE
+D05,SYBR,,Unkn,BR_WZA-28,4520.510357,,Unknown,Unassigned,FALSE
+E05,SYBR,,Unkn,BR_WZA-29,4499.057128,,Unknown,Unassigned,FALSE
+F05,SYBR,,Unkn,BR_WZA-30,4580.710558,,Unknown,Unassigned,FALSE
+G05,SYBR,,Unkn,BR_WZA-31,4719.48184,,Unknown,Unassigned,FALSE
+H05,SYBR,,Unkn,BR_WZA-32,4360.932861,,Unknown,Unassigned,FALSE
+A06,SYBR,,Unkn,BR_WZA-33,4672.61261,,Unknown,Unassigned,FALSE
+B06,SYBR,,Unkn,BR_WZA-34,4217.623328,,Unknown,Unassigned,FALSE
+C06,SYBR,,Unkn,BR_WZA-35,4583.482702,,Unknown,Unassigned,FALSE
+D06,SYBR,,Unkn,BR_WZA-36,4476.33801,,Unknown,Unassigned,FALSE
+E06,SYBR,,Unkn,BR_WZA-37,4281.34984,,Unknown,Unassigned,FALSE
+F06,SYBR,,Unkn,BR_WZA-38,4178.955803,,Unknown,Unassigned,FALSE
+G06,SYBR,,Unkn,BR_WZA-39,4199.766629,,Unknown,Unassigned,FALSE
+H06,SYBR,,Unkn,BR_WZA-40,4682.535201,,Unknown,Unassigned,FALSE
