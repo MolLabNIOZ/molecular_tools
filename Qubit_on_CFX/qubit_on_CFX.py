@@ -25,10 +25,10 @@ from matplotlib import pyplot as plt
 
 # ==================Import file================================================
 # =============================================================================
-project = "221103_JuliaPCR2qubit_WZN_partWZA_Opus_DayAfter"
-csv = "2022_julia_engelmann_qubit/raw_data/221103_JuliaPCR2qubit_WZN_partWZA_Opus_DayAfter.csv"
+project = "221107_QubitCFXvsOpus_std_dilutions_Opus_3"
+csv = "2022_CFX_vs_Opus_Qubit/raw_data/221107_QubitCFXvsOpus_std_dilutions_Opus_3.csv"
 decimal_sign =','
-data = pd.read_csv(csv, delimiter=';|,', decimal=decimal_sign)
+data = pd.read_csv(csv, delimiter=';|,', decimal=decimal_sign, engine='python')
 data.dropna(0, subset=["Sample"], inplace=True)
 # =============================================================================
 
@@ -137,7 +137,7 @@ if stdcurveBRraw.empty is False:
 # make layout fit better
 plt.tight_layout()
 # save standard curve as .png
-plt.savefig("2022_julia_engelmann_qubit/output/"+ project + "_standardcurve.png")
+plt.savefig("2022_CFX_vs_Opus_qubit/output/"+ project + "_standardcurve.png")
 # =============================================================================
 
 # ==================Calculating concentrations=================================
@@ -260,7 +260,7 @@ DNA_concentrations.drop(columns=['merge'], inplace=True)
          
 
 # Save results in excel file
-DNA_concentrations.to_excel('2022_julia_engelmann_qubit/output/' + project + '_analyses.xlsx', index=False)
+DNA_concentrations.to_excel('2022_CFX_vs_Opus_qubit/output/' + project + '_analyses.xlsx', index=False)
     
 # =============================================================================
                              
