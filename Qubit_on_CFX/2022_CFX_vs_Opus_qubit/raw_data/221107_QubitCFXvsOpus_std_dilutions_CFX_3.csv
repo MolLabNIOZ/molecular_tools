@@ -7,86 +7,86 @@
 ,F01,SYBR,,Unkn,BR 200 ng,10075.1442771468,,Unknown,Unassigned,False
 ,G01,SYBR,,Unkn,BR 200 ng,10053.0042085751,,Unknown,Unassigned,False
 ,H01,SYBR,,Unkn,BR 200 ng,10053.4744255972,,Unknown,Unassigned,False
-,A02,SYBR_,,Unkn,BR_ A_BR_,5106.69747921601,,Unknown,Unassigned,False
-,B02,SYBR_,,Unkn,BR_ B_BR_,5482.17523422032,,Unknown,Unassigned,False
-,C02,SYBR_,,Unkn,BR_ C_BR_,5701.99952203658,,Unknown,Unassigned,False
-,D02,SYBR_,,Unkn,BR_ D_BR_,6085.92725696237,,Unknown,Unassigned,False
-,E02,SYBR_,,Unkn,BR_ E_BR_,6429.00045608984,,Unknown,Unassigned,False
-,F02,SYBR_,,Unkn,BR_ F_BR_,6674.66412050316,,Unknown,Unassigned,False
-,G02,SYBR_,,Unkn,BR_ G_BR_,7011.66900473408,,Unknown,Unassigned,False
-,H02,SYBR_,,Unkn,BR_ H_BR_,7186.18097270163,,Unknown,Unassigned,False
-,A03,SYBR_,,Unkn,BR_ A_BR_,5134.83281005974,,Unknown,Unassigned,False
-,B03,SYBR_,,Unkn,BR_ B_BR_,5237.58543072909,,Unknown,Unassigned,False
-,C03,SYBR_,,Unkn,BR_ C_BR_,5529.7414136154,,Unknown,Unassigned,False
-,D03,SYBR_,,Unkn,BR_ D_BR_,6111.68301169695,,Unknown,Unassigned,False
-,E03,SYBR_,,Unkn,BR_ E_BR_,6401.83262671182,,Unknown,Unassigned,False
-,F03,SYBR_,,Unkn,BR_ F_BR_,6764.79954190025,,Unknown,Unassigned,False
-,G03,SYBR_,,Unkn,BR_ G_BR_,6843.61558900489,,Unknown,Unassigned,False
-,H03,SYBR_,,Unkn,BR_ H_BR_,7175.01320189495,,Unknown,Unassigned,False
-,A04,SYBR_,,Unkn,BR_ A_BR_,5165.91641921633,,Unknown,Unassigned,False
-,B04,SYBR_,,Unkn,BR_ B_BR_,5274.47071272679,,Unknown,Unassigned,False
-,C04,SYBR_,,Unkn,BR_ C_BR_,5422.67130589981,,Unknown,Unassigned,False
-,D04,SYBR_,,Unkn,BR_ D_BR_,5788.8622162002,,Unknown,Unassigned,False
-,E04,SYBR_,,Unkn,BR_ E_BR_,6242.86004714842,,Unknown,Unassigned,False
-,F04,SYBR_,,Unkn,BR_ F_BR_,6604.05969721977,,Unknown,Unassigned,False
-,G04,SYBR_,,Unkn,BR_ G_BR_,6794.48198220953,,Unknown,Unassigned,False
-,H04,SYBR_,,Unkn,BR_ H_BR_,7046.89591989483,,Unknown,Unassigned,False
-,A05,SYBR_,,Unkn,BR_ A_BR_,5141.74498283248,,Unknown,Unassigned,False
-,B05,SYBR_,,Unkn,BR_ B_BR_,5254.32055383796,,Unknown,Unassigned,False
-,C05,SYBR_,,Unkn,BR_ C_BR_,5662.60908246756,,Unknown,Unassigned,False
-,D05,SYBR_,,Unkn,BR_ D_BR_,5946.44031714443,,Unknown,Unassigned,False
-,E05,SYBR_,,Unkn,BR_ E_BR_,6388.62631068407,,Unknown,Unassigned,False
-,F05,SYBR_,,Unkn,BR_ F_BR_,6367.68694180609,,Unknown,Unassigned,False
-,G05,SYBR_,,Unkn,BR_ G_BR_,6798.78154264111,,Unknown,Unassigned,False
-,H05,SYBR_,,Unkn,BR_ H_BR_,7032.80073193023,,Unknown,Unassigned,False
-,A06,SYBR_,,Unkn,BR_ A_BR_,5112.06396790912,,Unknown,Unassigned,False
-,B06,SYBR_,,Unkn,BR_ B_BR_,5174.83459118949,,Unknown,Unassigned,False
-,C06,SYBR_,,Unkn,BR_ C_BR_,5533.70232565348,,Unknown,Unassigned,False
-,D06,SYBR_,,Unkn,BR_ D_BR_,5930.65892216379,,Unknown,Unassigned,False
-,E06,SYBR_,,Unkn,BR_ E_BR_,6438.56136498962,,Unknown,Unassigned,False
-,F06,SYBR_,,Unkn,BR_ F_BR_,6544.74235805826,,Unknown,Unassigned,False
-,G06,SYBR_,,Unkn,BR_ G_BR_,6871.61295490147,,Unknown,Unassigned,False
-,H06,SYBR_,,Unkn,BR_ H_BR_,7242.58626342881,,Unknown,Unassigned,False
-,A07,SYBR_,,Unkn,HS_ H_HS_,35599.634425234,,Unknown,Unassigned,False
-,B07,SYBR_,,Unkn,HS_ G_HS_,36069.4193252384,,Unknown,Unassigned,False
-,C07,SYBR_,,Unkn,HS_ F_HS_,33081.7870734987,,Unknown,Unassigned,False
-,D07,SYBR_,,Unkn,HS_ E_HS_,28652.8551072081,,Unknown,Unassigned,False
-,E07,SYBR_,,Unkn,HS_ D_HS_,23034.1682760576,,Unknown,Unassigned,False
-,F07,SYBR_,,Unkn,HS_ C_HS_,18863.1001395444,,Unknown,Unassigned,False
-,G07,SYBR_,,Unkn,HS_ B_HS_,14316.9681289686,,Unknown,Unassigned,False
-,H07,SYBR_,,Unkn,HS_ A_HS_,9866.21537790894,,Unknown,Unassigned,False
-,A08,SYBR_,,Unkn,HS_ H_HS_,36853.1765173014,,Unknown,Unassigned,False
-,B08,SYBR_,,Unkn,HS_ G_HS_,34732.1671623428,,Unknown,Unassigned,False
-,C08,SYBR_,,Unkn,HS_ F_HS_,32266.7618144251,,Unknown,Unassigned,False
-,D08,SYBR_,,Unkn,HS_ E_HS_,28211.281446978,,Unknown,Unassigned,False
-,E08,SYBR_,,Unkn,HS_ D_HS_,24789.1887753634,,Unknown,Unassigned,False
-,F08,SYBR_,,Unkn,HS_ C_HS_,19511.0290974365,,Unknown,Unassigned,False
-,G08,SYBR_,,Unkn,HS_ B_HS_,14004.9496378959,,Unknown,Unassigned,False
-,H08,SYBR_,,Unkn,HS_ A_HS_,9810.16094463592,,Unknown,Unassigned,False
-,A09,SYBR_,,Unkn,HS_ H_HS_,35874.2405811221,,Unknown,Unassigned,False
-,B09,SYBR_,,Unkn,HS_ G_HS_,34817.1460844401,,Unknown,Unassigned,False
-,C09,SYBR_,,Unkn,HS_ F_HS_,25645.3513984722,,Unknown,Unassigned,False
-,D09,SYBR_,,Unkn,HS_ E_HS_,27868.5181768324,,Unknown,Unassigned,False
-,E09,SYBR_,,Unkn,HS_ D_HS_,23167.8169172913,,Unknown,Unassigned,False
-,F09,SYBR_,,Unkn,HS_ C_HS_,18357.3877202755,,Unknown,Unassigned,False
-,G09,SYBR_,,Unkn,HS_ B_HS_,13977.4062742984,,Unknown,Unassigned,False
-,H09,SYBR_,,Unkn,HS_ A_HS_,9366.54988930029,,Unknown,Unassigned,False
-,A10,SYBR_,,Unkn,HS_ H_HS_,36033.0232098338,,Unknown,Unassigned,False
-,B10,SYBR_,,Unkn,HS_ G_HS_,32884.2688206097,,Unknown,Unassigned,False
-,C10,SYBR_,,Unkn,HS_ F_HS_,31660.4437311594,,Unknown,Unassigned,False
-,D10,SYBR_,,Unkn,HS_ E_HS_,28023.8720200732,,Unknown,Unassigned,False
-,E10,SYBR_,,Unkn,HS_ D_HS_,23029.225389387,,Unknown,Unassigned,False
-,F10,SYBR_,,Unkn,HS_ C_HS_,19100.8643986999,,Unknown,Unassigned,False
-,G10,SYBR_,,Unkn,HS_ B_HS_,14232.0813199461,,Unknown,Unassigned,False
-,H10,SYBR_,,Unkn,HS_ A_HS_,9440.66974263685,,Unknown,Unassigned,False
-,A11,SYBR_,,Unkn,HS_ H_HS_,35638.7115483213,,Unknown,Unassigned,False
-,B11,SYBR_,,Unkn,HS_ G_HS_,33047.6639267128,,Unknown,Unassigned,False
-,C11,SYBR_,,Unkn,HS_ F_HS_,30657.4261928695,,Unknown,Unassigned,False
-,D11,SYBR_,,Unkn,HS_ E_HS_,27462.6958261479,,Unknown,Unassigned,False
-,E11,SYBR_,,Unkn,HS_ D_HS_,23061.6293938809,,Unknown,Unassigned,False
-,F11,SYBR_,,Unkn,HS_ C_HS_,18072.0565695232,,Unknown,Unassigned,False
-,G11,SYBR_,,Unkn,HS_ B_HS_,14204.9504711498,,Unknown,Unassigned,False
-,H11,SYBR_,,Unkn,HS_ A_HS_,9530.83467370789,,Unknown,Unassigned,False
+,A02,SYBR,,Unkn,BR_12.5ng,5106.69747921601,,Unknown,Unassigned,False
+,B02,SYBR,,Unkn,BR_25.ng,5482.17523422032,,Unknown,Unassigned,False
+,C02,SYBR,,Unkn,BR_37.5ng,5701.99952203658,,Unknown,Unassigned,False
+,D02,SYBR,,Unkn,BR_50.ng,6085.92725696237,,Unknown,Unassigned,False
+,E02,SYBR,,Unkn,BR_62.5ng,6429.00045608984,,Unknown,Unassigned,False
+,F02,SYBR,,Unkn,BR_75.ng,6674.66412050316,,Unknown,Unassigned,False
+,G02,SYBR,,Unkn,BR_71.5ng,7011.66900473408,,Unknown,Unassigned,False
+,H02,SYBR,,Unkn,BR_100.ng,7186.18097270163,,Unknown,Unassigned,False
+,A03,SYBR,,Unkn,BR_12.5ng,5134.83281005974,,Unknown,Unassigned,False
+,B03,SYBR,,Unkn,BR_25.ng,5237.58543072909,,Unknown,Unassigned,False
+,C03,SYBR,,Unkn,BR_37.5ng,5529.7414136154,,Unknown,Unassigned,False
+,D03,SYBR,,Unkn,BR_50.ng,6111.68301169695,,Unknown,Unassigned,False
+,E03,SYBR,,Unkn,BR_62.5ng,6401.83262671182,,Unknown,Unassigned,False
+,F03,SYBR,,Unkn,BR_75.ng,6764.79954190025,,Unknown,Unassigned,False
+,G03,SYBR,,Unkn,BR_71.5ng,6843.61558900489,,Unknown,Unassigned,False
+,H03,SYBR,,Unkn,BR_100.ng,7175.01320189495,,Unknown,Unassigned,False
+,A04,SYBR,,Unkn,BR_12.5ng,5165.91641921633,,Unknown,Unassigned,False
+,B04,SYBR,,Unkn,BR_25.ng,5274.47071272679,,Unknown,Unassigned,False
+,C04,SYBR,,Unkn,BR_37.5ng,5422.67130589981,,Unknown,Unassigned,False
+,D04,SYBR,,Unkn,BR_50.ng,5788.8622162002,,Unknown,Unassigned,False
+,E04,SYBR,,Unkn,BR_62.5ng,6242.86004714842,,Unknown,Unassigned,False
+,F04,SYBR,,Unkn,BR_75.ng,6604.05969721977,,Unknown,Unassigned,False
+,G04,SYBR,,Unkn,BR_71.5ng,6794.48198220953,,Unknown,Unassigned,False
+,H04,SYBR,,Unkn,BR_100.ng,7046.89591989483,,Unknown,Unassigned,False
+,A05,SYBR,,Unkn,BR_12.5ng,5141.74498283248,,Unknown,Unassigned,False
+,B05,SYBR,,Unkn,BR_25.ng,5254.32055383796,,Unknown,Unassigned,False
+,C05,SYBR,,Unkn,BR_37.5ng,5662.60908246756,,Unknown,Unassigned,False
+,D05,SYBR,,Unkn,BR_50.ng,5946.44031714443,,Unknown,Unassigned,False
+,E05,SYBR,,Unkn,BR_62.5ng,6388.62631068407,,Unknown,Unassigned,False
+,F05,SYBR,,Unkn,BR_75.ng,6367.68694180609,,Unknown,Unassigned,False
+,G05,SYBR,,Unkn,BR_71.5ng,6798.78154264111,,Unknown,Unassigned,False
+,H05,SYBR,,Unkn,BR_100.ng,7032.80073193023,,Unknown,Unassigned,False
+,A06,SYBR,,Unkn,BR_12.5ng,5112.06396790912,,Unknown,Unassigned,False
+,B06,SYBR,,Unkn,BR_25.ng,5174.83459118949,,Unknown,Unassigned,False
+,C06,SYBR,,Unkn,BR_37.5ng,5533.70232565348,,Unknown,Unassigned,False
+,D06,SYBR,,Unkn,BR_50.ng,5930.65892216379,,Unknown,Unassigned,False
+,E06,SYBR,,Unkn,BR_62.5ng,6438.56136498962,,Unknown,Unassigned,False
+,F06,SYBR,,Unkn,BR_75.ng,6544.74235805826,,Unknown,Unassigned,False
+,G06,SYBR,,Unkn,BR_71.5ng,6871.61295490147,,Unknown,Unassigned,False
+,H06,SYBR,,Unkn,BR_100.ng,7242.58626342881,,Unknown,Unassigned,False
+,A07,SYBR,,Unkn,HS_20.ng,35599.634425234,,Unknown,Unassigned,False
+,B07,SYBR,,Unkn,HS_17.5ng,36069.4193252384,,Unknown,Unassigned,False
+,C07,SYBR,,Unkn,HS_15.ng,33081.7870734987,,Unknown,Unassigned,False
+,D07,SYBR,,Unkn,HS_12.5ng,28652.8551072081,,Unknown,Unassigned,False
+,E07,SYBR,,Unkn,HS_10.ng,23034.1682760576,,Unknown,Unassigned,False
+,F07,SYBR,,Unkn,HS_7.5ng,18863.1001395444,,Unknown,Unassigned,False
+,G07,SYBR,,Unkn,HS_5.ng,14316.9681289686,,Unknown,Unassigned,False
+,H07,SYBR,,Unkn,HS_2.5ng,9866.21537790894,,Unknown,Unassigned,False
+,A08,SYBR,,Unkn,HS_20.ng,36853.1765173014,,Unknown,Unassigned,False
+,B08,SYBR,,Unkn,HS_17.5ng,34732.1671623428,,Unknown,Unassigned,False
+,C08,SYBR,,Unkn,HS_15.ng,32266.7618144251,,Unknown,Unassigned,False
+,D08,SYBR,,Unkn,HS_12.5ng,28211.281446978,,Unknown,Unassigned,False
+,E08,SYBR,,Unkn,HS_10.ng,24789.1887753634,,Unknown,Unassigned,False
+,F08,SYBR,,Unkn,HS_7.5ng,19511.0290974365,,Unknown,Unassigned,False
+,G08,SYBR,,Unkn,HS_5.ng,14004.9496378959,,Unknown,Unassigned,False
+,H08,SYBR,,Unkn,HS_2.5ng,9810.16094463592,,Unknown,Unassigned,False
+,A09,SYBR,,Unkn,HS_20.ng,35874.2405811221,,Unknown,Unassigned,False
+,B09,SYBR,,Unkn,HS_17.5ng,34817.1460844401,,Unknown,Unassigned,False
+,C09,SYBR,,Unkn,HS_15.ng,25645.3513984722,,Unknown,Unassigned,False
+,D09,SYBR,,Unkn,HS_12.5ng,27868.5181768324,,Unknown,Unassigned,False
+,E09,SYBR,,Unkn,HS_10.ng,23167.8169172913,,Unknown,Unassigned,False
+,F09,SYBR,,Unkn,HS_7.5ng,18357.3877202755,,Unknown,Unassigned,False
+,G09,SYBR,,Unkn,HS_5.ng,13977.4062742984,,Unknown,Unassigned,False
+,H09,SYBR,,Unkn,HS_2.5ng,9366.54988930029,,Unknown,Unassigned,False
+,A10,SYBR,,Unkn,HS_20.ng,36033.0232098338,,Unknown,Unassigned,False
+,B10,SYBR,,Unkn,HS_17.5ng,32884.2688206097,,Unknown,Unassigned,False
+,C10,SYBR,,Unkn,HS_15.ng,31660.4437311594,,Unknown,Unassigned,False
+,D10,SYBR,,Unkn,HS_12.5ng,28023.8720200732,,Unknown,Unassigned,False
+,E10,SYBR,,Unkn,HS_10.ng,23029.225389387,,Unknown,Unassigned,False
+,F10,SYBR,,Unkn,HS_7.5ng,19100.8643986999,,Unknown,Unassigned,False
+,G10,SYBR,,Unkn,HS_5.ng,14232.0813199461,,Unknown,Unassigned,False
+,H10,SYBR,,Unkn,HS_2.5ng,9440.66974263685,,Unknown,Unassigned,False
+,A11,SYBR,,Unkn,HS_20.ng,35638.7115483213,,Unknown,Unassigned,False
+,B11,SYBR,,Unkn,HS_17.5ng,33047.6639267128,,Unknown,Unassigned,False
+,C11,SYBR,,Unkn,HS_15.ng,30657.4261928695,,Unknown,Unassigned,False
+,D11,SYBR,,Unkn,HS_12.5ng,27462.6958261479,,Unknown,Unassigned,False
+,E11,SYBR,,Unkn,HS_10.ng,23061.6293938809,,Unknown,Unassigned,False
+,F11,SYBR,,Unkn,HS_7.5ng,18072.0565695232,,Unknown,Unassigned,False
+,G11,SYBR,,Unkn,HS_5.ng,14204.9504711498,,Unknown,Unassigned,False
+,H11,SYBR,,Unkn,HS_2.5ng,9530.83467370789,,Unknown,Unassigned,False
 ,A12,SYBR,,Unkn,HS 20 ng,37558.8791276612,,Unknown,Unassigned,False
 ,B12,SYBR,,Unkn,HS 20 ng,37976.5318243054,,Unknown,Unassigned,False
 ,C12,SYBR,,Unkn,HS 20 ng,37044.1890164817,,Unknown,Unassigned,False
