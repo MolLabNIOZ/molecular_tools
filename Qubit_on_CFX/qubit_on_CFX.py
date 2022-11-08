@@ -5,6 +5,12 @@
 # Author:   Maartje Brouwer
 # Goal:     Automating qubit on CFX analysis
 # Date:     210423
+# update 221104 SV: 
+#   , delimiter added, changed file source and destination to
+#    seperate data folders per project
+# update 221107 SV:
+#   outcommented the part where HS_ or BR_ were removed because protocol
+#   was not doing this correctly
 # =============================================================================
 
 # !!! Make sure that your sample names start with HS_ or BR_
@@ -25,8 +31,8 @@ from matplotlib import pyplot as plt
 
 # ==================Import file================================================
 # =============================================================================
-project = "221107_QubitCFXvsOpus_std_dilutions_Opus_3"
-csv = "2022_CFX_vs_Opus_Qubit/raw_data/221107_QubitCFXvsOpus_std_dilutions_Opus_3.csv"
+project = "221107_QubitCFXvsOpus_std_dilutions_Opus_1"
+csv = "2022_CFX_vs_Opus_Qubit/raw_data/221107_QubitCFXvsOpus_std_dilutions_Opus_1.csv"
 decimal_sign =','
 data = pd.read_csv(csv, delimiter=';|,', decimal=decimal_sign, engine='python')
 data.dropna(0, subset=["Sample"], inplace=True)
@@ -166,9 +172,9 @@ if stdcurveHSraw.empty is False:
         # add concentration to the dataframe
         DNA_concentrations_HS.at[sample,'HS_[DNA] ng/µL'] = concentration
     # Get rid of HS in sample names, to be able to merge samples
-    DNA_concentrations_HS['Sample'] = (
-        (DNA_concentrations_HS['Sample'].str.split('HS_', 
-        expand=True))[1].astype(str))
+    # DNA_concentrations_HS['Sample'] = (
+    #     (DNA_concentrations_HS['Sample'].str.split('HS_', 
+    #     expand=True))[1].astype(str))
 
 if stdcurveBRraw.empty is False:
     # Get data from BR samples only
@@ -189,9 +195,9 @@ if stdcurveBRraw.empty is False:
         DNA_concentrations_BR.at[sample,'BR_[DNA] ng/µL'] = concentration
 
     # Get rid of BR in sample names, to be able to merge samples
-    DNA_concentrations_BR['Sample'] = (
-        (DNA_concentrations_BR['Sample'].str.split('BR_', 
-        expand=True))[1].astype(str))
+    # DNA_concentrations_BR['Sample'] = (
+    #     (DNA_concentrations_BR['Sample'].str.split('BR_', 
+    #     expand=True))[1].astype(str))
 
 # Merge HS and BR measurements
 DNA_concentrations = pd.merge(
