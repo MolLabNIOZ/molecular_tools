@@ -21,9 +21,10 @@ Anything after that in the template will be disregarded.
 Make the description as descriptive as possible (controls etc).
 
 edit:
-    220929. Changed barcodes to 4 digits instead of 3, so that we can combine
+    220929 Changed barcodes to 3 or 4 digits, so that we can combine
     Linda's primer set with our primer set. Linda's primers will be numbered 
     9001 and on.
+    221115 automated NIOZnumber extraction form excel
 
 """
 
@@ -31,22 +32,29 @@ edit:
 import pandas as pd       # to be able to work with dataframes
 from Bio.Seq import Seq   # to be able to do compl_rev
 # !!! Set variables for your mappingfile
-file_name = 'test_user_template_for_mappingfile_creatorpy.xlsx'
-
-# file_path to folder of mapping_file template (.xlsx or .csv)
-folder_path = "molecular_tools/mapping_file_creator/"
+file_name = 'NIOZ338_user_template_for_mappingfile_creatorpy_AV.xlsx'
+# !!! file_path to folder of mapping_file template (.xlsx or .csv)
+folder_path = "//zeus.nioz.nl/mmb/molecular_ecology/mollab_team/Sequencing/ngs_sequencing/Mapping_files/"
 # Change from windows path to unix path
 file_path = folder_path + file_name
-
-# !!! NIOZ number to name the mapping_file
-NIOZnumber = 'test_run'	
  
 #### Import needed files
 if file_path.endswith('.xlsx') or file_path.endswith('.xlsm'):
-    sample_file = pd.read_excel(file_path, sheet_name='FILL_IN', engine='openpyxl')
+    sample_file = pd.ExcelFile(file_path)
 if file_path.endswith('.csv'):
     sample_file = pd.read_csv(file_path, delimiter=';')
 
+# NIOZ number to name the mapping_file
+if file_path.endswith('.xlsx') or file_path.endswith('.xlsm'):
+    ReadMe = sample_file.parse('ReadMe')
+    NIOZnumber = (
+        ReadMe.loc[ReadMe['Project_info'] == 'NIOZ_Number', 'example'].iloc[0])
+if file_path.endswith('.csv'):
+    NIOZnumber = 'NIOZ???' #!!! fill in yourself
+
+# Only keep FILL_IN sheet
+sample_file = sample_file.parse('FILL_IN')
+        
 #### Generate sampleIDs
 # Create a new empty dataframe
 df = pd.DataFrame()
