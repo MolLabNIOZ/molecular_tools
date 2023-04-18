@@ -32,7 +32,7 @@ edit:
 import pandas as pd       # to be able to work with dataframes
 from Bio.Seq import Seq   # to be able to do compl_rev
 # !!! Set variables for your mappingfile
-file_name = 'NIOZ338_user_template_for_mappingfile_creatorpy_AV.xlsx'
+file_name = 'NIOZ350_mapping_file_template.xlsx'
 # !!! file_path to folder of mapping_file template (.xlsx or .csv)
 folder_path = "//zeus.nioz.nl/mmb/molecular_ecology/mollab_team/Sequencing/ngs_sequencing/Mapping_files/"
 # Change from windows path to unix path
@@ -61,29 +61,35 @@ df = pd.DataFrame()
 # Insert primers
 df['Forward_primer']=(sample_file['Forward_primer'].dropna())
 df['Reverse_primer']=(sample_file['Reverse_primer'].dropna())
-# Extract primernumbers (last 3-4 characters depending on the primer)
 
+#### Extract primer names and per sample a primer number
+# (last 3-4 characters depending on the primer)
+# Forward primer
 try:
-    #checks if last 4 characters are intergers, else the 4th digit is an char
-    int(sample_file.iloc[1]['Reverse_primer'][-4:])
+    #checks if last 4 characters are intergers
+    int(sample_file.iloc[1]['Forward_primer'][-4:])
     df['Forward_primer_number'] = (
             (sample_file['Forward_primer'].str.slice(-4)))
-    df['Reverse_primer_number'] = (
-            (sample_file['Reverse_primer'].str.slice(-4)))
-    #### Get primer and barcode sequence info
-    # Get primer names without barcode number
     fw_primer = sample_file.iloc[1]['Forward_primer'][:-4]
-    rv_primer = sample_file.iloc[1]['Reverse_primer'][:-4]
 except ValueError:
-    #
+    # Otherwise last 3 characters are integers
     df['Forward_primer_number'] = (
             (sample_file['Forward_primer'].str.slice(-3)))
+    fw_primer = sample_file.iloc[1]['Forward_primer'][:-3]
+
+# Reverse primer
+try:
+    #checks if last 4 characters are intergers
+    int(sample_file.iloc[1]['Reverse_primer'][-4:])
+    df['Reverse_primer_number'] = (
+            (sample_file['Reverse_primer'].str.slice(-4)))
+    rv_primer = sample_file.iloc[1]['Reverse_primer'][:-4]
+except ValueError:
+    # Otherwise last 3 characters are integers
     df['Reverse_primer_number'] = (
             (sample_file['Reverse_primer'].str.slice(-3)))
-    #### Get primer and barcode sequence info
-    # Get primer names without barcode number
-    fw_primer = sample_file.iloc[1]['Forward_primer'][:-3]
     rv_primer = sample_file.iloc[1]['Reverse_primer'][:-3]
+
 # Generate SampleIDs
 df['#SampleID'] = (
     NIOZnumber + '.' + 
