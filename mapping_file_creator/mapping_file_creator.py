@@ -62,30 +62,24 @@ df = pd.DataFrame()
 df['Forward_primer']=(sample_file['Forward_primer'].dropna())
 df['Reverse_primer']=(sample_file['Reverse_primer'].dropna())
 
-#### Extract primer names and per sample a primer number
-# (last 3-4 characters depending on the primer)
-# Forward primer
+# Extract primernumbers (last 3-4 characters depending on the primer)
 try:
-    #checks if last 4 characters are intergers
+    #checks if last 4 characters are intergers, else the 4th digit is an char
     int(sample_file.iloc[1]['Forward_primer'][-4:])
     df['Forward_primer_number'] = (
             (sample_file['Forward_primer'].str.slice(-4)))
     fw_primer = sample_file.iloc[1]['Forward_primer'][:-4]
 except ValueError:
-    # Otherwise last 3 characters are integers
     df['Forward_primer_number'] = (
             (sample_file['Forward_primer'].str.slice(-3)))
     fw_primer = sample_file.iloc[1]['Forward_primer'][:-3]
 
-# Reverse primer
 try:
-    #checks if last 4 characters are intergers
     int(sample_file.iloc[1]['Reverse_primer'][-4:])
     df['Reverse_primer_number'] = (
-            (sample_file['Reverse_primer'].str.slice(-4)))
+            (sample_file['Reverse_primer'].str.slice(-4)))    
     rv_primer = sample_file.iloc[1]['Reverse_primer'][:-4]
 except ValueError:
-    # Otherwise last 3 characters are integers
     df['Reverse_primer_number'] = (
             (sample_file['Reverse_primer'].str.slice(-3)))
     rv_primer = sample_file.iloc[1]['Reverse_primer'][:-3]
@@ -104,8 +98,16 @@ rv_primers = pd.read_excel(
     sheet_name=rv_primer, engine='openpyxl')
 
 #### Add primer sequence and barcode sequences from database to samples
-df = pd.merge(df, fw_primers)
-df = pd.merge(df, rv_primers)
+df = pd.merge(
+    df, 
+    fw_primers[['Forward_primer', 
+                'LinkerPrimerSequence', 
+                'Barcode_Forward_Primer']], on='Forward_primer', how='left')
+df = pd.merge(
+    df, 
+    rv_primers[['Reverse_primer', 
+                'ReversePrimer', 
+                'Barcode_Reverse_Primer']], on='Reverse_primer', how='left')
 
 #### Get complement reverse of reverse primer barcode
 # Make empty new column
