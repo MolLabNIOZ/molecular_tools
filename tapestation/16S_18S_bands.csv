@@ -1,0 +1,97 @@
+Sample Description;16S_ng/µL;16Sband;18S_ng/µL;18Sband;16S18S ratio
+C241 2.1;14.9;clear band;7.37;clear band;16S > 18S
+C241 2.2;14.3;clear band;4.04;clear band;16S > 18S
+C241 13.1;14.1;clear band;2.76;clear band;16S > 18S
+C241 17.2;0.446;faint band;0.341;faint band;16S > 18S
+C241 19.1;8.48;clear band;12.1;clear band;16S = 18S
+C241 19.2;2.6;clear band;0.322;faint band;16S > 18S
+C241 21.1;0.119;no or very faint band;0.0507;no or very faint band;16S > 18S
+C241 21.2;0.114;no or very faint band;0.0491;no or very faint band;16S > 18S
+C241 23.1;0.923;faint band;0.204;faint band;16S > 18S
+C241 23.2;0.234;faint band;7.48;clear band;16S < 18S
+C241 29.1;13.7;clear band;6.32;clear band;16S > 18S
+C241 29.2;5.48;clear band;4.9;clear band;16S = 18S
+C241 33.1;12.4;clear band;2.25;clear band;16S > 18S
+C241 33.2;0.686;faint band;5.39;clear band;16S < 18S
+C241 34.1;0.849;faint band;6.68;clear band;16S < 18S
+C241 34.2;0.344;faint band;0.472;faint band;16S = 18S
+C241 40;14.5;clear band;12.6;clear band;16S = 18S
+C241 42.1;10.5;clear band;9.47;clear band;16S = 18S
+C247 1.1;3.75;clear band;1.24;clear band;16S > 18S
+C247  2.1;1.25;clear band;0.351;faint band;16S > 18S
+C247  7.1;2.08;clear band;0.43;faint band;16S > 18S
+C247 13.1;13.2;clear band;2.99;clear band;16S > 18S
+C247 17.1;2.72;clear band;0.912;faint band;16S > 18S
+C247 20.1;2.35;clear band;34.0;clear band;16S < 18S
+C247 berm1;5.86;clear band;28.5;clear band;16S < 18S
+C247 22.1;1.29;clear band;36.2;clear band;16S < 18S
+C247 24.2;11.7;clear band;6.46;clear band;16S > 18S
+C247  26.2;2.82;clear band;34.0;clear band;16S < 18S
+C256 9.1;14.3;clear band;6.18;clear band;16S > 18S
+C256 9.2;1.51;clear band;0.341;faint band;16S > 18S
+C256 11.1;6.02;clear band;1.03;clear band;16S > 18S
+C256 11.2;14.5;clear band;6.2;clear band;16S > 18S
+C256 15.1;14.7;clear band;5.82;clear band;16S > 18S
+C256 15.2;12.9;clear band;4.76;clear band;16S > 18S
+C256 19.1;11.1;clear band;7.59;clear band;16S > 18S
+C256 19.2;4.67;clear band;0.742;faint band;16S > 18S
+C256 25.1;9.74;clear band;18.0;clear band;16S < 18S
+C256 25.2;3.78;clear band;24.4;clear band;16S < 18S
+C256 27.1;4.53;clear band;0.487;faint band;16S > 18S
+C256 27.2;1.84;clear band;0.365;faint band;16S > 18S
+C256 29.1;10.3;clear band;12.3;clear band;16S = 18S
+C256 29.2;1.19;clear band;0.365;faint band;16S > 18S
+C256 31.1;4.12;clear band;0.757;faint band;16S > 18S
+C256 31.2;0.84;faint band;1.82;clear band;16S < 18S
+C256 43.1;4.46;clear band;14.4;clear band;16S < 18S
+C256 43.2;0.401;faint band;0.53;faint band;16S = 18S
+C256 45.1;13.3;clear band;3.77;clear band;16S > 18S
+C256 45.2;0.112;no or very faint band;0.0789;no or very faint band;16S > 18S
+C256 58.1;0.529;faint band;0.25;faint band;16S > 18S
+442 08.05D3;11.7;clear band;4.78;clear band;16S > 18S
+448 02.02D1;3.0;clear band;9.73;clear band;16S < 18S
+448 04.03D1;15.2;clear band;6.74;clear band;16S > 18S
+448 04.03D3;12.2;clear band;6.5;clear band;16S > 18S
+448 05.04D1;7.88;clear band;11.9;clear band;16S < 18S
+448 05.04D2;13.9;clear band;6.46;clear band;16S > 18S
+448 05.04D3;7.65;clear band;13.8;clear band;16S < 18S
+448 07.05D1;2.8;clear band;14.2;clear band;16S < 18S
+448 07.05D2;2.83;clear band;12.7;clear band;16S < 18S
+448 07.05D3;4.06;clear band;13.2;clear band;16S < 18S
+448 07.01.5D1;1.2;clear band;20.1;clear band;16S < 18S
+448 07.01.5D2;0.363;faint band;1.24;clear band;16S < 18S
+448 07.01.3D1;0.542;faint band;15.8;clear band;16S < 18S
+448 07.03D1;0.0883;no or very faint band;0.0473;no or very faint band;16S > 18S
+448 08.06D3;12.3;clear band;8.14;clear band;16S > 18S
+448 09.07D3;6.16;clear band;27.4;clear band;16S < 18S
+448 12.09D3;4.78;clear band;4.3;clear band;16S = 18S
+448 17.12D1;9.19;clear band;5.78;clear band;16S > 18S
+448 17.12D2;13.1;clear band;7.35;clear band;16S > 18S
+448 18.13D2;5.23;clear band;2.81;clear band;16S > 18S
+448 18.13D3;11.0;clear band;5.9;clear band;16S > 18S
+448 20.14D2;4.23;clear band;18.2;clear band;16S < 18S
+448 20.02N1;0.366;faint band;5.65;clear band;16S < 18S
+448 21.15D1;3.91;clear band;21.2;clear band;16S < 18S
+448 21.15D2;0.971;faint band;1.11;clear band;16S = 18S
+448 22.16D1;4.67;clear band;7.16;clear band;16S < 18S
+448 24.17D1;0.186;no or very faint band;0.672;faint band;16S < 18S
+448 25.18D3;2.1;clear band;13.4;clear band;16S < 18S
+448 25.03D1;0.276;faint band;0.244;faint band;16S = 18S
+448 25.03D2;9.21;clear band;16.9;clear band;16S < 18S
+448 26.19D3;11.3;clear band;2.92;clear band;16S > 18S
+448 28.20D1;16.2;clear band;5.04;clear band;16S > 18S
+448 32.24D3;3.85;clear band;12.7;clear band;16S < 18S
+455 02.D1;11.1;clear band;8.0;clear band;16S > 18S
+455 07.D3;15.6;clear band;2.56;clear band;16S > 18S
+480 01.D1;12.5;clear band;4.03;clear band;16S > 18S
+480 02.D3;16.5;clear band;5.53;clear band;16S > 18S
+480 03.D4;14.7;clear band;4.59;clear band;16S > 18S
+480 07.D3;18.1;clear band;6.49;clear band;16S > 18S
+480 08.D3;19.6;clear band;7.89;clear band;16S > 18S
+480 08.D5;7.1;clear band;2.42;clear band;16S > 18S
+480 10.D3;17.2;clear band;11.2;clear band;16S > 18S
+480 11.D7;4.66;clear band;3.63;clear band;16S > 18S
+480 12.D4;5.07;clear band;2.67;clear band;16S > 18S
+FAN 01;6.41;clear band;1.84;clear band;16S > 18S
+Mock;10.6;clear band;0.775;faint band;16S > 18S
+NTC;0.165;no or very faint band;0.0682;no or very faint band;16S > 18S
