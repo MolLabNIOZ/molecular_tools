@@ -32,9 +32,9 @@ edit:
 import pandas as pd       # to be able to work with dataframes
 from Bio.Seq import Seq   # to be able to do compl_rev
 # !!! Set variables for your mappingfile
-file_name = 'NIOZ350_mapping_file_template.xlsx'
+file_name = 'NIOZ359_mapping_file_template.xlsx'
 # !!! file_path to folder of mapping_file template (.xlsx or .csv)
-folder_path = "//zeus.nioz.nl/mmb/molecular_ecology/mollab_team/Sequencing/ngs_sequencing/Mapping_files/"
+folder_path = "//zeus/mmb/molecular_ecology/mollab_team/Sequencing/ngs_sequencing/Mapping_files/"
 # Change from windows path to unix path
 file_path = folder_path + file_name
  
