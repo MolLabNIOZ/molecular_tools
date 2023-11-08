@@ -4,14 +4,18 @@ Automated shortening of sequences in FASTA format
 
 VERSION: November2023
 
-Dowload the asv sequences in a .txt or .seq file. Make sure the file is in FASTA format!
+Dowload the asv sequences in a .txt or .seq file. Make sure the file is in 
+FASTA format!
 The name of the file should be the NIOZ number of the sequence lane.
 This protocol uses the relative paths from the GitHub folder.
 Add the relative path to this file behind 'pathway'.
-If you want to use a file or save the file in a different folder, change the relative paths to a different folder.
+If you want to use a file or save the file in a different folder, change 
+the relative paths to a different folder.
 
 edit:
-
+231108: adds a repetition of 20 A's behind every sequence to hopefully make it 
+easier to allign the sequences. Also added a function that allows you to 
+disable the function that adds the poly A end after each sequence
 
 @author: rdebeer
 """
@@ -25,6 +29,12 @@ data = open(pathway)
 #creates the output variable, this will be later used to export to the new .txt file
 output1 = ""
 
+AA = "" #a variable to add a 'n' amount of A's behind every sequence.
+extention = True #makes it possible to dissable the addition of the A-string
+if extention:
+    for i in range(0,20): #sets the amount of A's in the string
+        AA = AA + 'A' #loop to create the string
+    
 #creates a loop that checks every line in the file you opened
 for line in data:
 #if the line starts with '>', it adds the whole line to the output and adds _ and the NIOZ number with the variable NIOZ.
@@ -33,7 +43,7 @@ for line in data:
         output1 = output1 + line.strip() + "_" + NIOZ + "\n"
 #if the line doesn't start with a >, it takes the first 50 characters on the line and adds this to the output. "\n" adds a new line to the output
     else:
-        output1 = output1 +line[0:50] + "\n"
+        output1 = output1 +line[0:50] + AA + "\n"
     
 #creates a new .seq file in the right folder. NIOZ is the variable you have created above.
 #if you want to create a .txt file, change .seq to .txt
