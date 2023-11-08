@@ -15,10 +15,35 @@ the relative paths to a different folder.
 edit:
 231108: adds a repetition of 20 A's behind every sequence to hopefully make it 
 easier to allign the sequences. Also added a function that allows you to 
-disable the function that adds the poly A end after each sequence
+disable the function that adds the poly A end after each sequence. It also adds
+the domain name of the species.
 
 @author: rdebeer
 """
+#import the package named panda
+import pandas
+
+#you can customize the output of the protocol. 
+extention = True #makes it possible to dissable the addition of the A-string, if False, it doesn't add the A-string. If true, it adds the A-string
+tax = True #adds the domain of the species, if False, it adds unknown to the sequence
+
+#checks if you want to add the domain name to the FASTA output
+if tax:
+#makes a variable named file for the file with the ASV table
+    file = "molecular_tools/FASTA shortening/asvTable_noSingletons.txt"
+
+#changes the .txt file to a csv file
+    ASV_table = pandas.read_csv(file,delimiter="\t",header=1)
+
+#creates a dictonary for the taxonomy per ASV number
+    taxonomies = {} 
+
+#adds the taxonomy to the dictonary per ASV number
+    for i in ASV_table.index:
+        ASV = ASV_table["#OTU ID"][i]
+        taxonomy = (str((ASV_table["taxonomy"][i]))).split(";")[0]
+        taxonomies[ASV] = taxonomy
+
 #creates a variable for the file you want to use. You can use a .txt or .seq as starting point. the pathway to your file behind pathway
 pathway = "molecular_tools/FASTA shortening/NIOZ354.seq"
 #creates a variable for the NIOZ number using the name of the file in the pathway above
@@ -28,19 +53,26 @@ data = open(pathway)
 
 #creates the output variable, this will be later used to export to the new .txt file
 output1 = ""
-
 AA = "" #a variable to add a 'n' amount of A's behind every sequence.
-extention = True #makes it possible to dissable the addition of the A-string
-if extention:
+
+
+if extention: #executes the next lines if extention = True
     for i in range(0,20): #sets the amount of A's in the string
         AA = AA + 'A' #loop to create the string
     
 #creates a loop that checks every line in the file you opened
 for line in data:
-#if the line starts with '>', it adds the whole line to the output and adds _ and the NIOZ number with the variable NIOZ.
-#line.strip() strips the layout of the line because this will generate the right output. "\n" adds a new line to the output
+
+#checks if the line stats with '>', if it does, it checks if the ASV number found on that line is the same as the ASV number in the dictonary.
+#if this is not the case, it adds unknown as taxonomy
     if line.startswith('>'):
-        output1 = output1 + line.strip() + "_" + NIOZ + "\n"
+        try:    
+            ASV = line[1:].strip() #.strip deletes the enter at the end of the line
+            domain = taxonomies[ASV] 
+        except:
+            domain = "unknown" #adds unknown as domain to the sequence if the domain is not in the dictonary
+        #generates the output you add for every line in the file to the variable you created in line 55    
+        output1 = output1 + line.strip() + "_" + domain + "_" + NIOZ + "\n"
 #if the line doesn't start with a >, it takes the first 50 characters on the line and adds this to the output. "\n" adds a new line to the output
     else:
         output1 = output1 +line[0:50] + AA + "\n"
