@@ -106,12 +106,10 @@ def run(protocol: protocol_api.ProtocolContext):
     pipette.starting_tip = tips_1.well(starting_tip)     
     
     
-    PCR1_rows = (
-            ([destination.rows_by_name()[row_name] 
-              for row_name in sample_rows]))
+    PCR1_rows = destination.rows_by_name()
     PCR1_wells = []
     for row in PCR1_rows:
         for well in row:
             PCR1_wells.append(well)
             
-            
+    protocol.command(PCR1_wells)         
