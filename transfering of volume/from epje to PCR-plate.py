@@ -8,7 +8,7 @@ Created on Thu Nov  9 13:05:07 2023
 ##=============================================================================
 number_of_samples = 24                #enter the number of samples 
 volume_of_sample = 30                 #enter the volume of the sample
-starting_tip = ''                     #enter the starting tip of either the p20 or p200 tips
+starting_tip = 'A1'                   #enter the starting tip of either the p20 or p200 tips
 
 ##=============================================================================
 # IMPORT STATEMENTS
@@ -71,21 +71,21 @@ def run(protocol: protocol_api.ProtocolContext):
             'opentrons_24_tuberack_eppendorf_1.5ml_safelock_snapcap',
             5,                                                       
             'sample_tubes_1')                                        
-    if sample_racks >= 2:
-        sample_tubes_2 = protocol.load_labware(
-            'opentrons_24_tuberack_eppendorf_1.5ml_safelock_snapcap',
-            8,                                                       
-            'sample_tubes_2')                                        
-    if sample_racks >= 3:
-        sample_tubes_3 = protocol.load_labware(
-            'opentrons_24_tuberack_eppendorf_1.5ml_safelock_snapcap',
-            4,                                                       
-            'sample_tubes_3')                                        
-    if sample_racks >= 4:
-        sample_tubes_4 = protocol.load_labware(
-            'opentrons_24_tuberack_eppendorf_1.5ml_safelock_snapcap',
-            7,                                                      
-            'sample_tubes_4')
+        if sample_racks >= 2:
+            sample_tubes_2 = protocol.load_labware(
+                'opentrons_24_tuberack_eppendorf_1.5ml_safelock_snapcap',
+                8,                                                       
+                'sample_tubes_2')                                        
+            if sample_racks >= 3:
+                sample_tubes_3 = protocol.load_labware(
+                    'opentrons_24_tuberack_eppendorf_1.5ml_safelock_snapcap',
+                    4,                                                       
+                    'sample_tubes_3')                                        
+                if sample_racks >= 4:
+                    sample_tubes_4 = protocol.load_labware(
+                        'opentrons_24_tuberack_eppendorf_1.5ml_safelock_snapcap',
+                        7,                                                      
+                        'sample_tubes_4')
     
     #Loading pipettes
     if volume_of_sample >= 20:
@@ -98,13 +98,20 @@ def run(protocol: protocol_api.ProtocolContext):
             'p20_single_gen2',                  
             'left',                             
             tip_racks=[tips_1, tips_2])      
+      
+##=============================================================================
+# SETTING LOCATIONS============================================================
+##=============================================================================
+    #Setting starting tip
+    pipette.starting_tip = tips_1.well(starting_tip)     
     
-    ### sample plekken.
-    ## sample 1: 5, sample 2: 8, sample 3: 4, sample 4: 7
- 
-       
-        
-        
-        
-        
-        
+    
+    PCR1_rows = (
+            ([destination.rows_by_name()[row_name] 
+              for row_name in sample_rows]))
+    PCR1_wells = []
+    for row in PCR1_rows:
+        for well in row:
+            PCR1_wells.append(well)
+            
+            
