@@ -31,8 +31,7 @@ if regions == 2:
     region_comment_2 = '18S'
 
 # Where is the compact region table located:
-filepath = ("C:/Users/mbrouwer/OneDrive - NIOZ/Documenten/GitHub/molecula"
-                 "r_tools/tapestation/test_compactRegionTable_2.csv")
+filepath = ("//zeus.nioz.nl/mmb/molecular_ecology/mollab_team/Projects/2023/MMB/Linda/231011-NIOZ369_515F951R_Quant - 2023-10-11 - 13-49-06-D1000_compactRegionTable.csv")
 
 # Data analysis ===============================================================
 data = pd.read_csv(filepath, encoding='unicode-escape')
