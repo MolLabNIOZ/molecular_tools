@@ -1,14 +1,14 @@
-# -*- coding: utf-8 -*-
 """
-Created on Thu Nov  9 13:05:07 2023
-
-@author: rdebeer
+wat doet dit protocol?
+Wat voor informatie is er nodig en wat gaat de robot dan doen?
 """
+##=============================================================================
 #VARIABLES TO SET!!!
 ##=============================================================================
 number_of_samples = 24                #enter the number of samples 
 volume_of_sample = 30                 #enter the volume of the sample
 starting_tip = 'A1'                   #enter the starting tip of either the p20 or p200 tips
+##=============================================================================
 
 ##=============================================================================
 # IMPORT STATEMENTS
@@ -17,7 +17,21 @@ starting_tip = 'A1'                   #enter the starting tip of either the p20 
 from opentrons import protocol_api
 
 #Import other modules
-import math                         #math to do some calculations (rounding up)
+import math #to do some calculations (rounding up)
+##=============================================================================
+
+##=============================================================================
+# CALCULATED VARIABLE
+##=============================================================================
+#Calculating how many sample racks are needed
+sample_racks = math.ceil(number_of_samples/24)
+
+#Determine how much volume to use as airgap
+if volume_of_sample <= 18:
+    airgap = 2
+else:
+    airgap = 10
+##=============================================================================
 
 ##=============================================================================
 # METADATA
@@ -30,15 +44,15 @@ metadata = {
 
 def run(protocol: protocol_api.ProtocolContext):
     """
-    pooling replicate PCR reactions into one of the reaction tubes
-    
+    transfering samples from 1.5ml to a PCR-plate
     """
+##=============================================================================
 
 ##=============================================================================
 # LOADING LABWARE AND PIPETTES
 ##=============================================================================
     #Loading pipettetips   
-    if volume_of_sample > 20:
+    if volume_of_sample > 18:
         tips_1 = protocol.load_labware(
                 'opentrons_96_filtertiprack_200ul',  
                 11,                                  
@@ -61,34 +75,31 @@ def run(protocol: protocol_api.ProtocolContext):
     destination = protocol.load_labware(
                 'biorad_96_wellplate_200ul_pcr',
                 6,
-                'sample_plate_96')
+                'destination_plate_96')
     
     #Loading labware - source
-    #Calculating how many sample racks are needed
-    sample_racks = math.ceil(number_of_samples/24)
-    if sample_racks >= 1:
-        sample_tubes_1 = protocol.load_labware(
+    sample_tubes_1 = protocol.load_labware(
+        'opentrons_24_tuberack_eppendorf_1.5ml_safelock_snapcap',
+        5,                                                       
+        'sample_tubes_1')                                        
+    if sample_racks >= 2:
+        sample_tubes_2 = protocol.load_labware(
             'opentrons_24_tuberack_eppendorf_1.5ml_safelock_snapcap',
-            5,                                                       
-            'sample_tubes_1')                                        
-        if sample_racks >= 2:
-            sample_tubes_2 = protocol.load_labware(
+            8,                                                       
+            'sample_tubes_2')                                        
+        if sample_racks >= 3:
+            sample_tubes_3 = protocol.load_labware(
                 'opentrons_24_tuberack_eppendorf_1.5ml_safelock_snapcap',
-                8,                                                       
-                'sample_tubes_2')                                        
-            if sample_racks >= 3:
-                sample_tubes_3 = protocol.load_labware(
+                4,                                                       
+                'sample_tubes_3')                                        
+            if sample_racks >= 4:
+                sample_tubes_4 = protocol.load_labware(
                     'opentrons_24_tuberack_eppendorf_1.5ml_safelock_snapcap',
-                    4,                                                       
-                    'sample_tubes_3')                                        
-                if sample_racks >= 4:
-                    sample_tubes_4 = protocol.load_labware(
-                        'opentrons_24_tuberack_eppendorf_1.5ml_safelock_snapcap',
-                        7,                                                      
-                        'sample_tubes_4')
+                    7,                                                      
+                    'sample_tubes_4')
     
     #Loading pipettes
-    if volume_of_sample >= 20:
+    if volume_of_sample >= 18:
         pipette = protocol.load_instrument(
             'p300_single_gen2',             
             'right',                        
@@ -98,18 +109,45 @@ def run(protocol: protocol_api.ProtocolContext):
             'p20_single_gen2',                  
             'left',                             
             tip_racks=[tips_1, tips_2])      
+##=============================================================================
       
 ##=============================================================================
 # SETTING LOCATIONS============================================================
 ##=============================================================================
-    #Setting starting tip
+    #### Setting starting tip
     pipette.starting_tip = tips_1.well(starting_tip)     
     
+    #### Setting tube locations
+    # Destination wells
+    destination_wells = []
+    destination_rows = destination.rows_by_name()
+    for row, row_wells in destination_rows.items():
+        destination_wells = destination_wells + row_wells
+    # We want the robot to loop through the wells horizontally (by row) instead
+    # of the default (by column).
+    destination_wells = destination_wells[:number_of_samples]
+    ## cuts off the list after certain number of samples 
     
-    PCR1_rows = destination.rows_by_name()
-    PCR1_wells = []
-    for row in PCR1_rows:
-        for well in row:
-            PCR1_wells.append(well)
-            
-    protocol.command(PCR1_wells)         
+    # Source wells
+    source_wells = [] 
+    source_wells = source_wells + sample_tubes_1.wells()
+    if sample_racks >= 2:
+        source_wells = source_wells + sample_tubes_2.wells()
+        if sample_racks >= 3:
+            source_wells = source_wells + sample_tubes_3.wells()
+            if sample_racks >= 4:
+                source_wells = source_wells + sample_tubes_4.wells()               
+    source_wells = source_wells[:number_of_samples]
+    ## cuts off the list after certain number of samples 
+##=============================================================================
+
+##=============================================================================
+# Transferring=================================================================
+##=============================================================================
+    for source_well, destination_well in zip(source_wells, destination_wells):
+        pipette.transfer(volume_of_sample,
+                         source_well, 
+                         destination_well, 
+                         new_tip='always',
+                         air_gap = airgap)
+##=============================================================================
