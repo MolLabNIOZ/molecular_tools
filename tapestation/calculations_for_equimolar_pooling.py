@@ -24,13 +24,13 @@ import math
 
 # Variables to set ============================================================
 #### Where is the compactRegionTable .csv located?
-filepath = "//zeus.nioz.nl/mmb/molecular_ecology/mollab_team/Projects/2023/COS/Evy/231211-NIOZ373_compactregiontable.csv"
+filepath = "//zeus.nioz.nl/mmb/molecular_ecology/mollab_team/Projects/2023/COS/Marie/kwantificatie NIOZ376 - 2023-12-12 - 10-27-14-D1000_compactRegionTable.csv"
 
 #### How much PCR product is available (µL)
-PCR_volume = 25
+PCR_volume = 20
 
 #### How much DNA do you want to send for sequencing? (ng)
-total_ng = 1200
+total_ng = 1900
     # The script multiplies this by 2, to take into account you will loose DNA
     # during clean-up
 
@@ -139,7 +139,7 @@ if number_of_samples_to_dilute > 0:
         try:
             dilution_ratio = float(dilution_ratio)
             # In steps of 10µL, check if it yields sufficient amounts of DNA
-            for i in range(1,math.ceil(PCR_volume/10)):
+            for i in range(1,math.ceil(PCR_volume/10)+1):
                 DNA_volume = 10 * i
                 if dilution_ratio * DNA_volume > PCR_volume:
                     break
@@ -237,7 +237,8 @@ print("\n"
       "y this list and paste it in equimolar_pooling.py \n\npool_volumes:")
 print(data['pool_volume'].tolist())
 
-data.to_csv(filepath, sep="\t", index=False)    
+
+# data.to_csv(filepath, index=False)
 
 
     
