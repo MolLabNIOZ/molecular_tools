@@ -14,20 +14,23 @@ the volumes of water/DNA needed to dilute the samples.
 """
 
 # Import needed packages=======================================================
+# For working with dataframes we need pandas
 import pandas as pd
+# To be able to exit the script when the samples are not sufficient we need sys
 from sys import exit
+# To do some math stuff such ass rounding up etc we need math
 import math
 # =============================================================================
 
 # Variables to set ============================================================
 #### Where is the compactRegionTable .csv located?
-filepath = "test_compactRegionTable_no_dil_needed.csv"
+filepath = "//zeus.nioz.nl/mmb/molecular_ecology/mollab_team/Projects/2023/COS/Evy/231211-NIOZ373_compactregiontable.csv"
 
 #### How much PCR product is available (µL)
-PCR_volume = 35
+PCR_volume = 25
 
 #### How much DNA do you want to send for sequencing? (ng)
-total_ng = 1000
+total_ng = 1200
     # The script multiplies this by 2, to take into account you will loose DNA
     # during clean-up
 
@@ -154,23 +157,38 @@ if number_of_samples_to_dilute > 0:
     if number_of_samples_to_dilute > max_dilutions_by_hand:
         # M-O will do the dilutions, the lists can be pasted into 
         # sample_dilution.py.
-        print("\n"
-              "Next you will see 2 lists. The first list contains all volumes of "
-              "water needed for diluting the samples. The second list contains all"
-              " volumes of PCR product that need to be transferred to the new 'dil"
-              "ution' plate. Copy these lists and paste them into sample_dilution."
-              "py \n\nwater_volumes:")
+        print("\nNext you will see 2 lists. The first list contains all "
+              "volumes of water needed for diluting the samples. The second "
+              "list contains volumes of PCR product that need to be "
+              "transferred to the new 'dilution' plate. Copy these lists and "
+              "paste them into sample_dilution.py"
+              "\n\nWater_volumes:")
         print(data['water_volume'].tolist())
         print("\nDNA_volumes:")
         print(data['DNA_volume'].tolist())
     else:
         # These should be diluted by hand, in PCR strips
         print("\n"
-              "")
-# If no samples need to be diluted, DNA_volume = PCR_volume
+              "The following samples need to be diluted. Please do this by "
+              "hand.")
+        for sample in data.index:
+            dilution_ratio = data['dilution_ratio'][sample]
+            if (isinstance(dilution_ratio, int) 
+                or 
+                isinstance(dilution_ratio, float)):
+                print("sample " + str(data['Sample Description'][sample]) + 
+                      " needs to be diluted. This sample is located in well " +
+                      str(data['WellId'][sample]) + " of the PCR_plate. Add to"
+                      " a PCR_strip_tube " + str(data['water_volume'][sample]) 
+                      + "µL of water and " + str(data['DNA_volume'][sample]) + 
+                      "µL of PCR product\n")
+            
+            
+# If no samples need to be diluted, DNA_volume = PCR_volume and water_volume = 0
 else:
     for sample in data.index:
         data.at[sample,'DNA_volume'] = PCR_volume
+        data.at[sample,'water_volume'] = 0
 
 #### Add a column with volumes to use for equimolar pooling
 # Make a new empty column
@@ -178,23 +196,48 @@ data['final_concentration'] = ''
 data['pool_volume'] = ''
 # For every sample calculate the concentration after dilution (calculations
 # work for both diluted and undiluted samples in one batch)
-for sample in data.index:
-    original_concentration = data['Conc. [ng/µl]'][sample]
-    DNA_volume = data['DNA_volume'][sample]
-    water_volume = data['water_volume'][sample]    
-    final_concentration = (original_concentration * DNA_volume) / (water_volume + DNA_volume)
-    pool_volume = float("%.2f" % (ng_per_sample / final_concentration))
-    if pool_volume > PCR_volume:
-        pool_volume = PCR_volume
-    data.at[sample,'final_concentration'] = final_concentration
-    data.at[sample,'pool_volume'] = pool_volume
+if (number_of_samples_to_dilute == 0 
+    or 
+    number_of_samples_to_dilute > max_dilutions_by_hand):
+    for sample in data.index:
+        original_concentration = data['Conc. [ng/µl]'][sample]
+        DNA_volume = data['DNA_volume'][sample]
+        water_volume = data['water_volume'][sample]
+        final_concentration = (original_concentration * DNA_volume) / (water_volume + DNA_volume)
+        pool_volume = float("%.2f" % (ng_per_sample / final_concentration))
+        if pool_volume > PCR_volume:
+            pool_volume = PCR_volume
+        data.at[sample,'final_concentration'] = final_concentration
+        data.at[sample,'pool_volume'] = pool_volume
+# If you did some dilutions by hand, the originals will be skipped and you'll 
+# get some separate volumes to pool by hand.
+else:
+    extra_pool = []
+    for sample in data.index:
+        dilution_ratio = data['dilution_ratio'][sample]
+        original_concentration = data['Conc. [ng/µl]'][sample]
+        DNA_volume = data['DNA_volume'][sample]
+        water_volume = data['water_volume'][sample]
+        final_concentration = (original_concentration * DNA_volume) / (water_volume + DNA_volume)
+        pool_volume = float("%.2f" % (ng_per_sample / final_concentration))
+        if pool_volume > PCR_volume:
+            pool_volume = PCR_volume
+            dilution_ratio = data['dilution_ratio'][sample]
+        if (isinstance(dilution_ratio, int) 
+            or 
+            isinstance(dilution_ratio, float)):
+            
+            pool_volume = 0
+        data.at[sample,'final_concentration'] = final_concentration
+        data.at[sample,'pool_volume'] = pool_volume
+    
 
 print("\n"
       "Following is a list with volumes you can use for equimolar pooling. Cop"
       "y this list and paste it in equimolar_pooling.py \n\npool_volumes:")
 print(data['pool_volume'].tolist())
 
-    
+data.to_csv(filepath, sep="\t", index=False)    
 
 
     
