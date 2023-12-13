@@ -21,13 +21,13 @@ import math
 
 # Variables to set ============================================================
 #### Where is the compactRegionTable .csv located?
-filepath = "test_compactRegionTable_no_dil_needed.csv"
+filepath = "C:/Users/rdebeer/Documents/GitHub/molecular_tools/tapestation/kwantificatie NIOZ376_orgineel - 2023-12-12 - 10-27-14-D1000_compactRegionTable.csv"
 
 #### How much PCR product is available (µL)
-PCR_volume = 35
+PCR_volume = 20
 
 #### How much DNA do you want to send for sequencing? (ng)
-total_ng = 1000
+total_ng = 1900
     # The script multiplies this by 2, to take into account you will loose DNA
     # during clean-up
 
