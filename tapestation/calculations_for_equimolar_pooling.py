@@ -24,13 +24,13 @@ import math
 
 # Variables to set ============================================================
 #### Where is the compactRegionTable .csv located?
-filepath = "//zeus.nioz.nl/mmb/molecular_ecology/mollab_team/Projects/2023/COS/Marie/kwantificatie NIOZ376 - 2023-12-12 - 10-27-14-D1000_compactRegionTable.csv"
+filepath = "//zeus.nioz.nl/mmb/molecular_ecology/mollab_team/Projects/2024/MMB/Linda/240130_NIOZ374_3D_quant - 2024-01-30 - 12-55-08-D1000_compactRegionTable.csv"
 
 #### How much PCR product is available (µL)
-PCR_volume = 20
+PCR_volume = 35
 
 #### How much DNA do you want to send for sequencing? (ng)
-total_ng = 1900
+total_ng = 1500
     # The script multiplies this by 2, to take into account you will loose DNA
     # during clean-up
 
@@ -139,7 +139,7 @@ if number_of_samples_to_dilute > 0:
         try:
             dilution_ratio = float(dilution_ratio)
             # In steps of 10µL, check if it yields sufficient amounts of DNA
-            for i in range(1,math.ceil(PCR_volume/10)+1):
+            for i in range(1,math.ceil(PCR_volume/10)):
                 DNA_volume = 10 * i
                 if dilution_ratio * DNA_volume > PCR_volume:
                     break
@@ -182,20 +182,22 @@ if number_of_samples_to_dilute > 0:
                       " a PCR_strip_tube " + str(data['water_volume'][sample]) 
                       + "µL of water and " + str(data['DNA_volume'][sample]) + 
                       "µL of PCR product\n")
-            
-            
-# If no samples need to be diluted, DNA_volume = PCR_volume and water_volume = 0
-else:
-    for sample in data.index:
-        data.at[sample,'DNA_volume'] = PCR_volume
-        data.at[sample,'water_volume'] = 0
+                        
+# # If no samples need to be diluted, DNA_volume = PCR_volume and water_volume = 0
+# else:
+#     for sample in data.index:
+#         data.at[sample,'DNA_volume'] = PCR_volume
+#         data.at[sample,'water_volume'] = 0
 
-#### Add a column with volumes to use for equimolar pooling
-# Make a new empty column
+#### Add columns with volumes to use for equimolar pooling and with extra info
+# And some additional info to put in the mapping_file
+# Make new empty columns
 data['final_concentration'] = ''
-data['pool_volume'] = ''
-# For every sample calculate the concentration after dilution (calculations
-# work for both diluted and undiluted samples in one batch)
+data['µL_pooled'] = ''
+data['ng_pooled'] = ''
+data['diluted_before_pooling'] = ''
+# For every sample calculate the concentration after dilution, 
+# calculations work for both diluted and undiluted samples in one batch
 if (number_of_samples_to_dilute == 0 
     or 
     number_of_samples_to_dilute > max_dilutions_by_hand):
@@ -203,12 +205,28 @@ if (number_of_samples_to_dilute == 0
         original_concentration = data['Conc. [ng/µl]'][sample]
         DNA_volume = data['DNA_volume'][sample]
         water_volume = data['water_volume'][sample]
+        
+        # Add final_concentrations to the df
         final_concentration = (original_concentration * DNA_volume) / (water_volume + DNA_volume)
-        pool_volume = float("%.2f" % (ng_per_sample / final_concentration))
-        if pool_volume > PCR_volume:
-            pool_volume = PCR_volume
         data.at[sample,'final_concentration'] = final_concentration
-        data.at[sample,'pool_volume'] = pool_volume
+        
+        # Add volumes to pool to the df
+        µL_pooled = float("%.2f" % (ng_per_sample / final_concentration))
+        if µL_pooled > PCR_volume:
+            µL_pooled = PCR_volume
+        data.at[sample,'µL_pooled'] = µL_pooled
+        
+        # Add total ng per sample pooled to the df
+        ng_pooled = final_concentration * µL_pooled
+        data.at[sample,'ng_pooled'] = ng_pooled        
+        
+        # Add info whether a sample has been diluted to the df
+        if water_volume > 0:
+            diluted = True
+        else:
+            diluted = False
+        data.at[sample,'diluted_before_pooling'] = diluted
+
 # If you did some dilutions by hand, the originals will be skipped and you'll 
 # get some separate volumes to pool by hand.
 else:
@@ -219,26 +237,27 @@ else:
         DNA_volume = data['DNA_volume'][sample]
         water_volume = data['water_volume'][sample]
         final_concentration = (original_concentration * DNA_volume) / (water_volume + DNA_volume)
-        pool_volume = float("%.2f" % (ng_per_sample / final_concentration))
-        if pool_volume > PCR_volume:
-            pool_volume = PCR_volume
+        µL_pooled = float("%.2f" % (ng_per_sample / final_concentration))
+        if µL_pooled > PCR_volume:
+            µL_pooled = PCR_volume
             dilution_ratio = data['dilution_ratio'][sample]
         if (isinstance(dilution_ratio, int) 
             or 
             isinstance(dilution_ratio, float)):
             
-            pool_volume = 0
+            µL_pooled = 0
         data.at[sample,'final_concentration'] = final_concentration
-        data.at[sample,'pool_volume'] = pool_volume
+        data.at[sample,'µL_pooled'] = µL_pooled
     
-
+#### Print the list with volumes to pool. 
 print("\n"
       "Following is a list with volumes you can use for equimolar pooling. Cop"
-      "y this list and paste it in equimolar_pooling.py \n\npool_volumes:")
-print(data['pool_volume'].tolist())
+      "y this list and paste it in equimolar_pooling.py \n\nµL to pool:")
+print(data['µL_pooled'].tolist())
 
-
-# data.to_csv(filepath, index=False)
+#### Save the calculations in a new csv file
+filepath = '/'.join(filepath.split('/')[:-1]) + '/'
+data.to_csv(filepath + 'equimolar_pooling_results.csv', index=False)
 
 
     
