@@ -24,13 +24,13 @@ import math
 
 # Variables to set ============================================================
 #### Where is the compactRegionTable .csv located?
-filepath = "//zeus.nioz.nl/mmb/molecular_ecology/mollab_team/Projects/2024/MMB/Linda/240130_NIOZ374_3D_quant - 2024-01-30 - 12-55-08-D1000_compactRegionTable.csv"
+filepath = "//zeus.nioz.nl/mmb/molecular_ecology/mollab_team/Projects/2024/COS/Evy/Plate_1_feb_2024_compactRegionTable.csv"
 
 #### How much PCR product is available (µL)
-PCR_volume = 35
+PCR_volume = 15
 
 #### How much DNA do you want to send for sequencing? (ng)
-total_ng = 1500
+total_ng = 800
     # The script multiplies this by 2, to take into account you will loose DNA
     # during clean-up
 
@@ -136,7 +136,7 @@ if number_of_samples_to_dilute > 0:
         dilution_ratio = data['dilution_ratio'][sample]
         # For every sample determine how much PCR product to use and if it
         # needs to be diluted, how much water is needed for that
-        try:
+        if dilution_ratio:
             dilution_ratio = float(dilution_ratio)
             # In steps of 10µL, check if it yields sufficient amounts of DNA
             for i in range(1,math.ceil(PCR_volume/10)):
@@ -146,7 +146,20 @@ if number_of_samples_to_dilute > 0:
                 else:
                     continue
             water_volume = DNA_volume * dilution_ratio - DNA_volume
-        except:
+            while water_volume + DNA_volume > 200:
+                water_volume = water_volume / 2
+                DNA_volume = DNA_volume / 2
+                if DNA_volume < 2.5:
+                    print(f"\n!!!\nConcentration of sample " 
+                          f"{data['Sample Description'][sample]}, located in "
+                          f"well {data['WellId'][sample]} is too high."
+                          f" I suggest you dilute this in the original PCR "
+                          f"plate first, adjust the concentration accordingly "
+                          f" and run this script again.")
+                    exit()
+                    
+                          
+        else:
             DNA_volume = PCR_volume
             water_volume = 0
         # Add values for water and DNA to the dataframe
@@ -183,11 +196,11 @@ if number_of_samples_to_dilute > 0:
                       + "µL of water and " + str(data['DNA_volume'][sample]) + 
                       "µL of PCR product\n")
                         
-# # If no samples need to be diluted, DNA_volume = PCR_volume and water_volume = 0
-# else:
-#     for sample in data.index:
-#         data.at[sample,'DNA_volume'] = PCR_volume
-#         data.at[sample,'water_volume'] = 0
+# If no samples need to be diluted, DNA_volume = PCR_volume and water_volume = 0
+else:
+    for sample in data.index:
+        data.at[sample,'DNA_volume'] = PCR_volume
+        data.at[sample,'water_volume'] = 0
 
 #### Add columns with volumes to use for equimolar pooling and with extra info
 # And some additional info to put in the mapping_file
