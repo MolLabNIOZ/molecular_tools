@@ -51,3 +51,4 @@ if students is True:
 
 # Prints the output receivers and changes the output of the list (changes ' ', to a ;)
 print("; ".join(receivers))
+print(len(receivers))
