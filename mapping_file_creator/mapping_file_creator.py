@@ -25,6 +25,8 @@ edit:
     Linda's primer set with our primer set. Linda's primers will be numbered 
     9001 and on.
     221115 automated NIOZnumber extraction form excel
+    240404 Description column doesnt need to be the last column in the excel
+    file.
 
 """
 
@@ -32,7 +34,7 @@ edit:
 import pandas as pd       # to be able to work with dataframes
 from Bio.Seq import Seq   # to be able to do compl_rev
 # !!! Set variables for your mappingfile
-file_name = 'NIOZ359_mapping_file_template.xlsx'
+file_name = 'NIOZ378_user_template_for_mappingfile_creatorpy.xlsx'
 # !!! file_path to folder of mapping_file template (.xlsx or .csv)
 folder_path = "//zeus/mmb/molecular_ecology/mollab_team/Sequencing/ngs_sequencing/Mapping_files/"
 # Change from windows path to unix path
@@ -54,6 +56,13 @@ if file_path.endswith('.csv'):
 
 # Only keep FILL_IN sheet
 sample_file = sample_file.parse('FILL_IN')
+
+# Creates a list of all the column headers, removes the header named "Description"
+# And adds it to the end of the DF.
+col_names = sample_file.columns.tolist()
+col_names.remove("Description")
+col_names.append("Description")
+sample_file = sample_file[col_names]
         
 #### Generate sampleIDs
 # Create a new empty dataframe
