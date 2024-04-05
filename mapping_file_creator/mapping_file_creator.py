@@ -48,7 +48,7 @@ if file_path.endswith('.csv'):
 
 # NIOZ number to name the mapping_file
 if file_path.endswith('.xlsx') or file_path.endswith('.xlsm'):
-    ReadMe = sample_file.parse('ReadMe')
+    ReadMe = sample_file.parse('ProjectInfo')
     NIOZnumber = (
         ReadMe.loc[ReadMe['Project_info'] == 'NIOZ_Number', 'example'].iloc[0])
 if file_path.endswith('.csv'):
