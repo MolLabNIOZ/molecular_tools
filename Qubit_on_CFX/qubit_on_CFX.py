@@ -41,7 +41,7 @@ for i, assay in enumerate(['BR', 'HS']):
     stdcurve = data[(data["Sample"].str.startswith(assay + " "))]
     # If the specific assay was measured, get curve data
     if not stdcurve.empty:
-        stdcurve ["ng/µl"] = ''
+        stdcurve ["ng"] = ''
         # get the concentrations of the original standards
         for standard in stdcurve.index:
             # extract concentration
@@ -49,27 +49,27 @@ for i, assay in enumerate(['BR', 'HS']):
             # 2µL was added for the standards, so multiply concentration by 2
             concentration = concentration * 2
             # add concentration to the dataframe
-            stdcurve.at[standard, "ng/µl"] = concentration
+            stdcurve.at[standard, "ng"] = concentration
             
         # Get info about the curve
-        slope, intercept, rv, pv, se = stats.linregress(stdcurve["ng/µl"].astype(float),
+        slope, intercept, rv, pv, se = stats.linregress(stdcurve["ng"].astype(float),
                                                         stdcurve["End RFU"])
-        interp = np.linspace(np.min(stdcurve["ng/µl"]),
-                              np.max(stdcurve["ng/µl"]),
+        interp = np.linspace(np.min(stdcurve["ng"]),
+                              np.max(stdcurve["ng"]),
                               num=500)        
 ## Plot both standard curves
         # Put the curve of 1st assay on the left, 2nd on the right
         assay_ax = ax[i]
         # Arange title, axes and grid
-        x_axis_max = np.max(stdcurve["ng/µl"]) * 1.25
+        x_axis_max = np.max(stdcurve["ng"]) * 1.25
         assay_ax.set_xticks(np.arange(0,x_axis_max,x_axis_max/5)) # x-grid from 0to25, with intervals=5
         assay_ax.grid(alpha=0.3) # transparancy of grid 
         assay_ax.set_title('standardcurve ' + assay, fontsize=16)
         # Plot the dots
-        plot = assay_ax.scatter(stdcurve["ng/µl"],   # x-axis
+        plot = assay_ax.scatter(stdcurve["ng"],   # x-axis
                           stdcurve["End RFU"], # y-axis
                           c='lightsteelblue')  # color of the dots
-        assay_ax.set_xlabel('DNA (ng/µl)')
+        assay_ax.set_xlabel('DNA (ng)')
         assay_ax.set_ylabel('end RFU')
         # Draw standard curve line
         assay_ax.plot(interp,                     # x-axis
