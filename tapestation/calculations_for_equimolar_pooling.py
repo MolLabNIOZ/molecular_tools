@@ -24,7 +24,7 @@ import math
 
 # Variables to set ============================================================
 #### Where is the compactRegionTable .csv located?
-filepath = "//zeus.nioz.nl/mmb/molecular_ecology/mollab_team/Projects/2024/COS/Evy/Plate_1_feb_2024_compactRegionTable.csv"
+filepath = 'C:/Users/rdebeer/Downloads/50_xc-b-jh_240219_NIOZ373 - 2024-02-19 - 12-08-56-D1000-PLATE1-D1000_compactRegionTable.csv'
 
 #### How much PCR product is available (µL)
 PCR_volume = 15
@@ -209,6 +209,9 @@ data['final_concentration'] = ''
 data['µL_pooled'] = ''
 data['ng_pooled'] = ''
 data['diluted_before_pooling'] = ''
+data[''] = ''
+data['pool_information'] = ''
+data['values'] = ''
 # For every sample calculate the concentration after dilution, 
 # calculations work for both diluted and undiluted samples in one batch
 if (number_of_samples_to_dilute == 0 
@@ -261,7 +264,20 @@ else:
             µL_pooled = 0
         data.at[sample,'final_concentration'] = final_concentration
         data.at[sample,'µL_pooled'] = µL_pooled
-    
+
+# Define a dictionary to map pool information to their corresponding values
+data_mappings = {
+    'total µl pooled': data['µL_pooled'].sum(),  # Calculate the total µL pooled
+    'total ng pooled': data['ng_pooled'].sum(),  # Calculate the total ng pooled
+    'total pb buffer needed (µl)': data['µL_pooled'].sum() * 5,  # Calculate the total pb buffer needed in µl
+    'total ph indicator needed (µl)': (data['µL_pooled'].sum() * 5) / 250  # Calculate the total ph indicator needed in µl
+}
+
+# Loop over the items in the dictionary and assign values to the dataframe
+for i, (info, value) in enumerate(data_mappings.items()):
+    data.at[i, 'pool_information'] = info  # Assign pool information to the 'pool_information' column
+    data.at[i, 'values'] = value  # Assign values to the 'values' column
+
 #### Print the list with volumes to pool. 
 print("\n"
       "Following is a list with volumes you can use for equimolar pooling. Cop"
