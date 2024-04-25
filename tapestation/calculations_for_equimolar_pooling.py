@@ -24,7 +24,7 @@ import math
 
 # Variables to set ============================================================
 #### Where is the compactRegionTable .csv located?
-filepath = "//zeus.nioz.nl/mmb/molecular_ecology/mollab_team/Projects/2024/COS/Evy/Plate_1_feb_2024_compactRegionTable.csv"
+filepath = 'C:/Users/rdebeer/Downloads/50_xc-b-jh_240219_NIOZ373 - 2024-02-19 - 12-08-56-D1000-PLATE1-D1000_compactRegionTable.csv'
 
 #### How much PCR product is available (µL)
 PCR_volume = 15
@@ -37,6 +37,9 @@ total_ng = 800
 #### If necesarry, how many samples would you dilute by hand, before making an
   ## entire new plate?
 max_dilutions_by_hand = 10
+
+# Enter the NIOZ_number of your run into here
+NIOZ_number = 'NIOZ100'
 # =============================================================================
 
 # Data analysis ===============================================================
@@ -102,26 +105,26 @@ for sample in data.index:
 number_of_samples_to_dilute = len(samples_to_dilute)
 # Recommendation to do it by hand or robot, based on max_dilutions_by_hand
 if number_of_samples_to_dilute > max_dilutions_by_hand:
-    print (
-           str(number_of_samples_to_dilute) + 
+    print (str(number_of_samples_to_dilute) + 
            " samples need to be diluted before pooling. "
-           "I suggest you let M-O do this for you. This script provides you wi"
-           "th a list of volumes for water and a list of volumes for samples. "
-           "You can insert these in sample_dilution.py."
-           "\nThis will result in an entire new 96-wells plate containing for "
-           "each sample either the original sample (these will be transferred "
-           "without diluting) or a dilution. This way you can use the entire n"
-           "ew 'dilution' plate for equimolar pooling.")
+           "I suggest you let me do this for you. I have been so kind to "
+           "create the two procols you need for this! You can find them in "
+           "the M-O folder and contain your NIOZ number. Good luck!"
+           "\nUntil next time! \nM-O")
+           
 elif number_of_samples_to_dilute == 0:
     print ("No samples need to be diluted. You can use the original PCR produc"
-           "ts for equimolar pooling.")
+           "ts for equimolar pooling. For pooling I have already created a "
+           "protocol.You can find them in "
+           "the M-O folder and contain your NIOZ number. Good luck!"
+           "\nUntil next time! \nM-O ")
 else:
     print (
            str(number_of_samples_to_dilute) + 
            " samples need to be diluted before pooling. "
            "I suggest you do this by hand. " 
            "This script provides you with a list of volumes for water and a li"
-           "st of volumes for samples. Make these dulutions in PCR strips. In "
+           "st of volumes for samples. Make these dilutions in PCR strips. In "
            " the volume list this script provides next, the wells where sample"
            "s that need diluting are located will be skipped and the dilutions"
            " will be added at the end.")
@@ -165,20 +168,32 @@ if number_of_samples_to_dilute > 0:
         # Add values for water and DNA to the dataframe
         data.at[sample,'DNA_volume'] = DNA_volume
         data.at[sample,'water_volume'] = float("%.2f" % water_volume) #2 decimals
-        
+    
     #### Print the water and DNA volume lists for diluting. 
-    if number_of_samples_to_dilute > max_dilutions_by_hand:
-        # M-O will do the dilutions, the lists can be pasted into 
-        # sample_dilution.py.
-        print("\nNext you will see 2 lists. The first list contains all "
-              "volumes of water needed for diluting the samples. The second "
-              "list contains volumes of PCR product that need to be "
-              "transferred to the new 'dilution' plate. Copy these lists and "
-              "paste them into sample_dilution.py"
-              "\n\nWater_volumes:")
-        print(data['water_volume'].tolist())
-        print("\nDNA_volumes:")
-        print(data['DNA_volume'].tolist())
+    if number_of_samples_to_dilute > max_dilutions_by_hand:     
+        # Creates 2 lists for the water_volumes and sample_volumes
+        sample_volumes = (data['DNA_volume'].tolist())
+        water_volumes = (data['water_volume'].tolist())
+
+        # Imports shutil, this is used for creating a copy of the template file
+        import shutil
+        # Locating the template file
+        # The directory for the new file with the name it should get
+        template_file = '//zeus.nioz.nl/mmb/molecular_ecology/data_from_lab_instruments/Opentrons_robots/M-O/generated_protocols/Template files/sample_dilution_template.py'
+        destination_pathway = '//zeus.nioz.nl/mmb/molecular_ecology/data_from_lab_instruments/Opentrons_robots/M-O/generated_protocols/' + NIOZ_number +  '_sample_dilution.py'
+        # Creates the copy of the right templates
+        shutil.copy(template_file, destination_pathway)
+        
+        search_sample = '<Sample_lists>'
+        search_water = '<Water_lists>'
+        # Replace placeholders                
+        with open (destination_pathway, 'r') as file:
+            dilution = file.read()
+            replace_water_sample = dilution.replace(search_sample, str(sample_volumes)).replace(search_water, str(water_volumes)) 
+        # Write modified content back to the file            
+        with open(destination_pathway, 'w') as file:
+            file.write(replace_water_sample) 
+            
     else:
         # These should be diluted by hand, in PCR strips
         print("\n"
@@ -209,6 +224,9 @@ data['final_concentration'] = ''
 data['µL_pooled'] = ''
 data['ng_pooled'] = ''
 data['diluted_before_pooling'] = ''
+data[''] = ''
+data['pool_information'] = ''
+data['values'] = ''
 # For every sample calculate the concentration after dilution, 
 # calculations work for both diluted and undiluted samples in one batch
 if (number_of_samples_to_dilute == 0 
@@ -261,16 +279,43 @@ else:
             µL_pooled = 0
         data.at[sample,'final_concentration'] = final_concentration
         data.at[sample,'µL_pooled'] = µL_pooled
-    
-#### Print the list with volumes to pool. 
-print("\n"
-      "Following is a list with volumes you can use for equimolar pooling. Cop"
-      "y this list and paste it in equimolar_pooling.py \n\nµL to pool:")
-print(data['µL_pooled'].tolist())
+
+# Define a dictionary to map pool information to their corresponding values
+data_mappings = {
+    'total µl pooled': data['µL_pooled'].sum(),  # Calculate the total µL pooled
+    'total ng pooled': data['ng_pooled'].sum(),  # Calculate the total ng pooled
+    'total pb buffer needed (µl)': data['µL_pooled'].sum() * 5,  # Calculate the total pb buffer needed in µl
+    'total ph indicator needed (µl)': (data['µL_pooled'].sum() * 5) / 250  # Calculate the total ph indicator needed in µl
+}
+
+# Loop over the items in the dictionary and assign values to the dataframe
+for i, (info, value) in enumerate(data_mappings.items()):
+    data.at[i, 'pool_information'] = info  # Assign pool information to the 'pool_information' column
+    data.at[i, 'values'] = value  # Assign values to the 'values' column
+
+DNA_volumes = (data['µL_pooled'].tolist())
+
+# Imports shutil, this is used for creating a copy of the template file
+import shutil
+# Locating the template file
+# The directory for the new file with the name it should get
+pooling_template_file = '//zeus.nioz.nl/mmb/molecular_ecology/data_from_lab_instruments/Opentrons_robots/M-O/generated_protocols/Template files/equimolar_pooling_template.py'
+destination_pathway = '//zeus.nioz.nl/mmb/molecular_ecology/data_from_lab_instruments/Opentrons_robots/M-O/generated_protocols/' + NIOZ_number +  '_equimolar_pooling.py'
+# Creates the copy of the right templates
+shutil.copy(pooling_template_file, destination_pathway)
+
+search_DNA = '<DNA_list>'
+
+# Replace placeholders                
+with open (destination_pathway, 'r') as file:
+    pooling = file.read()
+    replace_DNA = pooling.replace(search_DNA, str(DNA_volumes))
+# Write modified content back to the file            
+with open(destination_pathway, 'w') as file:
+    file.write(replace_DNA) 
 
 #### Save the calculations in a new csv file
 filepath = '/'.join(filepath.split('/')[:-1]) + '/'
 data.to_csv(filepath + 'equimolar_pooling_results.csv', index=False)
-
 
     
