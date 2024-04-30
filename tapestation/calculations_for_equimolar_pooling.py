@@ -9,13 +9,13 @@ the total amount of DNA (ng) you want in your final pool.
 
 Output can either be the recommendation to dilute the samples first, or to
 directly pool the undiluted PCR products.
-Furthermore, output will be a list with volumes to pool and if necesarry
-the volumes of water/DNA needed to dilute the samples.
+Furthermore, output will be opentrons protocols for diluting and/or equimolar
+pooling
 """
 
 # Variables to set ============================================================
 #### Where is the compactRegionTable .csv located?
-filepath = '//zeus.nioz.nl/mmb/molecular_ecology/data_from_lab_instruments/Opentrons_robots/M-O/generated_protocols/test_compactRegionTable.csv'
+filepath = '//zeus.nioz.nl/mmb/molecular_ecology/data_from_lab_instruments/Opentrons_robots/M-O/generated_protocols/test_NIOZ123_compactRegionTable.csv'
 
 #### How much PCR product is available (µL)
 PCR_volume = 15
