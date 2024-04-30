@@ -13,20 +13,9 @@ Furthermore, output will be a list with volumes to pool and if necesarry
 the volumes of water/DNA needed to dilute the samples.
 """
 
-# Import needed packages=======================================================
-# For working with dataframes we need pandas
-import pandas as pd
-# To be able to exit the script when the samples are not sufficient we need sys
-from sys import exit
-# To do some math stuff such ass rounding up etc we need math
-import math
-# Imports shutil, this is used for creating a copy of the template file
-import shutil
-# =============================================================================
-
 # Variables to set ============================================================
 #### Where is the compactRegionTable .csv located?
-filepath = 'C:/Users/rdebeer/Downloads/50_xc-b-jh_240219_NIOZ373 - 2024-02-19 - 12-08-56-D1000-PLATE1-D1000_compactRegionTable.csv'
+filepath = '//zeus.nioz.nl/mmb/molecular_ecology/data_from_lab_instruments/Opentrons_robots/M-O/generated_protocols/test_compactRegionTable.csv'
 
 #### How much PCR product is available (µL)
 PCR_volume = 15
@@ -39,12 +28,26 @@ total_ng = 800
 #### If necesarry, how many samples would you dilute by hand, before making an
   ## entire new plate?
 max_dilutions_by_hand = 10
+# =============================================================================
 
-# Enter the NIOZ_number of your run into here
-NIOZ_number = 'NIOZ100'
+# Import needed packages=======================================================
+# For working with dataframes we need pandas
+import pandas as pd
+# To be able to exit the script when the samples are not sufficient we need sys
+from sys import exit
+# To do some math stuff such ass rounding up etc we need math
+import math
+# Imports shutil, this is used for creating a copy of the template file
+import shutil
 # =============================================================================
 
 # Data analysis ===============================================================
+# Get the NIOZ number from the filename
+if 'NIOZ' in filepath:
+    NIOZ_number = 'NIOZ' + filepath.split('NIOZ',1)[1][:3]
+else:
+    raise Exception("Make sure your NIOZnumber is in the data filename")
+
 #### Read the compactRegionTable .csv and put into a dataframe
 data = pd.read_csv(filepath, encoding='unicode-escape')
 
