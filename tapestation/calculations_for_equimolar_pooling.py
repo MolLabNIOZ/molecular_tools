@@ -9,22 +9,13 @@ the total amount of DNA (ng) you want in your final pool.
 
 Output can either be the recommendation to dilute the samples first, or to
 directly pool the undiluted PCR products.
-Furthermore, output will be a list with volumes to pool and if necesarry
-the volumes of water/DNA needed to dilute the samples.
+Furthermore, output will be opentrons protocols for diluting and/or equimolar
+pooling
 """
-
-# Import needed packages=======================================================
-# For working with dataframes we need pandas
-import pandas as pd
-# To be able to exit the script when the samples are not sufficient we need sys
-from sys import exit
-# To do some math stuff such ass rounding up etc we need math
-import math
-# =============================================================================
 
 # Variables to set ============================================================
 #### Where is the compactRegionTable .csv located?
-filepath = 'C:/Users/rdebeer/Downloads/50_xc-b-jh_240219_NIOZ373 - 2024-02-19 - 12-08-56-D1000-PLATE1-D1000_compactRegionTable.csv'
+filepath = '//zeus.nioz.nl/mmb/molecular_ecology/data_from_lab_instruments/Opentrons_robots/M-O/generated_protocols/test_NIOZ123_compactRegionTable.csv'
 
 #### How much PCR product is available (µL)
 PCR_volume = 15
@@ -37,12 +28,26 @@ total_ng = 800
 #### If necesarry, how many samples would you dilute by hand, before making an
   ## entire new plate?
 max_dilutions_by_hand = 10
+# =============================================================================
 
-# Enter the NIOZ_number of your run into here
-NIOZ_number = 'NIOZ100'
+# Import needed packages=======================================================
+# For working with dataframes we need pandas
+import pandas as pd
+# To be able to exit the script when the samples are not sufficient we need sys
+from sys import exit
+# To do some math stuff such ass rounding up etc we need math
+import math
+# Imports shutil, this is used for creating a copy of the template file
+import shutil
 # =============================================================================
 
 # Data analysis ===============================================================
+# Get the NIOZ number from the filename
+if 'NIOZ' in filepath:
+    NIOZ_number = 'NIOZ' + filepath.split('NIOZ',1)[1][:3]
+else:
+    raise Exception("Make sure your NIOZnumber is in the data filename")
+
 #### Read the compactRegionTable .csv and put into a dataframe
 data = pd.read_csv(filepath, encoding='unicode-escape')
 
@@ -175,18 +180,16 @@ if number_of_samples_to_dilute > 0:
         sample_volumes = (data['DNA_volume'].tolist())
         water_volumes = (data['water_volume'].tolist())
 
-        # Imports shutil, this is used for creating a copy of the template file
-        import shutil
+        #### Make opentrons protocol for diluting
         # Locating the template file
         # The directory for the new file with the name it should get
         template_file = '//zeus.nioz.nl/mmb/molecular_ecology/data_from_lab_instruments/Opentrons_robots/M-O/generated_protocols/Template files/sample_dilution_template.py'
         destination_pathway = '//zeus.nioz.nl/mmb/molecular_ecology/data_from_lab_instruments/Opentrons_robots/M-O/generated_protocols/' + NIOZ_number +  '_sample_dilution.py'
         # Creates the copy of the right templates
         shutil.copy(template_file, destination_pathway)
-        
-        search_sample = '<Sample_lists>'
-        search_water = '<Water_lists>'
-        # Replace placeholders                
+        # Replace placeholders with lists of volumes
+        search_sample = '<Sample_volumes>'
+        search_water = '<Water_volumes>'
         with open (destination_pathway, 'r') as file:
             dilution = file.read()
             replace_water_sample = dilution.replace(search_sample, str(sample_volumes)).replace(search_water, str(water_volumes)) 
@@ -286,7 +289,7 @@ data_mappings = {
     'total ng pooled': data['ng_pooled'].sum(),  # Calculate the total ng pooled
     'total pb buffer needed (µl)': data['µL_pooled'].sum() * 5,  # Calculate the total pb buffer needed in µl
     'total ph indicator needed (µl)': (data['µL_pooled'].sum() * 5) / 250  # Calculate the total ph indicator needed in µl
-}
+    }
 
 # Loop over the items in the dictionary and assign values to the dataframe
 for i, (info, value) in enumerate(data_mappings.items()):
@@ -295,8 +298,7 @@ for i, (info, value) in enumerate(data_mappings.items()):
 
 DNA_volumes = (data['µL_pooled'].tolist())
 
-# Imports shutil, this is used for creating a copy of the template file
-import shutil
+#### Make opentrons protocols for pooling
 # Locating the template file
 # The directory for the new file with the name it should get
 pooling_template_file = '//zeus.nioz.nl/mmb/molecular_ecology/data_from_lab_instruments/Opentrons_robots/M-O/generated_protocols/Template files/equimolar_pooling_template.py'
@@ -304,7 +306,7 @@ destination_pathway = '//zeus.nioz.nl/mmb/molecular_ecology/data_from_lab_instru
 # Creates the copy of the right templates
 shutil.copy(pooling_template_file, destination_pathway)
 
-search_DNA = '<DNA_list>'
+search_DNA = '<DNA_volumes>'
 
 # Replace placeholders                
 with open (destination_pathway, 'r') as file:
