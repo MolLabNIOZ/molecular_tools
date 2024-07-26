@@ -183,7 +183,7 @@ if number_of_samples_to_dilute > 0:
         #### Make opentrons protocol for diluting
         # Locating the template file
         # The directory for the new file with the name it should get
-        template_file = 'C:/Users/rdebeer/OneDrive - NIOZ/Documents/GitHub/OT2/mollab_protocols/parameter_protocols/Sample_dilution_protocol_template.py'
+        template_file = 'OT2/mollab_protocols/parameter_protocols/Sample_dilution_protocol_template.py'
         destination_pathway = '//zeus.nioz.nl/mmb/molecular_ecology/data_from_lab_instruments/Opentrons_robots/Protocol_database/M-O/Generated_protocols/' + NIOZ_number +  '_sample_dilution.py'
         # Creates the copy of the right templates
         shutil.copy(template_file, destination_pathway)
@@ -301,7 +301,7 @@ DNA_volumes = (data['µL_pooled'].tolist())
 #### Make opentrons protocols for pooling
 # Locating the template file
 # The directory for the new file with the name it should get
-pooling_template_file = 'C:/Users/rdebeer/OneDrive - NIOZ/Documents/GitHub/OT2/mollab_protocols/parameter_protocols/Equimolar_pooling_protocol_template.py'
+pooling_template_file = 'OT2/mollab_protocols/parameter_protocols/Equimolar_pooling_protocol_template.py'
 destination_pathway = '//zeus.nioz.nl/mmb/molecular_ecology/data_from_lab_instruments/Opentrons_robots/Protocol_database/M-O/Generated_protocols/' + NIOZ_number +  '_equimolar_pooling.py'
 # Creates the copy of the right templates
 shutil.copy(pooling_template_file, destination_pathway)
