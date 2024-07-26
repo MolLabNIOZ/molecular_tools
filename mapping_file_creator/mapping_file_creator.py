@@ -168,3 +168,6 @@ mf = mf.loc[:,:'Description']
 ## Save mapping_file
 # Save file as RUNID_mapping_file.txt, tab delimited and without the index
 mf.to_csv(folder_path + NIOZnumber + "_mapping_file.txt", sep="\t", index=False)
+
+# Saves the ProjectInfo sheet as a .txt file at the same location as the mapping file
+ReadMe.to_csv(folder_path + NIOZnumber + "_README!.txt", sep="\t", index=False)
