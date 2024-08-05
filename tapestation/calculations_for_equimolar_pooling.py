@@ -263,7 +263,7 @@ if (number_of_samples_to_dilute == 0
         data.at[sample,'diluted_before_pooling'] = diluted
         
         # Add info whether a sample has sufficient DNA to reach the asked ng
-        if ng_pooled == ng_per_sample:
+        if math.ceil(ng_pooled) >= ng_per_sample:
             equimolar = True
         else:
             equimolar = False
