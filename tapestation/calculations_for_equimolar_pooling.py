@@ -326,6 +326,6 @@ with open(destination_pathway, 'w') as file:
 
 #### Save the calculations in a new csv file
 filepath = '/'.join(filepath.split('/')[:-1]) + '/'
-data.to_csv(filepath + 'equimolar_pooling_results.csv', index = False, encoding = 'ansi')
+data.to_csv(f'{filepath}_{NIOZ_number}_equimolar_pooling_results.csv', index = False, encoding = 'ansi')
 
     
