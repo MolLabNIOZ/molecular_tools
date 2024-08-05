@@ -15,13 +15,13 @@ pooling
 
 # Variables to set ============================================================
 #### Where is the compactRegionTable .csv located?
-filepath = '//lab-mmb.nioz.nl/temp/Annika/NIOZ392_2024-07-12 - 14-20-08Annika Ghana all samples-D1000_compactRegionTable.csv'
+filepath = '//zeus.nioz.nl/mmb/molecular_ecology/mollab_team/Projects/2024/MMB/Chloe/combined_NIOZ396.csv'
 
 #### How much PCR product is available (µL)
 PCR_volume = 45
 
 #### How much DNA do you want to send for sequencing? (ng)
-total_ng = 2000
+total_ng = 800
     # The script multiplies this by 2, to take into account you will loose DNA
     # during clean-up
 
@@ -49,7 +49,7 @@ else:
     raise Exception("Make sure your NIOZnumber is in the data filename")
 
 #### Read the compactRegionTable .csv and put into a dataframe
-data = pd.read_csv(filepath, encoding='unicode-escape')
+data = pd.read_csv(filepath, encoding = 'unicode-escape')
 
 #### Get a list with all concentrations
 concentrations = data['Conc. [ng/µl]'].tolist()
@@ -227,6 +227,7 @@ data['final_concentration'] = ''
 data['µL_pooled'] = ''
 data['ng_pooled'] = ''
 data['diluted_before_pooling'] = ''
+data['ng_equimolar'] = ''
 data[''] = ''
 data['pool_information'] = ''
 data['values'] = ''
@@ -260,7 +261,14 @@ if (number_of_samples_to_dilute == 0
         else:
             diluted = False
         data.at[sample,'diluted_before_pooling'] = diluted
-
+        
+        # Add info whether a sample has sufficient DNA to reach the asked ng
+        if ng_pooled == ng_per_sample:
+            equimolar = True
+        else:
+            equimolar = False
+        data.at[sample,'ng_equimolar'] = equimolar
+        
 # If you did some dilutions by hand, the originals will be skipped and you'll 
 # get some separate volumes to pool by hand.
 else:
@@ -318,6 +326,6 @@ with open(destination_pathway, 'w') as file:
 
 #### Save the calculations in a new csv file
 filepath = '/'.join(filepath.split('/')[:-1]) + '/'
-data.to_csv(filepath + 'equimolar_pooling_results.csv', index=False)
+data.to_csv(filepath + 'equimolar_pooling_results.csv', index = False, encoding = 'ansi')
 
     
