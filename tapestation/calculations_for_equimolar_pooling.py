@@ -15,13 +15,13 @@ pooling
 
 # Variables to set ============================================================
 #### Where is the compactRegionTable .csv located?
-filepath = '//zeus.nioz.nl/mmb/molecular_ecology/mollab_team/Projects/2024/MMB/Chloe/combined_NIOZ396.csv'
+filepath = '//zeus.nioz.nl/mmb/molecular_ecology/mollab_team/Projects/2024/COS/ActNOW/NIOZ393_PCR2_ACTNOW-D1000_compactRegionTable.csv'
 
 #### How much PCR product is available (µL)
-PCR_volume = 45
+PCR_volume = 65
 
 #### How much DNA do you want to send for sequencing? (ng)
-total_ng = 800
+total_ng = 500
     # The script multiplies this by 2, to take into account you will loose DNA
     # during clean-up
 
@@ -39,6 +39,8 @@ from sys import exit
 import math
 # Imports shutil, this is used for creating a copy of the template file
 import shutil
+
+import os
 # =============================================================================
 
 # Data analysis ===============================================================
@@ -50,6 +52,9 @@ else:
 
 #### Read the compactRegionTable .csv and put into a dataframe
 data = pd.read_csv(filepath, encoding = 'unicode-escape')
+
+#### Defines new map on ZEUS
+new_folder = '//zeus.nioz.nl/mmb/molecular_ecology/data_from_lab_instruments/Opentrons_robots/Protocol_database/M-O/Generated_protocols/' + NIOZ_number
 
 #### Get a list with all concentrations
 concentrations = data['Conc. [ng/µl]'].tolist()
@@ -184,7 +189,9 @@ if number_of_samples_to_dilute > 0:
         # Locating the template file
         # The directory for the new file with the name it should get
         template_file = 'OT2/mollab_protocols/parameter_protocols/Sample_dilution_protocol_template.py'
-        destination_pathway = '//zeus.nioz.nl/mmb/molecular_ecology/data_from_lab_instruments/Opentrons_robots/Protocol_database/M-O/Generated_protocols/' + NIOZ_number +  '_sample_dilution.py'
+        if not os.path.exists(new_folder):
+            os.mkdir(new_folder)
+        destination_pathway =  new_folder + '/' + NIOZ_number +  '_sample_dilution.py'
         # Creates the copy of the right templates
         shutil.copy(template_file, destination_pathway)
         # Replace placeholders with lists of volumes
@@ -310,7 +317,7 @@ DNA_volumes = (data['µL_pooled'].tolist())
 # Locating the template file
 # The directory for the new file with the name it should get
 pooling_template_file = 'OT2/mollab_protocols/parameter_protocols/Equimolar_pooling_protocol_template.py'
-destination_pathway = '//zeus.nioz.nl/mmb/molecular_ecology/data_from_lab_instruments/Opentrons_robots/Protocol_database/M-O/Generated_protocols/' + NIOZ_number +  '_equimolar_pooling.py'
+destination_pathway = new_folder + '/' + NIOZ_number + '_equimolar_pooling.py'
 # Creates the copy of the right templates
 shutil.copy(pooling_template_file, destination_pathway)
 
@@ -326,6 +333,6 @@ with open(destination_pathway, 'w') as file:
 
 #### Save the calculations in a new csv file
 filepath = '/'.join(filepath.split('/')[:-1]) + '/'
-data.to_csv(f'{filepath}_{NIOZ_number}_equimolar_pooling_results.csv', index = False, encoding = 'ansi')
+data.to_csv(f'{filepath}{NIOZ_number}_equimolar_pooling_results.csv', index = False, encoding = 'ansi')
 
     
