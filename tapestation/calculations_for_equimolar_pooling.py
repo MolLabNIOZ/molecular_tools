@@ -15,19 +15,19 @@ pooling
 
 # Variables to set ============================================================
 #### Where is the compactRegionTable .csv located?
-filepath = '//zeus.nioz.nl/mmb/molecular_ecology/mollab_team/Projects/2024/COS/ActNOW/NIOZ393_PCR2_ACTNOW-D1000_compactRegionTable.csv'
+filepath = 'C:/Users/rdebeer/Downloads/tests/Quantification_NIOZ100_processed_data-D1000_compactRegionTable.csv'
 
 #### How much PCR product is available (µL)
-PCR_volume = 65
+PCR_volume = 45
 
 #### How much DNA do you want to send for sequencing? (ng)
-total_ng = 500
+total_ng = 1250
     # The script multiplies this by 2, to take into account you will loose DNA
     # during clean-up
 
 #### If necesarry, how many samples would you dilute by hand, before making an
   ## entire new plate?
-max_dilutions_by_hand = 0
+max_dilutions_by_hand = 10
 # =============================================================================
 
 # Import needed packages=======================================================
@@ -54,7 +54,7 @@ else:
 data = pd.read_csv(filepath, encoding = 'unicode-escape')
 
 #### Defines new map on ZEUS
-new_folder = '//zeus.nioz.nl/mmb/molecular_ecology/data_from_lab_instruments/Opentrons_robots/Protocol_database/M-O/Generated_protocols/' + NIOZ_number
+new_folder = '//lab-mmb.nioz.nl/logs/MolLab_robots/Protocol_database/MO/Generated_protocols/' + NIOZ_number
 
 #### Get a list with all concentrations
 concentrations = data['Conc. [ng/µl]'].tolist()
@@ -197,9 +197,10 @@ if number_of_samples_to_dilute > 0:
         # Replace placeholders with lists of volumes
         search_sample = '<Sample_volumes>'
         search_water = '<Water_volumes>'
+        search_NIOZ_number = '<NIOZ_NUMBER>'
         with open (destination_pathway, 'r') as file:
             dilution = file.read()
-            replace_water_sample = dilution.replace(search_sample, str(sample_volumes)).replace(search_water, str(water_volumes)) 
+            replace_water_sample = dilution.replace(search_sample, str(sample_volumes)).replace(search_water, str(water_volumes)).replace(search_NIOZ_number, NIOZ_number) 
         # Write modified content back to the file            
         with open(destination_pathway, 'w') as file:
             file.write(replace_water_sample) 
@@ -322,11 +323,12 @@ destination_pathway = new_folder + '/' + NIOZ_number + '_equimolar_pooling.py'
 shutil.copy(pooling_template_file, destination_pathway)
 
 search_DNA = '<DNA_volumes>'
+search_NIOZ_number = '<NIOZ_NUMBER>'
 
 # Replace placeholders                
 with open (destination_pathway, 'r') as file:
     pooling = file.read()
-    replace_DNA = pooling.replace(search_DNA, str(DNA_volumes))
+    replace_DNA = pooling.replace(search_DNA, str(DNA_volumes)).replace(search_NIOZ_number, NIOZ_number) 
 # Write modified content back to the file            
 with open(destination_pathway, 'w') as file:
     file.write(replace_DNA) 
