@@ -34,7 +34,7 @@ edit:
 import pandas as pd       # to be able to work with dataframes
 from Bio.Seq import Seq   # to be able to do compl_rev
 # !!! Set variables for your mappingfile
-file_name = 'NIOZ368_Suzanne_template.xlsx'
+file_name = 'template_NIOZ396_ChloeWayman.xlsx'
 # !!! file_path to folder of mapping_file template (.xlsx or .csv)
 folder_path = "//zeus/mmb/molecular_ecology/mollab_team/Sequencing/ngs_sequencing/Mapping_files/"
 # Change from windows path to unix path
@@ -171,3 +171,5 @@ mf.to_csv(folder_path + NIOZnumber + "_mapping_file.txt", sep="\t", index=False)
 
 # Saves the ProjectInfo sheet as a .txt file at the same location as the mapping file
 ReadMe.to_csv(folder_path + NIOZnumber + "_README!.txt", sep="\t", index=False)
+
+print(f"Your mappingfile can be found here: \n{folder_path}")
