@@ -15,15 +15,13 @@ pooling
 
 # Variables to set ============================================================
 #### Where is the compactRegionTable .csv located?
-filepath = 'C:/Users/rdebeer/Downloads/tests/Quantification_NIOZ100_processed_data-D1000_compactRegionTable.csv'
+filepath = 'T:/Roos/Comparison_final_NIOZ398-cD1000_compactRegionTable.csv'
 
 #### How much PCR product is available (µL)
-PCR_volume = 45
+PCR_volume = 25
 
 #### How much DNA do you want to send for sequencing? (ng)
-total_ng = 1250
-    # The script multiplies this by 2, to take into account you will loose DNA
-    # during clean-up
+total_ng = 12000
 
 #### If necesarry, how many samples would you dilute by hand, before making an
   ## entire new plate?
@@ -70,7 +68,7 @@ def remove_insufficient_samples():
     for concentration in concentrations:
         number_of_samples = len(concentrations)
         # Calculate for each sample whether there is a sufficient amount of DNA
-        if concentration * PCR_volume < (total_ng * 2) / number_of_samples:
+        if concentration * PCR_volume < (total_ng) / number_of_samples:
             # If not, remove it from the list
             concentrations.remove(concentration)
         # Because now there is a lower amount of samples the amount of DNA
@@ -85,7 +83,7 @@ def remove_insufficient_samples():
 # Calling the previously written function
 remove_insufficient_samples()
 # Calculate the ng per sample needed
-ng_per_sample = (total_ng * 2) / len(concentrations)
+ng_per_sample = (total_ng) / len(concentrations)
 # Check if a sufficient amount of samples contribute to the pool (>50%)
 if len(concentrations) < original_number_of_samples / 2:
     print("Less than halve of your samples has a sufficient amount of DNA to a"
