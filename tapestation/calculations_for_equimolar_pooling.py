@@ -15,13 +15,13 @@ pooling
 
 # Variables to set ============================================================
 #### Where is the compactRegionTable .csv located?
-filepath = 'T:/Roos/Comparison_final_NIOZ398-cD1000_compactRegionTable.csv'
+filepath = 'T:/Roos/50_xc-b-rm_NIOZ399_quant_final-cD1000_data_compactRegionTable.csv'
 
 #### How much PCR product is available (µL)
 PCR_volume = 25
 
 #### How much DNA do you want to send for sequencing? (ng)
-total_ng = 12000
+total_ng = 10000
 
 #### If necesarry, how many samples would you dilute by hand, before making an
   ## entire new plate?
@@ -186,7 +186,7 @@ if number_of_samples_to_dilute > 0:
         #### Make opentrons protocol for diluting
         # Locating the template file
         # The directory for the new file with the name it should get
-        template_file = 'OT2/mollab_protocols/parameter_protocols/Sample_dilution_protocol_template.py'
+        template_file = 'OT2/Protocol_database/MO/pool_template_protocols/Sample_dilution_protocol_template.py'
         if not os.path.exists(new_folder):
             os.mkdir(new_folder)
         destination_pathway =  new_folder + '/' + NIOZ_number +  '_sample_dilution.py'
@@ -315,7 +315,7 @@ DNA_volumes = (data['µL_pooled'].tolist())
 #### Make opentrons protocols for pooling
 # Locating the template file
 # The directory for the new file with the name it should get
-pooling_template_file = 'OT2/mollab_protocols/parameter_protocols/Equimolar_pooling_protocol_template.py'
+pooling_template_file = 'OT2/Protocol_database/MO/pool_template_protocols/Equimolar_pooling_protocol_template.py'
 destination_pathway = new_folder + '/' + NIOZ_number + '_equimolar_pooling.py'
 # Creates the copy of the right templates
 shutil.copy(pooling_template_file, destination_pathway)
