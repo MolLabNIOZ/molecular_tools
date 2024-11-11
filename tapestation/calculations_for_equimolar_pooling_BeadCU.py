@@ -302,7 +302,8 @@ data_mappings = {
     'total µl pooled': data['µL_pooled'].sum(),  # Calculate the total µL pooled
     'total ng pooled': data['ng_pooled'].sum(),  # Calculate the total ng pooled
     'Beads needed (µl)': data['µL_pooled'].sum(),  # Calculate the beads needed in µl
-    '70% EtOH needed (µL)': (data['µL_pooled'].sum()*2)*3+50 # Calculate the amount of 70% EtOH needed in µl
+    '70% EtOH needed (µL)': (data['µL_pooled'].sum()*2)*3+50, # Calculate the amount of 70% EtOH needed in µl
+    'total µl water for dilution': data['water_volume'].sum() # Calculate the amount of water needed for the dilution
     }
 
 # Loop over the items in the dictionary and assign values to the dataframe
