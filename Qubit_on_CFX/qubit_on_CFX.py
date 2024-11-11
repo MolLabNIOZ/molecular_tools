@@ -23,8 +23,9 @@ from matplotlib import pyplot as plt
 from natsort import index_natsorted 
 
 #### Import file
-file_path = 'C:/Users/mbrouwer/Downloads/53_xc.b.cj_Nora1 -  End Point Results.xlsx'
-data = pd.read_excel(file_path, 'FAM')
+file_path = '//zeus.nioz.nl/mmb/molecular_ecology/mollab_team/Projects/2024/MMB/Pierre/53_xc.b.mn_Jamie_Qubit -  End Point Results.xlsx'
+
+data = pd.read_excel(file_path, 'SYBR')
 
 #### Make 2 empty dataframes
 DNA_concentrations_BR = pd.DataFrame(columns = ["Sample"])
@@ -67,8 +68,8 @@ for i, assay in enumerate(['BR', 'HS']):
         assay_ax.set_title('standardcurve ' + assay, fontsize=16)
         # Plot the dots
         plot = assay_ax.scatter(stdcurve["ng"],   # x-axis
-                          stdcurve["End RFU"], # y-axis
-                          c='lightsteelblue')  # color of the dots
+                          stdcurve["End RFU"],    # y-axis
+                          c='lightsteelblue')     # color of the dots
         assay_ax.set_xlabel('DNA (ng)')
         assay_ax.set_ylabel('end RFU')
         # Draw standard curve line
@@ -111,11 +112,11 @@ DNA_concentrations = pd.merge(
     indicator = 'merge' # new column that tells if both HS and BR are measured
     )
 # Sort samples, naturally (so 1,2,14,21 instead of 1,14,2,21)
-DNA_concentrations.sort_values(
-    by=['Sample'], 
-    inplace=True,
-    key=lambda x: np.argsort(index_natsorted(DNA_concentrations["Sample"]))
-    )
+# DNA_concentrations.sort_values(
+#     by=['Sample'], 
+#     inplace=True,
+#     key=lambda x: np.argsort(index_natsorted(DNA_concentrations["Sample"]))
+#     )
 
 # Final column for concentration, chose if both are measured for BR or HS
 DNA_concentrations['[DNA] ng/µL'] = ''
