@@ -15,13 +15,13 @@ pooling
 
 # Variables to set ============================================================
 #### Where is the compactRegionTable .csv located?
-filepath = 'molecular_tools/tapestation/NIOZ666_test_CRT.csv'
+filepath = 'P:/2025/Laura/Salima/50_xc-b-6n_NIOZ414_quant - 2025-04-03 - 16-06-27-D1000_compactRegionTable.csv'
 
 #### How much PCR product is available (µL)
-PCR_volume = 35
+PCR_volume = 20
 
 #### How much DNA do you want to send for sequencing? (ng)
-total_ng = 3000
+total_ng = 2500
 
 #### If necesarry, how many samples would you dilute by hand, before making an
   ## entire new plate?
@@ -257,23 +257,6 @@ if (number_of_samples_to_dilute == 0
             µL_pooled = PCR_volume
         data.at[sample,'µL_pooled'] = µL_pooled
         
-        # Add total ng per sample pooled to the df
-        ng_pooled = final_concentration * µL_pooled
-        data.at[sample,'ng_pooled'] = ng_pooled        
-        
-        # Add info whether a sample has been diluted to the df
-        if water_volume > 0:
-            diluted = True
-        else:
-            diluted = False
-        data.at[sample,'diluted_before_pooling'] = diluted
-        
-        # Add info whether a sample has sufficient DNA to reach the asked ng
-        if math.ceil(ng_pooled) >= ng_per_sample:
-            equimolar = True
-        else:
-            equimolar = False
-        data.at[sample,'ng_equimolar'] = equimolar
         
 # If you did some dilutions by hand, the originals will be skipped and you'll 
 # get some separate volumes to pool by hand.
@@ -289,13 +272,28 @@ else:
         if µL_pooled > PCR_volume:
             µL_pooled = PCR_volume
             dilution_ratio = data['dilution_ratio'][sample]
-        if (isinstance(dilution_ratio, int) 
-            or 
-            isinstance(dilution_ratio, float)):
-            
-            µL_pooled = 0
         data.at[sample,'final_concentration'] = final_concentration
         data.at[sample,'µL_pooled'] = µL_pooled
+
+for sample in data.index:
+       
+    # Add total ng per sample pooled to the df
+    ng_pooled = data['final_concentration'][sample] * data['µL_pooled'][sample]
+    data.at[sample,'ng_pooled'] = ng_pooled        
+    
+    # Add info whether a sample has been diluted to the df
+    if data['water_volume'][sample] > 0:
+        diluted = True
+    else:
+        diluted = False
+    data.at[sample,'diluted_before_pooling'] = diluted
+    
+    # Add info whether a sample has sufficient DNA to reach the asked ng
+    if math.ceil(ng_pooled) >= ng_per_sample:
+        equimolar = True
+    else:
+        equimolar = False
+    data.at[sample,'ng_equimolar'] = equimolar
 
 # Define a dictionary to map pool information to their corresponding values
 data_mappings = {
