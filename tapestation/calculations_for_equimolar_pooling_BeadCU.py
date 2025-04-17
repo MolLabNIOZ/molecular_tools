@@ -15,17 +15,17 @@ pooling
 
 # Variables to set ============================================================
 #### Where is the compactRegionTable .csv located?
-filepath = 'P:/2025/Laura/Salima/50_xc-b-6n_NIOZ414_quant - 2025-04-03 - 16-06-27-D1000_compactRegionTable.csv'
+filepath = '//zeus.nioz.nl/mmb/molecular_ecology/mollab_team/Projects/2025/COS/Evy/50_xc-b-7n_NIOZ415_redo_Quant - 2025-04-08 - 16-04-06-D1000_compactRegionTable.csv'
 
 #### How much PCR product is available (µL)
-PCR_volume = 20
+PCR_volume = 24
 
 #### How much DNA do you want to send for sequencing? (ng)
-total_ng = 2500
+total_ng = 50
 
 #### If necesarry, how many samples would you dilute by hand, before making an
   ## entire new plate?
-max_dilutions_by_hand = 10
+max_dilutions_by_hand = 2
 # =============================================================================
 
 # Import needed packages=======================================================
@@ -83,7 +83,14 @@ def remove_insufficient_samples():
 # Calling the previously written function
 remove_insufficient_samples()
 # Calculate the ng per sample needed
-ng_per_sample = (total_ng) / len(concentrations)
+try:
+    ng_per_sample = (total_ng) / len(concentrations)
+except:
+    print("Less than halve of your samples has a sufficient amount of DNA to a"
+          "dd to the pool. I suggest you either choose a lower [total_ng], add"
+          " some samples to your sequencing lane, or re-PCR your samples to ge"
+          "t a larger volume.")
+    exit()
 # Check if a sufficient amount of samples contribute to the pool (>50%)
 if len(concentrations) < original_number_of_samples / 2:
     print("Less than halve of your samples has a sufficient amount of DNA to a"
