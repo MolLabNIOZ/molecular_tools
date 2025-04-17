@@ -351,7 +351,7 @@ for dataframe_name, dataframe in final_data_dict.items():
 #### Make opentrons protocols for pooling
 # Locating the template file
 # The directory for the new file with the name it should get
-pooling_template_file = 'OT2/Protocol_database/MO/pool_template_protocols/Equimolar_pooling_protocol_template.py'
+pooling_template_file = 'OT2/Protocol_database/MO/pool_template_protocols/Equimolar_pooling_with_multiple_plates.py'
 destination_pathway = new_folder + '/' + NIOZ_number + '_equimolar_pooling.py'
 # Creates the copy of the right templates
 shutil.copy(pooling_template_file, destination_pathway)
