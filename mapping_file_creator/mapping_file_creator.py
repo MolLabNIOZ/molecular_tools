@@ -34,7 +34,7 @@ edit:
 import pandas as pd       # to be able to work with dataframes
 from Bio.Seq import Seq   # to be able to do compl_rev
 # !!! Set variables for your mappingfile
-file_name = 'template_NIOZ396_ChloeWayman.xlsx'
+file_name = 'NIOZ409_Marie_template.xlsx'
 # !!! file_path to folder of mapping_file template (.xlsx or .csv)
 folder_path = "//zeus/mmb/molecular_ecology/mollab_team/Sequencing/ngs_sequencing/Mapping_files/"
 # Change from windows path to unix path
@@ -53,7 +53,7 @@ if file_path.endswith('.xlsx') or file_path.endswith('.xlsm'):
     except:
         ReadMe = sample_file.parse('ReadMe')
     NIOZnumber = (
-        ReadMe.loc[ReadMe['Project_info'] == 'NIOZ_Number', 'example'].iloc[0])
+        ReadMe.loc[ReadMe['Project_info'] == 'NIOZ_Number', 'Fill_In'].iloc[0])
 if file_path.endswith('.csv'):
     NIOZnumber = 'NIOZ???' #!!! fill in yourself
 
