@@ -15,22 +15,34 @@ pooling
 
 # Variables to set ============================================================
 #### Where is the compactRegionTable .csv located?
-filepath = '//zeus.nioz.nl/mmb/molecular_ecology/mollab_team/Projects/2025/COS/Evy/50_xc-b-7n_NIOZ415_redo_Quant - 2025-04-08 - 16-04-06-D1000_compactRegionTable.csv'
+filepath = '//zeus.nioz.nl/mmb/molecular_ecology/mollab_team/Projects/2025/MMB/Helge/Gaia/corrected_Quantification_NIOZ418 - 2025-07-01 - 13-22-28 - Copy-D1000_compactRegionTable.csv'
 
 #### How much PCR product is available (µL)
-PCR_volume = 24
+PCR_volume = 40
 
-#### How much DNA do you want to send for sequencing? (ng)
-total_ng = 50
+#### Do you want to pool a total or per sample amount? (ng)
+total_amount = False
+if total_amount:
+    total_ng = 4000
+else:
+    ng_per_sample = 40
+
+#### What bead ratio do you want? (DNA : beads ==> 1 : #.#)
+bead_ratio = 0.8
+
+#### How do you want to treat Negative Controls?
+
+
 
 #### If necesarry, how many samples would you dilute by hand, before making an
   ## entire new plate?
-max_dilutions_by_hand = 2
+max_dilutions_by_hand = 10
 # =============================================================================
 
 # Import needed packages=======================================================
 # For working with dataframes we need pandas
 import pandas as pd
+from collections import Counter
 # To be able to exit the script when the samples are not sufficient we need sys
 from sys import exit
 # To do some math stuff such ass rounding up etc we need math
@@ -80,24 +92,70 @@ def remove_insufficient_samples():
         # and the loop stops
         else:
             pass
-# Calling the previously written function
-remove_insufficient_samples()
-# Calculate the ng per sample needed
-try:
-    ng_per_sample = (total_ng) / len(concentrations)
-except:
-    print("Less than halve of your samples has a sufficient amount of DNA to a"
-          "dd to the pool. I suggest you either choose a lower [total_ng], add"
-          " some samples to your sequencing lane, or re-PCR your samples to ge"
-          "t a larger volume.")
-    exit()
-# Check if a sufficient amount of samples contribute to the pool (>50%)
-if len(concentrations) < original_number_of_samples / 2:
-    print("Less than halve of your samples has a sufficient amount of DNA to a"
-          "dd to the pool. I suggest you either choose a lower [total_ng], add"
-          " some samples to your sequencing lane, or re-PCR your samples to ge"
-          "t a larger volume.")
-    exit()
+if total_amount:
+    # Calling the previously written function
+    remove_insufficient_samples()
+    # Calculate the ng per sample needed
+    try:
+        ng_per_sample = (total_ng) / len(concentrations)
+    except:
+        print("Less than halve of your samples has a sufficient amount of DNA to a"
+              "dd to the pool. I suggest you either choose a lower [total_ng], add"
+              " some samples to your sequencing lane, or re-PCR your samples to ge"
+              "t a larger volume.")
+        exit()
+    # Check if a sufficient amount of samples contribute to the pool (>50%)
+    if len(concentrations) < original_number_of_samples / 2:
+        print("Less than halve of your samples has a sufficient amount of DNA to a"
+              "dd to the pool. I suggest you either choose a lower [total_ng], add"
+              " some samples to your sequencing lane, or re-PCR your samples to ge"
+              "t a larger volume.")
+        exit()
+
+# Check how many samples have sufficient DNA
+else: # When you chose a specific amount per sample
+    counter = 0
+    for concentration in concentrations:
+        if concentration * PCR_volume >= ng_per_sample:
+            counter += 1
+    if counter < original_number_of_samples / 2:
+        print("Less than halve of your samples has a sufficient amount of DNA to a"
+              "dd to the pool. I suggest you either choose a lower [total_ng], add"
+              " some samples to your sequencing lane, or re-PCR your samples to ge"
+              "t a larger volume.")
+        exit()
+
+#### Check if raw data is correct
+# Check for double wells
+wells = data['WellId'].tolist()
+if not len(set(wells)) == len(wells):    
+    duplicate_wells = list((Counter(wells) - Counter(set(wells))).elements())
+    print("Your data contains duplicate wells. Check the following:")
+    print(f"{duplicate_wells} \n")
+    # exit()
+
+# Check for missing wells
+last_well = wells[-1]
+
+# Make list of expected wells:
+expected_wells = []
+# Make list of all possible wells
+for i in range(12):
+    column =  i + 1
+    for row in ['A','B','C','D','E','F','G','H']:
+        well = row + str(column)
+        expected_wells.append(well)
+# Remove evrything after last well
+
+        
+        
+if len(missing_wells) > 0:
+    print("Your data is missing wells. Check the following:")
+    print(f"{missing_wells} \n")
+    
+  
+                
+    
 
 
 #### Calculate how many samples need diluting
@@ -167,6 +225,7 @@ if number_of_samples_to_dilute > 0:
             while water_volume + DNA_volume > 200:
                 water_volume = water_volume / 2
                 DNA_volume = DNA_volume / 2
+                
                 if DNA_volume < 2.5:
                     print(f"\n!!!\nConcentration of sample " 
                           f"{data['Sample Description'][sample]}, located in "
@@ -306,7 +365,7 @@ for sample in data.index:
 data_mappings = {
     'total µl pooled': data['µL_pooled'].sum(),  # Calculate the total µL pooled
     'total ng pooled': data['ng_pooled'].sum(),  # Calculate the total ng pooled
-    'Beads needed (µl)': data['µL_pooled'].sum(),  # Calculate the beads needed in µl
+    'Beads needed (µl)': data['µL_pooled'].sum() * bead_ratio,  # Calculate the beads needed in µl
     '70% EtOH needed (µL)': (data['µL_pooled'].sum()*2)*3+50, # Calculate the amount of 70% EtOH needed in µl
     'total µl water for dilution': data['water_volume'].sum() # Calculate the amount of water needed for the dilution
     }
@@ -328,11 +387,12 @@ shutil.copy(pooling_template_file, destination_pathway)
 
 search_DNA = '<DNA_volumes>'
 search_NIOZ_number = '<NIOZ_NUMBER>'
+search_bead_ratio = '<bead_ratio>'
 
 # Replace placeholders                
 with open (destination_pathway, 'r') as file:
     pooling = file.read()
-    replace_DNA = pooling.replace(search_DNA, str(DNA_volumes)).replace(search_NIOZ_number, NIOZ_number) 
+    replace_DNA = pooling.replace(search_DNA, str(DNA_volumes)).replace(search_NIOZ_number, NIOZ_number).replace(search_bead_ratio, str(bead_ratio))  
 # Write modified content back to the file            
 with open(destination_pathway, 'w') as file:
     file.write(replace_DNA) 
