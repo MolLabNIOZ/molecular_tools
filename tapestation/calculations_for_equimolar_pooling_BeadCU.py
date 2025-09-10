@@ -15,20 +15,20 @@ pooling
 
 # Variables to set ============================================================
 #### Where is the compactRegionTable .csv located?
-filepath = '//zeus.nioz.nl/mmb/molecular_ecology/mollab_team/Projects/2025/MMB/Helge/Gaia/corrected_Quantification_NIOZ418 - 2025-07-01 - 13-22-28 - Copy-D1000_compactRegionTable.csv'
+filepath = '//zeus.nioz.nl/mmb/molecular_ecology/mollab_team/Projects/2025/MMB/Helge/Annalisa/NIOZ421/NIOZ421_2025-09-01 - 13-29-00-D1000_compactRegionTable.csv'
 
 #### How much PCR product is available (µL)
-PCR_volume = 40
+PCR_volume = 42
 
 #### Do you want to pool a total or per sample amount? (ng)
-total_amount = False
+total_amount = True
 if total_amount:
     total_ng = 4000
 else:
     ng_per_sample = 40
 
 #### What bead ratio do you want? (DNA : beads ==> 1 : #.#)
-bead_ratio = 0.8
+bead_ratio = 1
 
 #### How do you want to treat Negative Controls?
 
@@ -149,9 +149,9 @@ for i in range(12):
 
         
         
-if len(missing_wells) > 0:
-    print("Your data is missing wells. Check the following:")
-    print(f"{missing_wells} \n")
+# if len(missing_wells) > 0:
+#     print("Your data is missing wells. Check the following:")
+#     print(f"{missing_wells} \n")
     
   
                 
@@ -252,7 +252,7 @@ if number_of_samples_to_dilute > 0:
         #### Make opentrons protocol for diluting
         # Locating the template file
         # The directory for the new file with the name it should get
-        template_file = 'OT2/Protocol_database/MO/pool_template_protocols/Sample_dilution_protocol_template.py'
+        template_file = 'OT2/Protocol_database/MO/pool_template_protocols/Sample_dilution_protocol_template_V2.0.py'
         if not os.path.exists(new_folder):
             os.mkdir(new_folder)
         destination_pathway =  new_folder + '/' + NIOZ_number +  '_sample_dilution.py'
@@ -380,7 +380,7 @@ DNA_volumes = (data['µL_pooled'].tolist())
 #### Make opentrons protocols for pooling
 # Locating the template file
 # The directory for the new file with the name it should get
-pooling_template_file = 'OT2/Protocol_database/MO/pool_template_protocols/Equimolar_pooling_BeadCU_protocol_template.py'
+pooling_template_file = 'OT2/Protocol_database/MO/pool_template_protocols/Equimolar_pooling_BeadCU_protocol_template_V2.1.py'
 destination_pathway = new_folder + '/' + NIOZ_number + '_equimolar_pooling.py'
 # Creates the copy of the right templates
 shutil.copy(pooling_template_file, destination_pathway)

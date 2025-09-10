@@ -185,7 +185,7 @@ if number_of_samples_to_dilute > 0:
         #### Make opentrons protocol for diluting
         # Locating the template file
         # The directory for the new file with the name it should get
-        template_file = 'OT2/Protocol_database/MO/pool_template_protocols/Sample_dilution_protocol_template.py'
+        template_file = 'OT2/Protocol_database/MO/pool_template_protocols/Sample_dilution_protocol_template_V2.0.py'
         if not os.path.exists(new_folder):
             os.mkdir(new_folder)
         destination_pathway =  new_folder + '/' + NIOZ_number +  '_sample_dilution.py'
@@ -315,7 +315,7 @@ DNA_volumes = (data['µL_pooled'].tolist())
 #### Make opentrons protocols for pooling
 # Locating the template file
 # The directory for the new file with the name it should get
-pooling_template_file = 'OT2/Protocol_database/MO/pool_template_protocols/Equimolar_pooling_BeadCU_protocol_template.py'
+pooling_template_file = 'OT2/Protocol_database/MO/pool_template_protocols/Equimolar_pooling_BeadCU_protocol_template_V2.1.py'
 destination_pathway = new_folder + '/' + NIOZ_number + '_equimolar_pooling.py'
 # Creates the copy of the right templates
 shutil.copy(pooling_template_file, destination_pathway)
