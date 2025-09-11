@@ -17,6 +17,7 @@ pooling
 #### Where is the compactRegionTable .csv located?
 filepath = '//zeus.nioz.nl/mmb/molecular_ecology/mollab_team/Projects/2025/MMB/Helge/Annalisa/NIOZ421/NIOZ421_2025-09-01 - 13-29-00-D1000_compactRegionTable.csv'
 
+
 #### How much PCR product is available (µL)
 PCR_volume = 42
 
@@ -30,9 +31,16 @@ else:
 #### What bead ratio do you want? (DNA : beads ==> 1 : #.#)
 bead_ratio = 1
 
-#### How do you want to treat Negative Controls?
-
-
+#### How do you want to treat Negative Controls / low samples?
+## "option_1" : Use entire volume of controls/samples that do not have sufficient DNA
+## "option_2" : Use a specified sample as "lowest" sample and take the same volume of all that have less DNA
+## "option_3" : Use a specified maximum volume
+low_sample_treatment = "option_1"
+if low_sample_treatment == "option_2":
+    WellId_lowest = "A3"
+if low_sample_treatment == "option_3":
+    max_sample_volume = 30
+    
 
 #### If necesarry, how many samples would you dilute by hand, before making an
   ## entire new plate?
@@ -120,7 +128,7 @@ else: # When you chose a specific amount per sample
             counter += 1
     if counter < original_number_of_samples / 2:
         print("Less than halve of your samples has a sufficient amount of DNA to a"
-              "dd to the pool. I suggest you either choose a lower [total_ng], add"
+              "dd to the pool. I suggest you either choose a lower [ng_per_sample], add"
               " some samples to your sequencing lane, or re-PCR your samples to ge"
               "t a larger volume.")
         exit()
@@ -132,7 +140,7 @@ if not len(set(wells)) == len(wells):
     duplicate_wells = list((Counter(wells) - Counter(set(wells))).elements())
     print("Your data contains duplicate wells. Check the following:")
     print(f"{duplicate_wells} \n")
-    # exit()
+    exit()
 
 # Check for missing wells
 last_well = wells[-1]
@@ -146,18 +154,17 @@ for i in range(12):
         well = row + str(column)
         expected_wells.append(well)
 # Remove evrything after last well
+expected_wells = expected_wells[:expected_wells.index(last_well)+1]
 
-        
-        
-# if len(missing_wells) > 0:
-#     print("Your data is missing wells. Check the following:")
-#     print(f"{missing_wells} \n")
+
+# Check if all expected wells are in the wells list
+missing_wells = set(expected_wells) - set(wells)        
+if len(missing_wells) > 0:
+    print("Your data is missing wells. Check the following:")
+    print(f"{list(missing_wells)} \n")
+    exit()
+
     
-  
-                
-    
-
-
 #### Calculate how many samples need diluting
 # you want to pool at least 10 µl of each sample, to make it most accurate
 data['dilution_ratio'] = ''
@@ -341,8 +348,16 @@ else:
         data.at[sample,'final_concentration'] = final_concentration
         data.at[sample,'µL_pooled'] = µL_pooled
 
-for sample in data.index:
-       
+# Fix low samples / Negative controls, according to chosen option
+if low_sample_treatment == "option_2":
+    # largest volume to take from any sample
+    largest_volume = float(data.iloc[data.index[data['WellId'] == WellId_lowest]]['µL_pooled'].iloc[0])
+    for sample in data.index:
+        if data['µL_pooled'][sample] > largest_volume:
+            data.at[sample,'µL_pooled'] = largest_volume
+        
+    
+for sample in data.index:   
     # Add total ng per sample pooled to the df
     ng_pooled = data['final_concentration'][sample] * data['µL_pooled'][sample]
     data.at[sample,'ng_pooled'] = ng_pooled        
