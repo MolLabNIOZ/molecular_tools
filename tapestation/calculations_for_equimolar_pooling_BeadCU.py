@@ -20,6 +20,8 @@ filepath = '//zeus.nioz.nl/mmb/molecular_ecology/mollab_team/Projects/2025/MMB/H
 
 #### How much PCR product is available (µL)
 PCR_volume = 42
+#### How much do you want to pipette at least?
+least_volume = 5
 
 #### Do you want to pool a total or per sample amount? (ng)
 total_amount = True
@@ -35,9 +37,9 @@ bead_ratio = 1
 ## "option_1" : Use entire volume of controls/samples that do not have sufficient DNA
 ## "option_2" : Use a specified sample as "lowest" sample and take the same volume of all that have less DNA
 ## "option_3" : Use a specified maximum volume
-low_sample_treatment = "option_1"
+low_sample_treatment = "option_2"
 if low_sample_treatment == "option_2":
-    WellId_lowest = "A3"
+    WellId_lowest = "F1"
 if low_sample_treatment == "option_3":
     max_sample_volume = 30
     
@@ -169,7 +171,7 @@ if len(missing_wells) > 0:
 # you want to pool at least 10 µl of each sample, to make it most accurate
 data['dilution_ratio'] = ''
 samples_to_dilute = []
-preferred_max_concentration = ng_per_sample / 10
+preferred_max_concentration = ng_per_sample / least_volume
 # Based on the preferred_max_concentratio check for each sample, whether they 
 # need to be diluted and add the dilution ratio to the dataframe.
 for sample in data.index:
@@ -221,9 +223,9 @@ if number_of_samples_to_dilute > 0:
         # needs to be diluted, how much water is needed for that
         if dilution_ratio:
             dilution_ratio = float(dilution_ratio)
-            # In steps of 10µL, check if it yields sufficient amounts of DNA
-            for i in range(1,math.ceil(PCR_volume/10)):
-                DNA_volume = 10 * i
+            # In steps of least_volume, check if it yields sufficient amounts of DNA
+            for i in range(1,math.ceil(PCR_volume/least_volume)):
+                DNA_volume = least_volume * i
                 if dilution_ratio * DNA_volume > PCR_volume:
                     break
                 else:
@@ -350,11 +352,18 @@ else:
 
 # Fix low samples / Negative controls, according to chosen option
 if low_sample_treatment == "option_2":
+    # If necesarry, volumes to take for diluting
+    largest_DNA_volume = float(data.iloc[data.index[data['WellId'] == WellId_lowest]]['DNA_volume'].iloc[0])
+    lowest_water_volume = float(data.iloc[data.index[data['WellId'] == WellId_lowest]]['water_volume'].iloc[0])
     # largest volume to take from any sample
-    largest_volume = float(data.iloc[data.index[data['WellId'] == WellId_lowest]]['µL_pooled'].iloc[0])
+    largest_pool_volume = float(data.iloc[data.index[data['WellId'] == WellId_lowest]]['µL_pooled'].iloc[0])
     for sample in data.index:
-        if data['µL_pooled'][sample] > largest_volume:
-            data.at[sample,'µL_pooled'] = largest_volume
+        if data['µL_pooled'][sample] > largest_pool_volume:
+            data.at[sample,'dilution_ratio'] = f"based on well {WellId_lowest}"
+            data.at[sample,'DNA_volume'] = largest_DNA_volume
+            data.at[sample,'water_volume'] = lowest_water_volume
+            data.at[sample,'µL_pooled'] = largest_pool_volume
+            
         
     
 for sample in data.index:   
