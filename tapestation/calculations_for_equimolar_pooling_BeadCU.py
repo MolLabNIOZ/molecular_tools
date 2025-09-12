@@ -15,7 +15,7 @@ pooling
 
 # Variables to set ============================================================
 #### Where is the compactRegionTable .csv located?
-filepath = '//zeus.nioz.nl/mmb/molecular_ecology/mollab_team/Projects/2025/MMB/Helge/Annalisa/NIOZ421_2025-09-01 - 13-29-00-D1000_compactRegionTable.csv'
+filepath = '//zeus.nioz.nl/mmb/molecular_ecology/mollab_team/Projects/2025/MMB/Helge/Annalisa/NIOZ424.csv'
 
 
 #### How much PCR product is available? (µL)
@@ -39,7 +39,7 @@ bead_ratio = 1
 ## "option_3" : Use a specified maximum volume
 low_sample_treatment = "option_2"
 if low_sample_treatment == "option_2":
-    WellId_lowest = "F1"
+    WellId_lowest = "B3"
 if low_sample_treatment == "option_3":
     max_sample_volume = 30
     
@@ -367,6 +367,7 @@ if low_sample_treatment == "option_2":
     largest_pool_volume = float(data.iloc[data.index[data['WellId'] == WellId_lowest]]['µL_pooled'].iloc[0])
     for sample in data.index:
         if data['µL_pooled'][sample] > largest_pool_volume:
+            data.at[sample,'dilution_ratio'] = f"based on well {WellId_lowest}"
             data.at[sample,'µL_pooled'] = largest_pool_volume
         
     
