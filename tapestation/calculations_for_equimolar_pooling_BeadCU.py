@@ -15,7 +15,7 @@ pooling
 
 # Variables to set ============================================================
 #### Where is the compactRegionTable .csv located?
-filepath = '//zeus.nioz.nl/mmb/molecular_ecology/mollab_team/Projects/2025/MMB/Helge/Annalisa/NIOZ424.csv'
+filepath = '//zeus.nioz.nl/mmb/molecular_ecology/mollab_team/Projects/2025/MMB/Helge/Annalisa/NIOZ425 - 2025-09-04 - 16-10-16-D1000_compactRegionTable.csv'
 
 
 #### How much PCR product is available? (µL)
@@ -36,12 +36,10 @@ bead_ratio = 1
 #### How do you want to treat Negative Controls / low samples?
 ## "option_1" : Use entire volume of controls/samples that do not have sufficient DNA
 ## "option_2" : Use a specified sample as "lowest" sample and take the same volume of all that have less DNA
-## "option_3" : Use a specified maximum volume
-low_sample_treatment = "option_2"
+low_sample_treatment = "option_1"
 if low_sample_treatment == "option_2":
-    WellId_lowest = "B3"
-if low_sample_treatment == "option_3":
-    max_sample_volume = 30
+    WellId_lowest = "D6"
+
     
 
 #### If necesarry, how many samples would you dilute by hand, before making an
