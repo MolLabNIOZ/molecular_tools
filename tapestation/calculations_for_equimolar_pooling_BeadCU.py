@@ -15,13 +15,13 @@ pooling
 
 # Variables to set ============================================================
 #### Where is the compactRegionTable .csv located?
-filepath = '//zeus.nioz.nl/mmb/molecular_ecology/mollab_team/Projects/2025/MMB/Helge/Annalisa/NIOZ421/NIOZ421_2025-09-01 - 13-29-00-D1000_compactRegionTable.csv'
+filepath = '//zeus.nioz.nl/mmb/molecular_ecology/mollab_team/Projects/2025/MMB/Helge/Annalisa/NIOZ421_2025-09-01 - 13-29-00-D1000_compactRegionTable.csv'
 
 
-#### How much PCR product is available (µL)
+#### How much PCR product is available? (µL)
 PCR_volume = 42
-#### How much do you want to pipette at least?
-least_volume = 5
+#### How much do you want to pipette at least? (µL)
+least_volume = 5 # (standard is 10µL)
 
 #### Do you want to pool a total or per sample amount? (ng)
 total_amount = True
@@ -226,24 +226,24 @@ if number_of_samples_to_dilute > 0:
             # In steps of least_volume, check if it yields sufficient amounts of DNA
             for i in range(1,math.ceil(PCR_volume/least_volume)):
                 DNA_volume = least_volume * i
-                if dilution_ratio * DNA_volume > PCR_volume:
+                if dilution_ratio * DNA_volume > least_volume *3:
                     break
                 else:
                     continue
             water_volume = DNA_volume * dilution_ratio - DNA_volume
+
             while water_volume + DNA_volume > 200:
                 water_volume = water_volume / 2
                 DNA_volume = DNA_volume / 2
                 
-                if DNA_volume < 2.5:
+                if DNA_volume < least_volume:
                     print(f"\n!!!\nConcentration of sample " 
                           f"{data['Sample Description'][sample]}, located in "
                           f"well {data['WellId'][sample]} is too high."
                           f" I suggest you dilute this in the original PCR "
                           f"plate first, adjust the concentration accordingly "
                           f" and run this script again.")
-                    exit()
-                    
+                    exit()               
                           
         else:
             DNA_volume = PCR_volume
@@ -251,6 +251,17 @@ if number_of_samples_to_dilute > 0:
         # Add values for water and DNA to the dataframe
         data.at[sample,'DNA_volume'] = DNA_volume
         data.at[sample,'water_volume'] = float("%.2f" % water_volume) #2 decimals
+        
+    # Fix low samples / Negative controls, according to chosen option
+    if low_sample_treatment == "option_2":
+        # If necesarry, volumes to take for diluting
+        largest_DNA_volume = float(data.iloc[data.index[data['WellId'] == WellId_lowest]]['DNA_volume'].iloc[0])
+        lowest_water_volume = float(data.iloc[data.index[data['WellId'] == WellId_lowest]]['water_volume'].iloc[0])
+        for sample in data.index:
+            if data['DNA_volume'][sample] > largest_DNA_volume:
+                data.at[sample,'dilution_ratio'] = f"based on well {WellId_lowest}"
+                data.at[sample,'DNA_volume'] = largest_DNA_volume
+                data.at[sample,'water_volume'] = lowest_water_volume
     
     #### Print the water and DNA volume lists for diluting. 
     if number_of_samples_to_dilute > max_dilutions_by_hand:     
@@ -352,18 +363,11 @@ else:
 
 # Fix low samples / Negative controls, according to chosen option
 if low_sample_treatment == "option_2":
-    # If necesarry, volumes to take for diluting
-    largest_DNA_volume = float(data.iloc[data.index[data['WellId'] == WellId_lowest]]['DNA_volume'].iloc[0])
-    lowest_water_volume = float(data.iloc[data.index[data['WellId'] == WellId_lowest]]['water_volume'].iloc[0])
     # largest volume to take from any sample
     largest_pool_volume = float(data.iloc[data.index[data['WellId'] == WellId_lowest]]['µL_pooled'].iloc[0])
     for sample in data.index:
         if data['µL_pooled'][sample] > largest_pool_volume:
-            data.at[sample,'dilution_ratio'] = f"based on well {WellId_lowest}"
-            data.at[sample,'DNA_volume'] = largest_DNA_volume
-            data.at[sample,'water_volume'] = lowest_water_volume
             data.at[sample,'µL_pooled'] = largest_pool_volume
-            
         
     
 for sample in data.index:   
