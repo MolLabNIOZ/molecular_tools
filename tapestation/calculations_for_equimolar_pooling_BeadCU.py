@@ -15,18 +15,18 @@ pooling
 
 # Variables to set ============================================================
 #### Where is the compactRegionTable .csv located?
-filepath = '//zeus.nioz.nl/mmb/molecular_ecology/mollab_team/Projects/2025/MMB/Helge/Annalisa/NIOZ425 - 2025-09-04 - 16-10-16-D1000_compactRegionTable.csv'
+filepath = '//zeus.nioz.nl/mmb/molecular_ecology/mollab_team/Projects/2025/EDS/Stef/251016_NIOZ431_quantification-D1000_compactRegionTable_reordered.csv'
 
 
 #### How much PCR product is available? (µL)
-PCR_volume = 42
+PCR_volume = 40
 #### How much do you want to pipette at least? (µL)
 least_volume = 5 # (standard is 10µL)
 
 #### Do you want to pool a total or per sample amount? (ng)
 total_amount = True
 if total_amount:
-    total_ng = 4000
+    total_ng = 1000
 else:
     ng_per_sample = 40
 
@@ -38,9 +38,7 @@ bead_ratio = 1
 ## "option_2" : Use a specified sample as "lowest" sample and take the same volume of all that have less DNA
 low_sample_treatment = "option_1"
 if low_sample_treatment == "option_2":
-    WellId_lowest = "D6"
-
-    
+    WellId_lowest = "D6"  
 
 #### If necesarry, how many samples would you dilute by hand, before making an
   ## entire new plate?
@@ -333,7 +331,7 @@ if (number_of_samples_to_dilute == 0
         
         # Add final_concentrations to the df
         final_concentration = (original_concentration * DNA_volume) / (water_volume + DNA_volume)
-        data.at[sample,'final_concentration'] = final_concentration
+        data.at[sample,'final_concentration'] = float("%.2f" % final_concentration)
         
         # Add volumes to pool to the df
         µL_pooled = float("%.2f" % (ng_per_sample / final_concentration))
@@ -356,8 +354,8 @@ else:
         if µL_pooled > PCR_volume:
             µL_pooled = PCR_volume
             dilution_ratio = data['dilution_ratio'][sample]
-        data.at[sample,'final_concentration'] = final_concentration
-        data.at[sample,'µL_pooled'] = µL_pooled
+        data.at[sample,'final_concentration'] = float("%.2f" % final_concentration)
+        data.at[sample,'µL_pooled'] = float("%.2f" % µL_pooled)
 
 # Fix low samples / Negative controls, according to chosen option
 if low_sample_treatment == "option_2":
@@ -369,10 +367,11 @@ if low_sample_treatment == "option_2":
             data.at[sample,'µL_pooled'] = largest_pool_volume
         
     
+not_equimolar = 0
 for sample in data.index:   
     # Add total ng per sample pooled to the df
     ng_pooled = data['final_concentration'][sample] * data['µL_pooled'][sample]
-    data.at[sample,'ng_pooled'] = ng_pooled        
+    data.at[sample,'ng_pooled'] = float("%.2f" % ng_pooled)  
     
     # Add info whether a sample has been diluted to the df
     if data['water_volume'][sample] > 0:
@@ -385,7 +384,7 @@ for sample in data.index:
     if math.ceil(ng_pooled) >= ng_per_sample:
         equimolar = True
     else:
-        equimolar = False
+        equimolar = False    
     data.at[sample,'ng_equimolar'] = equimolar
 
 # Define a dictionary to map pool information to their corresponding values
@@ -394,7 +393,8 @@ data_mappings = {
     'total ng pooled': data['ng_pooled'].sum(),  # Calculate the total ng pooled
     'Beads needed (µl)': data['µL_pooled'].sum() * bead_ratio,  # Calculate the beads needed in µl
     '70% EtOH needed (µL)': (data['µL_pooled'].sum()*2)*3+50, # Calculate the amount of 70% EtOH needed in µl
-    'total µl water for dilution': data['water_volume'].sum() # Calculate the amount of water needed for the dilution
+    'total µl water for dilution': data['water_volume'].sum(), # Calculate the amount of water needed for the dilution
+    '% samples that have enough': float("%.2f" % ((data.ng_equimolar.sum() / len(data.index)) * 100))
     }
 
 # Loop over the items in the dictionary and assign values to the dataframe
