@@ -1,61 +1,34 @@
 #!/usr/bin/python3
 """
 Automated mapping_file creator
-VERSION: Feb2022
+VERSION: Nov 2025
 
 If you have different primer sets within 1 sequencing lane
 make seperate mapping_files for the different primer sets
 
-Fill in a template. this can be .xlsx or .csv:
+Fill in the template .xlsx
 Template can be found here: 
-//zeus.nioz.nl/mmb/molecular_ecology/mollab_team/Sequencing/ngs_sequencing
-If .xlsx, sheet with mapping_file data must be called FILL_IN.
-$1 and $2 must be Forward_primer and Reverse_primer
-
-You can add as many columns of metadata as you like
-In the .xlsx template, add meta data that is equal for all samples to the ReadMe.
-In the FILL_IN only enter metadata that differs between samples
-This metadata will be added to the end of the mappingfile
-The description column will be the last column of the mapping_file.
-Anything after that in the template will be disregarded.
-Make the description as descriptive as possible (controls etc).
-
-edit:
-    220929 Changed barcodes to 3 or 4 digits, so that we can combine
-    Linda's primer set with our primer set. Linda's primers will be numbered 
-    9001 and on.
-    221115 automated NIOZnumber extraction form excel
-    240404 Description column doesnt need to be the last column in the excel
-    file.
+//zeus.nioz.nl/mmb/molecular_ecology/mollab_team/Sequencing/ngs_sequencing/2025_mappingfile_template.xlsx
 
 """
+#### Change this
+file_name = 'NIOZ435_Miriam_mappingfile_template.xlsx'
+
 
 #### Import needed packages
 import pandas as pd       # to be able to work with dataframes
 from Bio.Seq import Seq   # to be able to do compl_rev
-# !!! Set variables for your mappingfile
-file_name = 'NIOZ415_template.xlsx'
-# !!! file_path to folder of mapping_file template (.xlsx or .csv)
+
+#### Where to find the template
 folder_path = "//zeus/mmb/molecular_ecology/mollab_team/Sequencing/ngs_sequencing/Mapping_files/"
-# Change from windows path to unix path
 file_path = folder_path + file_name
- 
 #### Import needed files
-if file_path.endswith('.xlsx') or file_path.endswith('.xlsm'):
-    sample_file = pd.ExcelFile(file_path)
-if file_path.endswith('.csv'):
-    sample_file = pd.read_csv(file_path, delimiter=';')
+sample_file = pd.ExcelFile(file_path)
 
 # NIOZ number to name the mapping_file
-if file_path.endswith('.xlsx') or file_path.endswith('.xlsm'):
-    try:
-        ReadMe = sample_file.parse('ProjectInfo')
-    except:
-        ReadMe = sample_file.parse('ReadMe')
-    NIOZnumber = (
-        ReadMe.loc[ReadMe['Project_info'] == 'NIOZ_Number', 'Fill_In'].iloc[0])
-if file_path.endswith('.csv'):
-    NIOZnumber = 'NIOZ???' #!!! fill in yourself
+ReadMe = sample_file.parse('ProjectInfo')
+NIOZnumber = ( ReadMe.loc[ReadMe['Project_info'] == 'NIOZ_Number', 'Fill_In'].iloc[0])
+
 
 # Only keep FILL_IN sheet
 sample_file = sample_file.parse('FILL_IN')
