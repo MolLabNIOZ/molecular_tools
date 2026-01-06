@@ -13,12 +13,11 @@ Template can be found here:
 
 """
 #### Change this
-file_name = 'NIOZ431_M13_2025_mappingfile_template.xlsx'
+file_name = 'NIOZ444_Miriam_mappingfile_template.xlsx'
 
 #### Import needed packages
 import pandas as pd       # to be able to work with dataframes
 import numpy as np
-# from Bio.Seq import Seq   # to be able to do compl_rev
 
 #### Where to find the template
 folder_path = "//zeus/mmb/molecular_ecology/mollab_team/Sequencing/ngs_sequencing/Mapping_files/"
