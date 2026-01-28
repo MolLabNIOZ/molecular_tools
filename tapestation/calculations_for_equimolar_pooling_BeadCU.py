@@ -15,18 +15,17 @@ pooling
 
 # Variables to set ============================================================
 #### Where is the compactRegionTable .csv located?
-filepath = '//zeus.nioz.nl/mmb/molecular_ecology/mollab_team/Projects/2025/EDS/Stef/251016_NIOZ431_quantification-D1000_compactRegionTable_reordered.csv'
-
+filepath = '//zeus.nioz.nl/mmb/molecular_ecology/mollab_team/Projects/2026/MMB/Laura/Marie/NIOZ426-430/NIOZ426_kwantificatie_18S - 2025-10-20 - 12-20-21-D1000_compactRegionTable.csv'
 
 #### How much PCR product is available? (µL)
-PCR_volume = 40
+PCR_volume = 5
 #### How much do you want to pipette at least? (µL)
-least_volume = 5 # (standard is 10µL)
+least_volume = 4.9 # (standard is 10µL)
 
 #### Do you want to pool a total or per sample amount? (ng)
 total_amount = True
 if total_amount:
-    total_ng = 1000
+    total_ng = 750
 else:
     ng_per_sample = 40
 
