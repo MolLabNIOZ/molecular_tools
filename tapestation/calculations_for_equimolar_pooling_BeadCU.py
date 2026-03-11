@@ -15,17 +15,21 @@ pooling
 
 # Variables to set ============================================================
 #### Where is the compactRegionTable .csv located?
-filepath = '//zeus.nioz.nl/mmb/molecular_ecology/mollab_team/Projects/2026/MMB/Laura/Marie/NIOZ426-430/NIOZ426_kwantificatie_18S - 2025-10-20 - 12-20-21-D1000_compactRegionTable.csv'
+filepath = 'C:/Users/rdebeer/OneDrive - NIOZ/test/Marie/NIOZ4280_Quantification_16S - 2025-10-27 - 11-11-04-D1000_compactRegionTable.csv'
+
+#### Extra info you want to have included in the names of the files and in the run info of the robot scripts
+# for example: "18S", "16S", "20µL" or False (if you do not want any extra info in the name)
+name_addition = "16S-3000ng"
 
 #### How much PCR product is available? (µL)
-PCR_volume = 5
-#### How much do you want to pipette at least? (µL)
-least_volume = 4.9 # (standard is 10µL)
+PCR_volume = 100
+### How much do you want to pipette at least? (µL)
+least_volume = 10 # (standard is 10µL)
 
 #### Do you want to pool a total or per sample amount? (ng)
 total_amount = True
 if total_amount:
-    total_ng = 750
+    total_ng = 2000
 else:
     ng_per_sample = 40
 
@@ -60,10 +64,13 @@ import os
 
 # Data analysis ===============================================================
 # Get the NIOZ number from the filename
-if 'NIOZ' in filepath:
-    NIOZ_number = 'NIOZ' + filepath.split('NIOZ',1)[1][:3]
+NIOZ_number = 'NIOZ' + filepath.upper().split('NIOZ')[-1][:3]
+    
+if name_addition:
+    pool_identifier = NIOZ_number + "_" + name_addition
+    
 else:
-    raise Exception("Make sure your NIOZnumber is in the data filename")
+    pool_identifier = NIOZ_number
 
 #### Read the compactRegionTable .csv and put into a dataframe
 data = pd.read_csv(filepath, encoding = 'unicode-escape')
@@ -270,7 +277,7 @@ if number_of_samples_to_dilute > 0:
         template_file = 'OT2/Protocol_database/MO/pool_template_protocols/Sample_dilution_protocol_template_V2.0.py'
         if not os.path.exists(new_folder):
             os.mkdir(new_folder)
-        destination_pathway =  new_folder + '/' + NIOZ_number +  '_sample_dilution.py'
+        destination_pathway =  new_folder + '/' + pool_identifier +  '_sample_dilution.py'
         # Creates the copy of the right templates
         shutil.copy(template_file, destination_pathway)
         # Replace placeholders with lists of volumes
@@ -279,7 +286,7 @@ if number_of_samples_to_dilute > 0:
         search_NIOZ_number = '<NIOZ_NUMBER>'
         with open (destination_pathway, 'r') as file:
             dilution = file.read()
-            replace_water_sample = dilution.replace(search_sample, str(sample_volumes)).replace(search_water, str(water_volumes)).replace(search_NIOZ_number, NIOZ_number) 
+            replace_water_sample = dilution.replace(search_sample, str(sample_volumes)).replace(search_water, str(water_volumes)).replace(search_NIOZ_number, pool_identifier) 
         # Write modified content back to the file            
         with open(destination_pathway, 'w') as file:
             file.write(replace_water_sample) 
@@ -407,7 +414,7 @@ DNA_volumes = (data['µL_pooled'].tolist())
 # Locating the template file
 # The directory for the new file with the name it should get
 pooling_template_file = 'OT2/Protocol_database/MO/pool_template_protocols/Equimolar_pooling_BeadCU_protocol_template_V2.1.py'
-destination_pathway = new_folder + '/' + NIOZ_number + '_equimolar_pooling.py'
+destination_pathway = new_folder + '/' + pool_identifier + '_equimolar_pooling.py'
 # Creates the copy of the right templates
 shutil.copy(pooling_template_file, destination_pathway)
 
@@ -418,13 +425,13 @@ search_bead_ratio = '<bead_ratio>'
 # Replace placeholders                
 with open (destination_pathway, 'r') as file:
     pooling = file.read()
-    replace_DNA = pooling.replace(search_DNA, str(DNA_volumes)).replace(search_NIOZ_number, NIOZ_number).replace(search_bead_ratio, str(bead_ratio))  
+    replace_DNA = pooling.replace(search_DNA, str(DNA_volumes)).replace(search_NIOZ_number, pool_identifier).replace(search_bead_ratio, str(bead_ratio))  
 # Write modified content back to the file            
 with open(destination_pathway, 'w') as file:
     file.write(replace_DNA) 
 
 #### Save the calculations in a new csv file
 filepath = '/'.join(filepath.split('/')[:-1]) + '/'
-data.to_csv(f'{filepath}{NIOZ_number}_equimolar_pooling_results.csv', index = False, encoding = 'ansi')
+data.to_csv(f'{filepath}{pool_identifier}_equimolar_pooling_results.csv', index = False, encoding = 'ansi')
 
     
