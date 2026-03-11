@@ -13,7 +13,7 @@ Template can be found here:
 
 """
 #### Change this
-file_name = 'NIOZ441_Demi_mappingfile_template.xlsx'
+file_name = 'NIOZ443_mappingfile_template.xlsx'
 
 #### Import needed packages
 import pandas as pd       # to be able to work with dataframes
