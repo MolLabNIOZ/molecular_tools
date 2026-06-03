@@ -15,14 +15,14 @@ pooling
 
 # Variables to set ============================================================
 #### Where is the compactRegionTable .csv located?
-filepath = 'C:/Users/rdebeer/OneDrive - NIOZ/test/Marie/NIOZ4280_Quantification_16S - 2025-10-27 - 11-11-04-D1000_compactRegionTable.csv'
+filepath = '//zeus.nioz.nl/mmb/molecular_ecology/mollab_team/Projects/2026/MMB/Anja/NIOZ451_compact_region_table.csv'
 
 #### Extra info you want to have included in the names of the files and in the run info of the robot scripts
 # for example: "18S", "16S", "20µL" or False (if you do not want any extra info in the name)
-name_addition = "16S-3000ng"
+name_addition = False
 
 #### How much PCR product is available? (µL)
-PCR_volume = 100
+PCR_volume = 45
 ### How much do you want to pipette at least? (µL)
 least_volume = 10 # (standard is 10µL)
 
@@ -32,6 +32,9 @@ if total_amount:
     total_ng = 2000
 else:
     ng_per_sample = 40
+
+#### Do you want >50% of your samples to be equimolar? 
+majority_equimolar = True
 
 #### What bead ratio do you want? (DNA : beads ==> 1 : #.#)
 bead_ratio = 1
@@ -114,15 +117,16 @@ if total_amount:
         print("Less than halve of your samples has a sufficient amount of DNA to a"
               "dd to the pool. I suggest you either choose a lower [total_ng], add"
               " some samples to your sequencing lane, or re-PCR your samples to ge"
-              "t a larger volume.")
+              "t a larger volume. \n")
         exit()
     # Check if a sufficient amount of samples contribute to the pool (>50%)
     if len(concentrations) < original_number_of_samples / 2:
         print("Less than halve of your samples has a sufficient amount of DNA to a"
               "dd to the pool. I suggest you either choose a lower [total_ng], add"
               " some samples to your sequencing lane, or re-PCR your samples to ge"
-              "t a larger volume.")
-        exit()
+              "t a larger volume. \n")
+        if majority_equimolar:
+            exit()
 
 # Check how many samples have sufficient DNA
 else: # When you chose a specific amount per sample
@@ -134,7 +138,7 @@ else: # When you chose a specific amount per sample
         print("Less than halve of your samples has a sufficient amount of DNA to a"
               "dd to the pool. I suggest you either choose a lower [ng_per_sample], add"
               " some samples to your sequencing lane, or re-PCR your samples to ge"
-              "t a larger volume.")
+              "t a larger volume. \n")
         exit()
 
 #### Check if raw data is correct
