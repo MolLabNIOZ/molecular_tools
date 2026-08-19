@@ -8,10 +8,10 @@ Created on Fri Jan 30 11:41:28 2026
 # Variables to fill in
 # =============================================================================
 # Link the absolute pathway to the .csv file
-filepath = 'C:/Users/rdebeer/OneDrive - NIOZ/Data/python tests/nanodrop/Alg met Elsa.csv'
+filepath = '//zeus.nioz.nl/mmb/molecular_ecology/mollab_team/Projects/2026/MMB/Helge/Pauline/Nanodrop DNA 28-7.csv'
 
 # Give your graph a title
-graph_title = "Nanodrop van de 5 algen extracten"
+graph_title = "Absorbtion of coast and offshore DNA samples extracted bij Rob 260728"
 # =============================================================================
 # Imports the necessary 
 import matplotlib.pyplot as plt
@@ -20,7 +20,7 @@ import pandas as pd
 dataframe = pd.read_csv(filepath)
 
 # Creates a dataframe with only the data necessary for the linegraph (absorbance data)
-dataframe_linegraph = dataframe.drop(dataframe.columns[[0,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19]], axis=1)
+dataframe_linegraph = dataframe.drop(dataframe.columns[[0,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,-1]], axis=1)
 
 #### The procedure to create the plot
 # Get the absorbance data and convert them to ints instead of strings
@@ -47,6 +47,7 @@ plt.title(graph_title)
 # Adds a legend, makes sure that the plat is as you want
 plt.legend()
 plt.xlim(220, 350)
+plt.ylim(0,2.5)
 plt.margins(x=0)
 
 # Creates a grid on the plot

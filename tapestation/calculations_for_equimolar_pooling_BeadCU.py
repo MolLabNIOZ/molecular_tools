@@ -15,14 +15,14 @@ pooling
 
 # Variables to set ============================================================
 #### Where is the compactRegionTable .csv located?
-filepath = '//zeus.nioz.nl/mmb/molecular_ecology/mollab_team/Projects/2026/MMB/Anja/NIOZ451_compact_region_table.csv'
+filepath = '//zeus.nioz.nl/mmb/molecular_ecology/mollab_team/Projects/2026/MMB/Laura/Marie/NIOZ426-430/tweede run/region_tables/NIOZ426_16S.csv'
 
 #### Extra info you want to have included in the names of the files and in the run info of the robot scripts
 # for example: "18S", "16S", "20µL" or False (if you do not want any extra info in the name)
-name_addition = False
+name_addition = "16S_65uL"
 
 #### How much PCR product is available? (µL)
-PCR_volume = 45
+PCR_volume = 65
 ### How much do you want to pipette at least? (µL)
 least_volume = 10 # (standard is 10µL)
 

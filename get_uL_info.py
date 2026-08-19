@@ -3,11 +3,11 @@ import pandas as pd
 
 ## Import excel sheet
 volume_data = pd.read_excel(
-    "//zeus.nioz.nl/mmb/molecular_ecology/mollab_team/Projects/2025/MMB/Helge/Gaia/NIOZ418_equimolar_pooling_results_second_try.xlsx",
-    sheet_name='part 2')
+    "C:/Users/rdebeer/Downloads/Lena µl (3).xlsx",
+    sheet_name='Sheet1')
 
 # Make list of volumes (rounded to 2 decimals)
-dna = round(volume_data['water_volume'],2).to_list()
+dna = round(volume_data['Run 12'],2).to_list()
 
 # remove NaNs
 dna_noNaNs = [x for x in dna if pd.isnull(x) == False and x != 'nan']
